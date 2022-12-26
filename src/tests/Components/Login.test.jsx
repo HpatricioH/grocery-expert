@@ -7,7 +7,7 @@ describe('Test Login', () => [
   it('Renders Login Component Correctly', () => {
     const component = render(<Login />, { wrapper: BrowserRouter })
 
-    const textInPage = component.getByText('Login Page for Expert Grocery')
+    const textInPage = component.getByText('Expert Grocery')
 
     expect(textInPage).toBeInTheDocument()
   })
