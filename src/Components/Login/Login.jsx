@@ -1,11 +1,36 @@
-import { Box, TextField, Typography, Container, CssBaseline } from '@mui/material'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { Box, TextField, Typography, Container, CssBaseline, Checkbox, Button, Grid } from '@mui/material'
+import { createTheme, ThemeProvider, styled } from '@mui/material/styles'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import { Link } from 'react-router-dom'
+
+const CssTextField = styled(TextField)({
+  '& label.Mui-focused': {
+    color: '#3D550C'
+  },
+  '& .MuiOutlinedInput-root': {
+    '&.Mui-focused fieldset': {
+      borderColor: '#81B622'
+    },
+    '&:hover fieldset': {
+      borderColor: '#81B622'
+    }
+  }
+})
+
+// Button costume style
+const ButtonLogin = styled(Button)({
+  backgroundColor: '#81B622',
+  '&:hover': {
+    backgroundColor: '#59981A'
+  }
+})
 
 export const Login = () => {
   const theme = createTheme()
+
   return (
     <ThemeProvider theme={theme}>
-      <Container component='main' maxWidth='md'>
+      <Container component='main' maxWidth='xs'>
         <CssBaseline />
         <Box sx={{
           marginTop: 8,
@@ -14,11 +39,10 @@ export const Login = () => {
           alignItems: 'center'
         }}
         >
-          <Typography component='h1' variant='h5'>Expert Grocery</Typography>
-          <Box component='form' sx={{ mt: 1 }}>
-            <TextField
+          <Typography component='h1' variant='h5' fontWeight='bold'>Expert Grocery</Typography>
+          <Box component='form' sx={{ mt: 1, width: '100%' }}>
+            <CssTextField
               margin='normal'
-              required
               fullWidth
               id='email'
               label='Email Address'
@@ -26,6 +50,36 @@ export const Login = () => {
               autoComplete='email'
               autoFocus
             />
+            <CssTextField
+              margin='normal'
+              fullWidth
+              name='password'
+              label='Password'
+              type='password'
+              id='password'
+              autoComplete='current-password'
+            />
+            <FormControlLabel
+              control={<Checkbox value='remember' color='primary' />}
+              label='Remember me'
+            />
+            <ButtonLogin
+              type='submit'
+              fullWidth
+              variant='contained'
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign In
+            </ButtonLogin>
+            <Box
+              display='flex'
+              flexDirection='row'
+              alignItems='center'
+              justifyContent='space-between'
+            >
+              <Link>Forgot Password?</Link>
+              <Link>Sign Up</Link>
+            </Box>
           </Box>
         </Box>
       </Container>
