@@ -1,12 +1,16 @@
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
-import { Home } from './Pages/Home/Home'
+import { Login } from './Pages/Login/Login'
+import { CssBaseline } from '@mui/material'
 
 function App () {
   return (
-    <Routes>
-      <Route path='/' element={<Home />} />
-    </Routes>
+    <>
+      <CssBaseline />
+      <Routes>
+        <Route path='/' element={<Login />} />
+      </Routes>
+    </>
   )
 }
 

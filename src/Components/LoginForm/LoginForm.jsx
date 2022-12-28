@@ -1,58 +1,53 @@
-import { Box, TextField, Typography, Container, CssBaseline, Checkbox, Button, Grid } from '@mui/material'
-import { createTheme, ThemeProvider, styled } from '@mui/material/styles'
-import FormControlLabel from '@mui/material/FormControlLabel'
+import { Box, Container, Checkbox, Typography, FormControlLabel } from '@mui/material'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { Link } from 'react-router-dom'
+import logo from '../../assets/pictures/logo.png'
+import FormInput from '../../utilities/FormInput'
+import Buttons from '../../utilities/Buttons'
 
-const CssTextField = styled(TextField)({
-  '& label.Mui-focused': {
-    color: '#3D550C'
-  },
-  '& .MuiOutlinedInput-root': {
-    '&.Mui-focused fieldset': {
-      borderColor: '#81B622'
-    },
-    '&:hover fieldset': {
-      borderColor: '#81B622'
-    }
-  }
-})
-
-// Button costume style
-const ButtonLogin = styled(Button)({
-  backgroundColor: '#81B622',
-  '&:hover': {
-    backgroundColor: '#59981A'
-  }
-})
-
-export const Login = () => {
+export const LoginForm = () => {
   const theme = createTheme()
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    const { email, password } = e.target
+
+    console.log(email.value)
+    console.log(password.value)
+  }
 
   return (
     <ThemeProvider theme={theme}>
       <Container component='main' maxWidth='xs'>
-        <CssBaseline />
+
         <Box sx={{
-          marginTop: 8,
+          marginTop: 12,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center'
         }}
         >
-          <Typography component='h1' variant='h5' fontWeight='bold'>Expert Grocery</Typography>
-          <Box component='form' sx={{ mt: 1, width: '100%' }}>
-            <CssTextField
-              margin='normal'
-              fullWidth
+          <img src={logo} alt='company logo' style={{ width: '100%', height: '100%', marginBottom: '2rem' }} />
+          <Typography
+            component='h1'
+            variant='h5'
+            fontWeight='semi-bold'
+            fontSize='1.8rem'
+            color='#3D550C'
+          >
+            Sign in
+          </Typography>
+
+          <Box component='form' sx={{ mt: 1, width: '100%' }} onSubmit={handleSubmit}>
+            <FormInput
               id='email'
               label='Email Address'
               name='email'
               autoComplete='email'
               autoFocus
             />
-            <CssTextField
-              margin='normal'
-              fullWidth
+            <FormInput
               name='password'
               label='Password'
               type='password'
@@ -63,22 +58,23 @@ export const Login = () => {
               control={<Checkbox value='remember' color='primary' />}
               label='Remember me'
             />
-            <ButtonLogin
+            <Buttons
               type='submit'
               fullWidth
               variant='contained'
               sx={{ mt: 3, mb: 2 }}
             >
               Sign In
-            </ButtonLogin>
+            </Buttons>
             <Box
               display='flex'
               flexDirection='row'
               alignItems='center'
               justifyContent='space-between'
+              marginTop='1.5rem'
             >
               <Link>Forgot Password?</Link>
-              <Link>Sign Up</Link>
+              {/* <Link>Sign Up</Link> */}
             </Box>
           </Box>
         </Box>
