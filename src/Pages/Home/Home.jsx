@@ -1,9 +1,7 @@
-import { Login } from '../../Components/Login/Login'
+import { HomePage } from '../../Components/HomePage/HomePage'
 
 export const Home = () => {
   return (
-    <>
-      <Login />
-    </>
+    <HomePage />
   )
 }
