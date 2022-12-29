@@ -1,12 +1,15 @@
-import { Box, Container, Checkbox, Typography, FormControlLabel } from '@mui/material'
+import { Box, Container, Checkbox, Typography, FormControlLabel, FormControl } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { Link, useNavigate } from 'react-router-dom'
 import { supabase } from '../../utilities/supabaseClient'
 import logo from '../../assets/pictures/logo.png'
 import FormInput from '../../utilities/FormInput'
 import Buttons from '../../utilities/Buttons'
+import { useState } from 'react'
 
 export const LoginForm = () => {
+  const [error, setError] = useState(null)
+  const [formError, setFormError] = useState(false)
   const theme = createTheme()
   const history = useNavigate()
 
@@ -14,16 +17,30 @@ export const LoginForm = () => {
     e.preventDefault()
 
     const { email, password } = e.target
-    // TODO: add validations for the form field and Google social login
+    // TODO: add Google social login
+
+    if (!email.value && !password.value) {
+      setFormError(true)
+    }
+
     try {
-      await supabase.auth.signInWithPassword({
+      const response = await supabase.auth.signInWithPassword({
         email: email.value,
         password: password.value
       })
-      history('/home')
+      if (response.error === null) {
+        history('/home')
+        setError(null)
+        setFormError(false)
+      } else {
+        setError(response.error.message)
+        setFormError(true)
+      }
     } catch (error) {
       console.log(error)
+      setFormError(true)
     }
+    e.target.reset()
   }
 
   return (
@@ -49,32 +66,38 @@ export const LoginForm = () => {
           </Typography>
 
           <Box component='form' sx={{ mt: 1, width: '100%' }} onSubmit={handleSubmit}>
-            <FormInput
-              id='email'
-              label='Email Address'
-              name='email'
-              autoComplete='email'
-              autoFocus
-            />
-            <FormInput
-              name='password'
-              label='Password'
-              type='password'
-              id='password'
-              autoComplete='current-password'
-            />
-            <FormControlLabel
-              control={<Checkbox value='remember' color='primary' />}
-              label='Remember me'
-            />
-            <Buttons
-              type='submit'
-              fullWidth
-              variant='contained'
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Buttons>
+            <FormControl error={formError} sx={{ width: '100%' }}>
+              <FormInput
+                id='email'
+                label='Email Address'
+                name='email'
+                autoComplete='email'
+                autoFocus
+                error={formError}
+                helperText={error}
+              />
+              <FormInput
+                name='password'
+                label='Password'
+                type='password'
+                id='password'
+                autoComplete='current-password'
+                error={formError}
+                helperText={error}
+              />
+              <FormControlLabel
+                control={<Checkbox value='remember' color='primary' />}
+                label='Remember me'
+              />
+              <Buttons
+                type='submit'
+                fullWidth
+                variant='contained'
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Sign In
+              </Buttons>
+            </FormControl>
             <Box
               display='flex'
               flexDirection='row'
