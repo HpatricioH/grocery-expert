@@ -6,6 +6,11 @@ const CssTextField = styled(TextField)({
     color: '#3D550C'
   },
   '& .MuiOutlinedInput-root': {
+    '&.Mui-error': {
+      '& .MuiOutlinedInput-notchedOutline': {
+        borderColor: '#d32f2f'
+      }
+    },
     '&.Mui-focused fieldset': {
       borderColor: '#81B622'
     },

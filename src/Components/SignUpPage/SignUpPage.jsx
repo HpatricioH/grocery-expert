@@ -1,22 +1,31 @@
-import { Box, Container, Checkbox, Typography, FormControlLabel } from '@mui/material'
+import { Box, Container, Checkbox, Typography, FormControlLabel, FormControl } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { Link, useNavigate } from 'react-router-dom'
 import { supabase } from '../../utilities/supabaseClient'
 import logo from '../../assets/pictures/logo.png'
 import FormInput from '../../utilities/FormInput'
 import Buttons from '../../utilities/Buttons'
+import { useState } from 'react'
 
 export const SignUpPage = () => {
+  const [error, setError] = useState(null)
+  const [passwordError, setPasswordError] = useState(null)
+  const [formError, setFormError] = useState(false)
   const theme = createTheme()
   const history = useNavigate()
 
   const createProfile = async (firstName, lastName, userId) => {
-    const response = await supabase.from('profiles').insert({
-      first_name: firstName,
-      last_name: lastName,
-      id_user: userId
-    })
-    console.log(response)
+    // TODO: fix this function to store user name into database
+    try {
+      const response = await supabase.from('profiles').insert({
+        first_name: firstName,
+        last_name: lastName,
+        id_user: userId
+      })
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const handleSubmit = async (e) => {
@@ -24,14 +33,29 @@ export const SignUpPage = () => {
 
     const { email, password, firstName, lastName } = e.target
 
-    const response = await supabase.auth.signUp({
-      email: email.value,
-      password: password.value
-    })
+    if (!email.value && !password.value && !firstName.value && !lastName.value) {
+      setError('Please fill all fields')
+      setFormError(true)
+    }
 
-    await createProfile(firstName.value, lastName.value, response.id)
-
-    history('/')
+    try {
+      const response = await supabase.auth.signUp({
+        email: email.value,
+        password: password.value
+      })
+      if (response.error === null) {
+        history('/')
+        setError(null)
+        setFormError(false)
+        await createProfile(firstName.value, lastName.value, response.id)
+      } else {
+        setPasswordError(response.error.message)
+        setFormError(true)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+    e.target.reset()
   }
 
   return (
@@ -57,49 +81,59 @@ export const SignUpPage = () => {
           </Typography>
 
           <Box component='form' sx={{ mt: 1, width: '100%' }} onSubmit={handleSubmit}>
-            <Box
-              display='flex'
-              flexDirection='row'
-            >
-              <FormInput
-                id='firstName'
-                label='First Name'
-                name='firstName'
-                style={{ marginRight: '1rem' }}
-              />
-              <FormInput
-                id='lastName'
-                label='last Name'
-                name='lastName'
-              />
+            <FormControl>
+              <Box
+                display='flex'
+                flexDirection='row'
+              >
+                <FormInput
+                  id='firstName'
+                  label='First Name'
+                  name='firstName'
+                  error={formError}
+                  helperText={error}
+                  style={{ marginRight: '1rem' }}
+                />
+                <FormInput
+                  id='lastName'
+                  label='last Name'
+                  name='lastName'
+                  error={formError}
+                  helperText={error}
+                />
 
-            </Box>
-            <FormInput
-              id='email'
-              label='Email Address'
-              name='email'
-              autoComplete='email'
-              autoFocus
-            />
-            <FormInput
-              name='password'
-              label='Password'
-              type='password'
-              id='password'
-              autoComplete='current-password'
-            />
-            <FormControlLabel
-              control={<Checkbox value='remember' color='primary' />}
-              label='Remember me'
-            />
-            <Buttons
-              type='submit'
-              fullWidth
-              variant='contained'
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign Up
-            </Buttons>
+              </Box>
+              <FormInput
+                id='email'
+                label='Email Address'
+                name='email'
+                autoComplete='email'
+                autoFocus
+                error={formError}
+                helperText={error}
+              />
+              <FormInput
+                name='password'
+                label='Password'
+                type='password'
+                id='password'
+                autoComplete='current-password'
+                error={formError}
+                helperText={passwordError}
+              />
+              <FormControlLabel
+                control={<Checkbox value='remember' color='primary' />}
+                label='Remember me'
+              />
+              <Buttons
+                type='submit'
+                fullWidth
+                variant='contained'
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Sign Up
+              </Buttons>
+            </FormControl>
             <Box
               display='flex'
               flexDirection='row'
