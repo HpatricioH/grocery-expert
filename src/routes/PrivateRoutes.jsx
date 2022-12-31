@@ -1,10 +1,11 @@
-import { Route, Routes } from 'react-router-dom'
-import { Home } from '../Pages/Home/Home'
+import { useContext } from 'react'
+import { Outlet, useNavigate } from 'react-router-dom'
+import UserContext from '../context/UserContext'
 
 export const PrivateRoutes = () => {
+  const { user } = useContext(UserContext)
+  const navigate = useNavigate()
   return (
-    <Routes>
-      <Route path='/home' element={<Home />} />
-    </Routes>
+    user ? <Outlet /> : navigate('/')
   )
 }
