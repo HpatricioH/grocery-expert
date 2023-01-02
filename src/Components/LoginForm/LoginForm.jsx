@@ -1,17 +1,22 @@
 import { Box, Container, Checkbox, Typography, FormControlLabel, FormControl } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { Link, useNavigate } from 'react-router-dom'
-import { supabase } from '../../utilities/supabaseClient'
+import { useEffect, useState } from 'react'
+import { useAuth } from '../../hooks/useAuth'
 import logo from '../../assets/pictures/logo.png'
 import FormInput from '../../utilities/FormInput'
 import Buttons from '../../utilities/Buttons'
-import { useState } from 'react'
 
 export const LoginForm = () => {
+  const { handleLogin, user } = useAuth()
   const [error, setError] = useState(null)
   const [formError, setFormError] = useState(false)
   const theme = createTheme()
-  const history = useNavigate()
+  const navigate = useNavigate()
+
+  // useEffect(() => {
+  //   handleLogin()
+  // }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -19,27 +24,21 @@ export const LoginForm = () => {
     const { email, password } = e.target
     // TODO: add Google social login
 
+    // TODO: is this validation useful?
     if (!email.value && !password.value) {
       setFormError(true)
     }
 
-    try {
-      const response = await supabase.auth.signInWithPassword({
-        email: email.value,
-        password: password.value
-      })
-      if (response.error === null) {
-        history('/home')
-        setError(null)
-        setFormError(false)
-      } else {
-        setError(response.error.message)
-        setFormError(true)
-      }
-    } catch (error) {
-      console.log(error)
-      setFormError(true)
+    // login context function
+    handleLogin(email.value, password.value, navigate)
+
+    if (user?.error === null) {
+      setError(null)
+      setFormError(false)
+    } else {
+      setError(user.error.message)
     }
+
     e.target.reset()
   }
 

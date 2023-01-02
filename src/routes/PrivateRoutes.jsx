@@ -1,11 +1,16 @@
-import { useContext } from 'react'
-import { Outlet, useNavigate } from 'react-router-dom'
-import UserContext from '../context/UserContext'
+import { useEffect } from 'react'
+import { Navigate, Outlet, useLocation } from 'react-router-dom'
+import { useAuth } from '../hooks/useAuth'
 
 export const PrivateRoutes = () => {
-  const { user } = useContext(UserContext)
-  const navigate = useNavigate()
-  return (
-    user ? <Outlet /> : navigate('/')
-  )
+  const { user } = useAuth()
+  const location = useLocation()
+
+  useEffect(() => {
+    if (!user) {
+      <Navigate to='/' state={{ from: location }} replace />
+    }
+  })
+
+  return <Outlet />
 }
