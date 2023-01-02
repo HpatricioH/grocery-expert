@@ -1,20 +1,28 @@
 import './App.css'
-import { Route, Routes } from 'react-router-dom'
-import { Login } from './Pages/Login/Login'
 import { CssBaseline } from '@mui/material'
-import { SignUp } from './Pages/SignUp/SignUp'
+import { PrivateRoutes } from './routes/PrivateRoutes'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Home } from './Pages/Home/Home'
+import { Login } from './Pages/Login/Login'
+import { SignUp } from './Pages/SignUp/SignUp'
+import React from 'react'
 
 function App () {
   // TODO: add private routes and set up context API
+
   return (
     <>
       <CssBaseline />
-      <Routes>
-        <Route path='/' element={<Login />} />
-        <Route path='/signUp' element={<SignUp />} />
-        <Route path='/home' element={<Home />} />
-      </Routes>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Login />} />
+          <Route path='/signUp' element={<SignUp />} />
+          <Route element={<PrivateRoutes />}>
+            <Route path='/home' element={<Home />} exact />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+
     </>
   )
 }
