@@ -1,29 +1,38 @@
 import { createContext, useMemo, useState } from 'react'
 import { auth } from '../utilities/auth'
+import { supabase } from '../utilities/supabaseClient'
 
 const UserContext = createContext()
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null)
+  const [logoutError, setLogoutError] = useState('')
 
   const handleLogin = async (email, password, navigate) => {
     const token = await auth(email, password)
     if (token.error === null) {
       navigate('/home')
     }
-    setUser(token)
   }
 
-  const handleLogOut = async () => {
-    setUser(null)
+  const handleLogOut = async (navigate) => {
+    const { error } = await supabase.auth.signOut()
+    if (error) {
+      setLogoutError(error)
+    }
+    navigate('/')
+  }
+
+  const getSession = async () => {
+    const { data } = await supabase.auth.getSession()
+    return data
   }
 
   const value = useMemo(() => ({
-    user,
-    setUser,
     handleLogin,
-    handleLogOut
-  }), [user])
+    handleLogOut,
+    logoutError,
+    getSession
+  }), [])
 
   return (
     <UserContext.Provider value={
