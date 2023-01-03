@@ -27,10 +27,12 @@ export const LoginForm = () => {
     // TODO: is this validation useful?
     if (!email.value && !password.value) {
       setFormError(true)
+    } else {
+      // login context function
+      handleLogin(email.value, password.value, navigate)
     }
 
-    // login context function
-    handleLogin(email.value, password.value, navigate)
+    console.log(user)
 
     if (user?.error === null) {
       setError(null)

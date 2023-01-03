@@ -1,27 +1,28 @@
-import { useContext, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import UserContext from '../../context/UserContext'
-import { supabase } from '../../utilities/supabaseClient'
+import { useAuth } from '../../hooks/useAuth'
 
-export const HomePage = () => {
-  const { setUser, user } = useContext(UserContext)
-  const [messageError, setMessageError] = useState('')
+export const HomePage = ({ props }) => {
+  const { handleLogOut, getSession } = useAuth()
+  const [user, setUser] = useState(null)
   const navigate = useNavigate()
-
-  const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut()
-    if (error) {
-      setMessageError(error)
-    }
-    navigate('/')
-    setUser(null)
+  const handleClick = async () => {
+    handleLogOut(navigate)
   }
 
-  return (
-    <>
-      <div>Home Page for user </div>
-      <button onClick={handleLogout}>logout</button>
+  useEffect(() => {
+    getSession().then((result) => {
+      setUser(result.session.user)
+    })
+  }, [])
 
-    </>
-  )
+  return user === null
+    ? null
+    : (
+      <>
+        <div>Home Page for user {user?.email} </div>
+        <button onClick={handleClick}>logout</button>
+
+      </>
+      )
 }
