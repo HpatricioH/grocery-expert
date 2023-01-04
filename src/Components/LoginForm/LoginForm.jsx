@@ -1,22 +1,19 @@
 import { Box, Container, Checkbox, Typography, FormControlLabel, FormControl } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { Link, useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useAuth } from '../../hooks/useAuth'
 import logo from '../../assets/pictures/logo.png'
 import FormInput from '../../utilities/FormInput'
 import Buttons from '../../utilities/Buttons'
+import headingFont from '../../styles/fontTheme'
 
 export const LoginForm = () => {
-  const { handleLogin, user } = useAuth()
+  const { handleLogin } = useAuth()
   const [error, setError] = useState(null)
   const [formError, setFormError] = useState(false)
   const theme = createTheme()
   const navigate = useNavigate()
-
-  // useEffect(() => {
-  //   handleLogin()
-  // }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -24,24 +21,22 @@ export const LoginForm = () => {
     const { email, password } = e.target
     // TODO: add Google social login
 
-    // TODO: is this validation useful?
+    // validate empty inputs
     if (!email.value && !password.value) {
       setFormError(true)
+      // retrieve error message from api
+      handleLogin().then((result) => {
+        if (result) {
+          setFormError(true)
+          setError(result)
+        }
+      })
     } else {
       // login context function
       handleLogin(email.value, password.value, navigate)
-    }
-
-    console.log(user)
-
-    if (user?.error === null) {
       setError(null)
       setFormError(false)
-    } else {
-      setError(user.error.message)
     }
-
-    e.target.reset()
   }
 
   return (
@@ -60,10 +55,11 @@ export const LoginForm = () => {
             component='h1'
             variant='h5'
             fontWeight='semi-bold'
-            fontSize='1.8rem'
+            fontSize='4rem'
             color='#3D550C'
+            fontFamily={headingFont.typography.fontFamily}
           >
-            Sign in
+            Sign In
           </Typography>
 
           <Box component='form' sx={{ mt: 1, width: '100%' }} onSubmit={handleSubmit}>
