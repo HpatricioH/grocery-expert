@@ -6,6 +6,7 @@ import logo from '../../assets/pictures/logo.png'
 import FormInput from '../../utilities/FormInput'
 import Buttons from '../../utilities/Buttons'
 import { useState } from 'react'
+import headingFont from '../../styles/fontTheme'
 
 export const SignUpPage = () => {
   const [error, setError] = useState(null)
@@ -74,8 +75,9 @@ export const SignUpPage = () => {
             component='h1'
             variant='h5'
             fontWeight='semi-bold'
-            fontSize='1.8rem'
+            fontSize='4rem'
             color='#3D550C'
+            fontFamily={headingFont.typography.fontFamily}
           >
             Sign Up
           </Typography>

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 
-export const HomePage = ({ props }) => {
+export const HomePage = () => {
   const { handleLogOut, getSession } = useAuth()
   const [user, setUser] = useState(null)
   const navigate = useNavigate()
@@ -12,7 +12,7 @@ export const HomePage = ({ props }) => {
 
   useEffect(() => {
     getSession().then((result) => {
-      setUser(result.session.user)
+      setUser(result)
     })
   }, [])
 
