@@ -1,7 +1,7 @@
 import { Box, Container, Checkbox, Typography, FormControlLabel, FormControl } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { Link, useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useAuth } from '../../hooks/useAuth'
 import logo from '../../assets/pictures/logo.png'
 import FormInput from '../../utilities/FormInput'
@@ -9,11 +9,19 @@ import Buttons from '../../utilities/Buttons'
 import headingFont from '../../styles/fontTheme'
 
 export const LoginForm = () => {
-  const { handleLogin } = useAuth()
+  const { handleLogin, getSession } = useAuth()
   const [error, setError] = useState(null)
   const [formError, setFormError] = useState(false)
   const theme = createTheme()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    getSession().then((result) => {
+      if (result) {
+        navigate('/home')
+      }
+    })
+  })
 
   const handleSubmit = async (e) => {
     e.preventDefault()

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
+import { NavBar } from '../Components/NavBar/NavBar'
 import { useAuth } from '../hooks/useAuth'
 
 export const PrivateRoutes = () => {
@@ -13,5 +14,12 @@ export const PrivateRoutes = () => {
     })
   }, [])
 
-  return loading ? null : <Outlet />
+  return loading
+    ? null
+    : (
+      <>
+        <NavBar />
+        <Outlet />
+      </>
+      )
 }
