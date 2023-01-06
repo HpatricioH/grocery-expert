@@ -8,8 +8,6 @@ import { SignUp } from './Pages/SignUp/SignUp'
 import React from 'react'
 
 function App () {
-  // TODO: add private routes and set up context API
-
   return (
     <>
       <CssBaseline />
