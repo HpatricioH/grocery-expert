@@ -2,26 +2,32 @@ import { Box, Container, Checkbox, Typography, FormControlLabel, FormControl } f
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { useAuth } from '../../hooks/useAuth'
 import logo from '../../assets/pictures/logo.png'
 import FormInput from '../../utilities/FormInput'
 import Buttons from '../../utilities/Buttons'
 import headingFont from '../../styles/fontTheme'
+import { supabase } from '../../utilities/supabaseClient'
+import { auth } from '../../utilities/auth'
 
 export const LoginForm = () => {
-  const { handleLogin, getSession } = useAuth()
   const [error, setError] = useState(null)
   const [formError, setFormError] = useState(false)
   const theme = createTheme()
   const navigate = useNavigate()
 
   useEffect(() => {
-    getSession().then((result) => {
-      if (result) {
-        navigate('/home')
+    const getSession = async () => {
+      try {
+        const { data } = await supabase.auth.getSession()
+        if (data.session) {
+          navigate('/home')
+        }
+      } catch (error) {
+        console.log(error)
       }
-    })
-  })
+    }
+    getSession()
+  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -29,21 +35,15 @@ export const LoginForm = () => {
     const { email, password } = e.target
     // TODO: add Google social login
 
-    // validate empty inputs
-    if (!email.value && !password.value) {
+    const token = await auth(email.value, password.value)
+
+    if (token.error) {
       setFormError(true)
-      // retrieve error message from api
-      handleLogin().then((result) => {
-        if (result) {
-          setFormError(true)
-          setError(result)
-        }
-      })
+      setError(token.error.message)
     } else {
-      // login context function
-      handleLogin(email.value, password.value, navigate)
       setError(null)
       setFormError(false)
+      navigate('/home')
     }
   }
 
