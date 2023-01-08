@@ -10,19 +10,21 @@ import React from 'react'
 
 function App () {
   return (
-    <UserProvider>
+    <>
       <CssBaseline />
       <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Login />} />
-          <Route path='/signUp' element={<SignUp />} />
-          <Route path='/home' element={<PrivateRoutes />}>
-            <Route path='/home' element={<Home />} exact />
-          </Route>
-        </Routes>
+        <UserProvider>
+          <Routes>
+            <Route path='/' element={<Login />} />
+            <Route path='/signUp' element={<SignUp />} />
+            <Route path='/home' element={<PrivateRoutes />}>
+              <Route path='/home' element={<Home />} exact />
+            </Route>
+          </Routes>
+        </UserProvider>
       </BrowserRouter>
+    </>
 
-    </UserProvider>
   )
 }
 

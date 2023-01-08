@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
+import { BottomNav } from '../Components/BottomNav/BottomNav'
 import { NavBar } from '../Components/NavBar/NavBar'
 import { supabase } from '../utilities/supabaseClient'
 
@@ -28,6 +29,7 @@ export const PrivateRoutes = () => {
       <>
         <NavBar />
         <Outlet />
+        <BottomNav />
       </>
       )
 }
