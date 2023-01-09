@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react'
-import { useAuth } from '../../hooks/useAuth'
+import { supabase } from '../../utilities/supabaseClient'
 
-export const HomePage = () => {
-  const { getSession } = useAuth()
-  const [user, setUser] = useState(null)
+const HomePage = () => {
+  const [user, setUser] = useState()
 
   useEffect(() => {
-    getSession().then((result) => {
-      setUser(result)
-    })
+    const getSession = async () => {
+      const { data } = await supabase.auth.getSession()
+
+      setUser(data?.session?.user ?? null)
+    }
+    getSession()
   }, [])
 
   return user === null
-    ? null
+    ? <div>...Loading</div>
     : (
       <>
         <div>Home Page for user {user?.email} </div>
@@ -20,3 +22,5 @@ export const HomePage = () => {
       </>
       )
 }
+
+export default HomePage

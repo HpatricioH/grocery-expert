@@ -1,17 +1,26 @@
 import { useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
-import { NavBar } from '../Components/NavBar/NavBar'
-import { useAuth } from '../hooks/useAuth'
+import BottomNav from '../Components/BottomNav/BottomNav'
+import NavBar from '../Components/NavBar/NavBar'
+import { supabase } from '../utilities/supabaseClient'
 
-export const PrivateRoutes = () => {
+const PrivateRoutes = () => {
   const [loading, setLoading] = useState(true)
-  const { getSession } = useAuth()
   const navigate = useNavigate()
 
   useEffect(() => {
-    getSession(navigate).then((result) => {
-      if (result) return setLoading(false)
-    })
+    const getSession = async () => {
+      try {
+        const { data } = await supabase.auth.getSession()
+        // else navigate('/home)
+        if (!data.session) return navigate('/')
+        if (data) return setLoading(false)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    getSession()
   }, [])
 
   return loading
@@ -20,6 +29,8 @@ export const PrivateRoutes = () => {
       <>
         <NavBar />
         <Outlet />
+        <BottomNav />
       </>
       )
 }
+export default PrivateRoutes
