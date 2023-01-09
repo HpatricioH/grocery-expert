@@ -13,7 +13,7 @@ import { useAuth } from '../../hooks/useAuth'
 
 const settings = ['Profile', 'Logout']
 
-export const BottomNav = () => {
+const BottomNav = () => {
   const { handleLogOut } = useAuth()
   const [value, setValue] = useState()
   const [anchorElUser, setAnchorElUser] = useState(null)
@@ -32,7 +32,7 @@ export const BottomNav = () => {
   }
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: '100%', borderTop: '1px solid #3D550C' }}>
       <BottomNavigation
         showLabels
         value={value}
@@ -68,7 +68,12 @@ export const BottomNav = () => {
           onClose={handleCloseUserMenu}
         >
           {settings.map((setting, index) => (
-            <MenuItem key={index} onClick={setting === 'Logout' ? logoutUser : handleCloseUserMenu}>
+            <MenuItem
+              key={index}
+              onClick={setting === 'Logout'
+                ? logoutUser
+                : handleCloseUserMenu}
+            >
               <Typography textAlign='center'>{setting}</Typography>
             </MenuItem>
           ))}
@@ -77,3 +82,5 @@ export const BottomNav = () => {
     </Box>
   )
 }
+
+export default BottomNav

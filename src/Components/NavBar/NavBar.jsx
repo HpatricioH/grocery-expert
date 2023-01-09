@@ -9,18 +9,24 @@ import './navBar.css'
 
 const pages = ['Home', 'Pantry', 'Recipes']
 
-export const NavBar = () => {
-  const activePath = pages.map((page) => (window.location.pathname.includes(`${page.toLowerCase()}`)))
+const NavBar = () => {
+  const activePath = window.location.pathname
 
   return (
     <AppBar position='static' style={{ backgroundColor: '#fff' }}>
-
       <Container maxWidth='xl'>
         <Box sx={{ width: '100%' }}>
           <ul className='navbar__container'>
             {pages.map((page, i) => (
-              <li key={i} className='navbar__element'>
-                <Link to={`/${page.toLowerCase()}`} className='navbar__link'>
+              <li
+                key={i} className={activePath.includes(`${page.toLowerCase()}`)
+                  ? 'navbar__element'
+                  : 'navBar__element-active'}
+              >
+                <Link
+                  to={`/${page.toLowerCase()}`}
+                  className='navbar__link'
+                >
                   {`${page}`}
                 </Link>
               </li>
@@ -32,3 +38,5 @@ export const NavBar = () => {
     </AppBar>
   )
 }
+
+export default NavBar

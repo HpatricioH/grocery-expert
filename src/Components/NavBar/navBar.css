@@ -1,17 +1,31 @@
 .navbar__container {
   display: flex; 
   justify-Content: center; 
-  align-items: center; 
+  align-items: center;
+  margin: 0;
   gap: 3rem; 
   padding-left: 0
 }
 
 .navbar__element {
-  list-style: none 
+  list-style: none;
+  border-bottom: 4px solid #3D550C;
+  list-style: none;
+  padding: 1rem 0   
+}
+.navbar__element-active {
+  border-bottom: 4px solid #3D550C;
+  padding-bottom: 1rem
 }
 
 .navbar__link {
   text-decoration: none; 
   color: #3D550C; 
-  font-weight: bold
+  font-weight: bold;
 }
+
+.navbar__link:hover {
+  border-bottom: 4px solid #3D550C;
+  padding-bottom: 1rem
+}
+

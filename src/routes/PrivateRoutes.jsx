@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
-import { BottomNav } from '../Components/BottomNav/BottomNav'
-import { NavBar } from '../Components/NavBar/NavBar'
+import BottomNav from '../Components/BottomNav/BottomNav'
+import NavBar from '../Components/NavBar/NavBar'
 import { supabase } from '../utilities/supabaseClient'
 
-export const PrivateRoutes = () => {
+const PrivateRoutes = () => {
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
 
@@ -33,3 +33,4 @@ export const PrivateRoutes = () => {
       </>
       )
 }
+export default PrivateRoutes
