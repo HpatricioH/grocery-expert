@@ -52,7 +52,7 @@ const BottomNav = () => {
         <BottomNavigationAction label='Favorites' icon={<FavoriteIcon />} />
         <BottomNavigationAction label='Profile' icon={<PersonIcon />} onClick={handleOpenUserMenu} />
         <Menu
-          sx={{ mt: '45px' }}
+          sx={{ mt: '-35px' }}
           id='menu-appbar'
           anchorEl={anchorElUser}
           anchorOrigin={{
