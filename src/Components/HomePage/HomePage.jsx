@@ -48,14 +48,15 @@ const HomePage = () => {
                     color: '#fff',
                     position: 'absolute',
                     top: '6.8rem',
-                    padding: '0.5rem 0.2rem'
+                    padding: '0.5rem 0.5rem',
+                    textTransform: 'capitalize'
                   }}
                 >
                   {recipe.title}
                 </Typography>
                 <Container style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', textAlign: 'center', padding: '0', color: '#3D550C' }}>
                   <div>
-                    <Typography style={{ textAlign: 'left', fontSize: '0.8rem' }} color='text.secondary'>
+                    <Typography style={{ textAlign: 'left', fontSize: '0.8rem', textTransform: 'capitalize' }} color='text.secondary'>
                       {/** get only 3 ingredients from the recipe and return the name */}
                       {recipe?.extendedIngredients?.slice(0, 3).map((name) => `${name.name}, `)}
                     </Typography>
