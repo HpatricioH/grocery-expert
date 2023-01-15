@@ -3,7 +3,9 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
-import { Box, CardActionArea, Container } from '@mui/material'
+import Box from '@mui/material/Box'
+import CardActionArea from '@mui/material/CardActionArea'
+import Container from '@mui/material/Container'
 import axios from 'axios'
 import AvTimerIcon from '@mui/icons-material/AvTimer'
 import PeopleIcon from '@mui/icons-material/People'
@@ -27,10 +29,27 @@ const HomePage = () => {
   }, [])
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', py: '1rem', flexDirection: 'column' }}>
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        py: '1rem',
+        flexDirection: 'column'
+      }}
+    >
       {recipes?.map((recipe) => {
         return (
-          <Card key={recipe?.id} sx={{ maxWidth: 350, my: '1rem', width: '-webkit-fill-available', border: '1px solid #3D550C', position: 'relative' }}>
+          <Card
+            key={recipe?.id}
+            sx={{
+              maxWidth: 350,
+              my: '1rem',
+              width: '-webkit-fill-available',
+              border: '1px solid #3D550C',
+              position: 'relative'
+            }}
+          >
             <CardActionArea>
               <CardMedia
                 component='img'
