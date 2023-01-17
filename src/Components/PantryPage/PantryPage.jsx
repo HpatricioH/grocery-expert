@@ -7,11 +7,12 @@ import { SearchGroceries } from '../SearchGroceries/SearchGroceries'
 const PantryPage = () => {
   const [ingredients, setIngredients] = useState()
   const [value, setValue] = useState()
+  const url = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list'
 
   useEffect(() => {
     async function getIngredients () {
       try {
-        const response = await axios.get('https://www.themealdb.com/api/json/v1/1/list.php?i=list')
+        const response = await axios.get(url)
         setIngredients(response.data)
       } catch (error) {
         console.log(error)
@@ -23,25 +24,28 @@ const PantryPage = () => {
   const pantryItems = ingredients?.meals.map(ingredient => ingredient.strIngredient)
 
   return (
-    <Container>
-      <Autocomplete
-        disablePortal
-        id='combo-box-demo'
-        onChange={(e, newValue) => {
-          setValue(newValue)
-        }}
-        options={pantryItems}
-        sx={{ width: '100%' }}
-        renderInput={(params) => <FormInput {...params} label='Add Groceries' />}
-      />
+    <>
+      <Container>
+        <Autocomplete
+          disablePortal
+          id='combo-box-demo'
+          onChange={(e, newValue) => {
+            setValue(newValue)
+          }}
+          options={pantryItems}
+          sx={{ width: '100%' }}
+          renderInput={(params) => <FormInput {...params} label='Add Groceries' />}
+        />
 
-      {/* grocery search elements */}
-      {value === undefined || value === null
-        ? null
-        : <SearchGroceries value={value} />}
+        {/* grocery search elements */}
+        {value === undefined || value === null
+          ? null
+          : <SearchGroceries value={value} />}
 
-      <Typography variant='h4' component='h1'>Pantry</Typography>
-    </Container>
+        <Typography variant='h4' component='h1'>Pantry</Typography>
+      </Container>
+
+    </>
   )
 }
 
