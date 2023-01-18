@@ -3,7 +3,9 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
-import { Box, CardActionArea, Container } from '@mui/material'
+import Box from '@mui/material/Box'
+import CardActionArea from '@mui/material/CardActionArea'
+import Container from '@mui/material/Container'
 import axios from 'axios'
 import AvTimerIcon from '@mui/icons-material/AvTimer'
 import PeopleIcon from '@mui/icons-material/People'
@@ -27,10 +29,27 @@ const HomePage = () => {
   }, [])
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', py: '1rem', flexDirection: 'column' }}>
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        py: '1rem',
+        flexDirection: 'column'
+      }}
+    >
       {recipes?.map((recipe) => {
         return (
-          <Card key={recipe?.id} sx={{ maxWidth: 350, my: '1rem', width: '-webkit-fill-available', border: '1px solid #3D550C', position: 'relative' }}>
+          <Card
+            key={recipe?.id}
+            sx={{
+              maxWidth: 350,
+              my: '1rem',
+              width: '-webkit-fill-available',
+              border: '1px solid #3D550C',
+              position: 'relative'
+            }}
+          >
             <CardActionArea>
               <CardMedia
                 component='img'
@@ -48,14 +67,15 @@ const HomePage = () => {
                     color: '#fff',
                     position: 'absolute',
                     top: '6.8rem',
-                    padding: '0.5rem 0.2rem'
+                    padding: '0.5rem 0.5rem',
+                    textTransform: 'capitalize'
                   }}
                 >
                   {recipe.title}
                 </Typography>
                 <Container style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', textAlign: 'center', padding: '0', color: '#3D550C' }}>
                   <div>
-                    <Typography style={{ textAlign: 'left', fontSize: '0.8rem' }} color='text.secondary'>
+                    <Typography style={{ textAlign: 'left', fontSize: '0.8rem', textTransform: 'capitalize' }} color='text.secondary'>
                       {/** get only 3 ingredients from the recipe and return the name */}
                       {recipe?.extendedIngredients?.slice(0, 3).map((name) => `${name.name}, `)}
                     </Typography>

@@ -29,7 +29,8 @@ export const UserProvider = ({ children }) => {
   const value = {
     handleLogOut,
     logoutError,
-    user
+    user,
+    setUser
   }
 
   return (

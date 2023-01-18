@@ -7,14 +7,15 @@ import PersonIcon from '@mui/icons-material/Person'
 import Typography from '@mui/material/Typography'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
+import { supabase } from '../../utilities/supabaseClient'
 
 const settings = ['Profile', 'Logout']
 
 const BottomNav = () => {
-  const { handleLogOut } = useAuth()
+  const { handleLogOut, setUser } = useAuth()
   const [value, setValue] = useState()
   const [anchorElUser, setAnchorElUser] = useState(null)
   const navigate = useNavigate()
@@ -30,6 +31,15 @@ const BottomNav = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
   }
+
+  // getUser session information and store it in context
+  useEffect(() => {
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser()
+      setUser(user)
+    }
+    getUser()
+  }, [])
 
   return (
     <Box sx={{ width: '100%', borderTop: '1px solid #3D550C' }}>
