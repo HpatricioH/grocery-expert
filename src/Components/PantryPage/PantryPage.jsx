@@ -1,7 +1,9 @@
 import { Autocomplete, Container, Typography } from '@mui/material'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import headingFont from '../../styles/fontTheme'
 import FormInput from '../../utilities/FormInput'
+import { PantryItemList } from '../PantryItemList/PantryItemList'
 import { SearchGroceries } from '../SearchGroceries/SearchGroceries'
 
 const PantryPage = () => {
@@ -42,7 +44,19 @@ const PantryPage = () => {
           ? null
           : <SearchGroceries value={value} />}
 
-        <Typography variant='h4' component='h1'>Pantry</Typography>
+        <div>
+          <Typography
+            variant='h4'
+            component='h1'
+            fontFamily={headingFont.typography.fontFamily}
+            fontWeight='semi-bold'
+            fontSize='4rem'
+            letterSpacing='0.2rem'
+            color='#3D550C'
+          >Pantry
+          </Typography>
+          <PantryItemList />
+        </div>
       </Container>
 
     </>

@@ -22,6 +22,7 @@ export const SearchGroceries = ({ value }) => {
     if (count > 0) setCount(count - 1)
   }
 
+  // add grocery items to DB
   const handleAddItem = async () => {
     const itemName = value
     const userId = user.id
