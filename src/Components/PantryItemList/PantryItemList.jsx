@@ -2,14 +2,20 @@ import { useEffect, useState } from 'react'
 import { supabase } from '../../utilities/supabaseClient'
 import { Box, Typography } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
-import { ModalUpdate } from '../ModalUpdate/ModalUpdate'
+import ModalUpdate from '../ModalUpdate/ModalUpdate'
 
 export const PantryItemList = ({ newItem }) => {
   const [groceries, setGroceries] = useState(null)
+  const [selectedGrocery, setSelectedGrocery] = useState(null)
   const [error, setError] = useState(null)
   const [open, setOpen] = useState(false)
-  const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
+
+  const handleOpen = async (id) => {
+    const grocery = await supabase.from('groceries').select().eq('id', id)
+    setSelectedGrocery(grocery)
+    setOpen(true)
+  }
 
   useEffect(() => {
     const getGroceries = async () => {
@@ -42,8 +48,8 @@ export const PantryItemList = ({ newItem }) => {
             alt={grocery?.name}
             className='ingredient__img'
           />
-          <EditIcon color='primary' style={{ placeSelf: 'center' }} onClick={handleOpen} />
-          <ModalUpdate handleOpen={handleOpen} handleClose={handleClose} open={open} />
+          <EditIcon color='primary' style={{ placeSelf: 'center' }} onClick={() => handleOpen(grocery.id)} />
+          <ModalUpdate handleClose={handleClose} open={open} grocery={selectedGrocery?.data[0]} />
           {error ? <p>error</p> : null}
         </Box>
       )
