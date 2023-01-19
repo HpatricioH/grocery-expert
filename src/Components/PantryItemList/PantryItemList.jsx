@@ -2,10 +2,14 @@ import { useEffect, useState } from 'react'
 import { supabase } from '../../utilities/supabaseClient'
 import { Box, Typography } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
+import { ModalUpdate } from '../ModalUpdate/ModalUpdate'
 
-export const PantryItemList = () => {
+export const PantryItemList = ({ newItem }) => {
   const [groceries, setGroceries] = useState(null)
   const [error, setError] = useState(null)
+  const [open, setOpen] = useState(false)
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
 
   useEffect(() => {
     const getGroceries = async () => {
@@ -18,10 +22,7 @@ export const PantryItemList = () => {
       }
     }
     getGroceries()
-    console.log('rendering')
-  }, [])
-
-  // console.log(SearchGroceries)
+  }, [newItem])
 
   return (
     groceries?.map((grocery) => {
@@ -41,10 +42,10 @@ export const PantryItemList = () => {
             alt={grocery?.name}
             className='ingredient__img'
           />
-          <EditIcon color='primary' style={{ placeSelf: 'center' }} />
-          {/* <Buttons style={{ height: '1.8rem', placeSelf: 'center', color: '#fff' }}>Add</Buttons> */}
+          <EditIcon color='primary' style={{ placeSelf: 'center' }} onClick={handleOpen} />
+          <ModalUpdate handleOpen={handleOpen} handleClose={handleClose} open={open} />
+          {error ? <p>error</p> : null}
         </Box>
-
       )
     })
 

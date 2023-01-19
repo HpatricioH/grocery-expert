@@ -42,7 +42,7 @@ const BottomNav = () => {
   }, [])
 
   return (
-    <Box sx={{ width: '100%', borderTop: '1px solid #3D550C' }}>
+    <Box sx={{ width: '100%', borderTop: '1px solid #3D550C' }} component='footer'>
       <BottomNavigation
         showLabels
         value={value}

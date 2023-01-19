@@ -4,11 +4,8 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight'
 import React, { useState } from 'react'
 import './searchGroceries.css'
 import Buttons from '../../utilities/Buttons'
-import { useAuth } from '../../hooks/useAuth'
-import { supabase } from '../../utilities/supabaseClient'
 
-export const SearchGroceries = ({ value }) => {
-  const { user } = useAuth()
+export const SearchGroceries = ({ value, addGroceries }) => {
   const [count, setCount] = useState(0)
   const groceryImage = `https://www.themealdb.com/images/ingredients/${value}.png`
 
@@ -24,18 +21,8 @@ export const SearchGroceries = ({ value }) => {
 
   // add grocery items to DB
   const handleAddItem = async () => {
-    const itemName = value
-    const userId = user.id
-
     if (count > 0) {
-      const { error } = await supabase.from('groceries')
-        .insert({
-          user_id: userId,
-          name: itemName,
-          image: groceryImage,
-          quantity: count
-        })
-      console.log(error)
+      addGroceries(groceryImage, count)
       setCount(0)
     } else {
       console.log('add quantity')
