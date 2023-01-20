@@ -19,13 +19,19 @@ const style = {
   p: 4
 }
 
-const ModalUpdate = ({ handleClose, open, grocery, setUpdateGrocery }) => {
+const ModalUpdate = ({ handleClose, open, grocery, getGroceries }) => {
   const [count, setCount] = useState(0)
 
+  // update groceries quantity
   const handleClickUpdate = async () => {
     if (count !== grocery?.quantity) {
-      const { data } = await supabase.from('groceries').update({ quantity: count }).eq('id', grocery?.id)
-      setUpdateGrocery(data)
+      await supabase.from('groceries').update({ quantity: count }).eq('id', grocery?.id)
+      getGroceries()
+      handleClose()
+      setCount(0)
+    } else {
+      // eslint-disable-next-line no-undef
+      alert(`You already have ${grocery?.name}`)
     }
   }
 
@@ -73,7 +79,12 @@ const ModalUpdate = ({ handleClose, open, grocery, setUpdateGrocery }) => {
           <Count count={count} setCount={setCount} />
         </Box>
 
-        <Buttons style={{ color: '#fff', margin: '1.5rem 0 0' }} onClick={handleClickUpdate}>Update</Buttons>
+        <Buttons
+          style={{ color: '#fff', margin: '1.5rem 0 0' }}
+          onClick={handleClickUpdate}
+        >
+          Update
+        </Buttons>
       </Box>
     </Modal>
   )

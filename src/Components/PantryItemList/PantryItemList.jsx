@@ -7,9 +7,7 @@ import ModalUpdate from '../ModalUpdate/ModalUpdate'
 export const PantryItemList = ({ newItem }) => {
   const [groceries, setGroceries] = useState(null)
   const [selectedGrocery, setSelectedGrocery] = useState(null)
-  const [error, setError] = useState(null)
   const [open, setOpen] = useState(false)
-  const [updateGrocery, setUpdateGrocery] = useState(null)
 
   const handleClose = () => setOpen(false)
 
@@ -19,18 +17,17 @@ export const PantryItemList = ({ newItem }) => {
     setOpen(true)
   }
 
-  useEffect(() => {
-    const getGroceries = async () => {
-      try {
-        const { data, error } = await supabase.from('groceries').select('name, quantity, image, id')
-        setGroceries(data)
-        setError(error)
-      } catch (error) {
-        console.log(error)
-      }
+  const getGroceries = async () => {
+    try {
+      const { data } = await supabase.from('groceries').select('name, quantity, image, id')
+      setGroceries(data)
+    } catch (error) {
+      console.log(error)
     }
+  }
+  useEffect(() => {
     getGroceries()
-  }, [newItem, updateGrocery])
+  }, [newItem])
 
   return (
     groceries?.map((grocery) => {
@@ -69,10 +66,9 @@ export const PantryItemList = ({ newItem }) => {
             handleClose={handleClose}
             open={open}
             grocery={selectedGrocery?.data[0]}
-            setUpdateGrocery={setUpdateGrocery}
+            getGroceries={getGroceries}
           />
-          {/* TODO: fix this line */}
-          {error ? <p>error</p> : null}
+
         </Box>
       )
     })
