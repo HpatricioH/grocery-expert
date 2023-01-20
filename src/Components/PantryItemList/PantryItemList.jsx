@@ -9,6 +9,8 @@ export const PantryItemList = ({ newItem }) => {
   const [selectedGrocery, setSelectedGrocery] = useState(null)
   const [error, setError] = useState(null)
   const [open, setOpen] = useState(false)
+  const [updateGrocery, setUpdateGrocery] = useState(null)
+
   const handleClose = () => setOpen(false)
 
   const handleOpen = async (id) => {
@@ -28,15 +30,29 @@ export const PantryItemList = ({ newItem }) => {
       }
     }
     getGroceries()
-  }, [newItem])
+  }, [newItem, updateGrocery])
 
   return (
     groceries?.map((grocery) => {
       return (
-        <Box key={grocery.id} style={{ display: 'flex', justifyContent: 'space-between', padding: '1rem 0', borderBottom: '1px solid #3D550C' }}>
+        <Box
+          key={grocery.id} style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            padding: '1rem 0',
+            borderBottom: '1px solid #3D550C'
+          }}
+        >
 
           {/* grocery name  */}
-          <Typography style={{ placeSelf: 'center', fontSize: '0.8rem', width: '8rem' }}>{grocery?.name}</Typography>
+          <Typography style={{
+            placeSelf: 'center',
+            fontSize: '0.8rem',
+            width: '8rem'
+          }}
+          >
+            {grocery?.name}
+          </Typography>
 
           <Box style={{ display: 'flex', cursor: 'pointer', placeSelf: 'center' }}>
             <p style={{ margin: 0 }}>{grocery?.quantity}</p>
@@ -49,7 +65,13 @@ export const PantryItemList = ({ newItem }) => {
             className='ingredient__img'
           />
           <EditIcon color='primary' style={{ placeSelf: 'center' }} onClick={() => handleOpen(grocery.id)} />
-          <ModalUpdate handleClose={handleClose} open={open} grocery={selectedGrocery?.data[0]} />
+          <ModalUpdate
+            handleClose={handleClose}
+            open={open}
+            grocery={selectedGrocery?.data[0]}
+            setUpdateGrocery={setUpdateGrocery}
+          />
+          {/* TODO: fix this line */}
           {error ? <p>error</p> : null}
         </Box>
       )
