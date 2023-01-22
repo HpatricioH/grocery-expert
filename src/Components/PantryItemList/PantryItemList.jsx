@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../../utilities/supabaseClient'
-import { Box, Typography } from '@mui/material'
+import { Box } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import ModalUpdate from '../ModalUpdate/ModalUpdate'
+import { GroceriesCard } from '../GroceriesCard/GroceriesCard'
 
 export const PantryItemList = ({ newItem }) => {
   const [groceries, setGroceries] = useState(null)
@@ -41,26 +42,12 @@ export const PantryItemList = ({ newItem }) => {
           }}
         >
 
-          {/* grocery name  */}
-          <Typography style={{
-            placeSelf: 'center',
-            fontSize: '0.8rem',
-            width: '8rem'
-          }}
-          >
-            {grocery?.name}
-          </Typography>
-
-          <Box style={{ display: 'flex', cursor: 'pointer', placeSelf: 'center' }}>
-            <p style={{ margin: 0 }}>{grocery?.quantity}</p>
-          </Box>
-
-          {/* grocery images */}
-          <img
-            src={grocery?.image}
-            alt={grocery?.name}
-            className='ingredient__img'
+          <GroceriesCard
+            name={grocery?.name}
+            quantity={grocery?.quantity}
+            image={grocery?.image}
           />
+
           <EditIcon color='primary' style={{ placeSelf: 'center' }} onClick={() => handleOpen(grocery.id)} />
           <ModalUpdate
             handleClose={handleClose}

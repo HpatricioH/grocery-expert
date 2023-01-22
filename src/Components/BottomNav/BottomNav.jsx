@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 import { supabase } from '../../utilities/supabaseClient'
 
@@ -42,7 +42,7 @@ const BottomNav = () => {
   }, [])
 
   return (
-    <Box sx={{ width: '100%', borderTop: '1px solid #3D550C', position: 'fixed', bottom: 0 }} component='footer'>
+    <Box sx={{ width: '100%', borderTop: '1px solid #3D550C', margin: '1rem 0 0' }} component='footer'>
       <BottomNavigation
         showLabels
         value={value}
@@ -58,7 +58,8 @@ const BottomNav = () => {
           }
         }}
       >
-        <BottomNavigationAction label='Groceries' icon={<ShoppingCartIcon />} />
+
+        <BottomNavigationAction label='Groceries' icon={<Link to='/groceries' style={{ color: 'inherit' }}><ShoppingCartIcon /></Link>} />
         <BottomNavigationAction label='Favorites' icon={<FavoriteIcon />} />
         <BottomNavigationAction label='Profile' icon={<PersonIcon />} onClick={handleOpenUserMenu} />
         <Menu
