@@ -1,5 +1,5 @@
 import { ImageList, ImageListItem, Typography } from '@mui/material'
-import groceries from '../../../public/groceries.jpg'
+import groceries from '../../assets/pictures/groceries.jpg'
 import headingFont from '../../styles/fontTheme'
 
 export const NoGroceries = () => {

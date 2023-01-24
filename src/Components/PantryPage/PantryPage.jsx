@@ -70,6 +70,7 @@ const PantryPage = () => {
         <Typography
           variant='h4'
           component='h1'
+          textAlign='center'
           fontFamily={headingFont.typography.fontFamily}
           fontWeight='semi-bold'
           fontSize='4rem'

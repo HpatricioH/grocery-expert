@@ -1,18 +1,25 @@
-import { Box, Container } from '@mui/material'
+import { Box, Container, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
+import headingFont from '../../styles/fontTheme'
+import { LoadingSpinner } from '../../utilities/LoadingSpinner'
 import { supabase } from '../../utilities/supabaseClient'
 import { GroceriesCard } from '../GroceriesCard/GroceriesCard'
 import { NoGroceries } from '../NoGroceries/NoGroceries'
 
 export const GroceriesList = () => {
   const [list, setList] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [noGroceries, setNoGroceries] = useState(false)
 
   const getGroceriesList = async () => {
     try {
+      setLoading(true)
       const { data } = await supabase.from('groceries').select().eq('quantity', '0')
-      setList(data)
+      !data?.length ? setNoGroceries(true) : setList(data)
     } catch (error) {
       console.log(error)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -22,8 +29,23 @@ export const GroceriesList = () => {
 
   return (
     <Container component='section'>
-      {!list?.length
-        ? <NoGroceries />
+      <Typography
+        variant='h4'
+        component='h1'
+        textAlign='center'
+        fontFamily={headingFont.typography.fontFamily}
+        fontWeight='semi-bold'
+        fontSize='4rem'
+        letterSpacing='0.2rem'
+        color='#3D550C'
+        padding='1.5rem 0 0'
+      >
+        Groceries List
+      </Typography>
+
+      {loading
+        ? <LoadingSpinner />
+
         : list?.map((product) => {
           return (
             <Box
@@ -42,6 +64,8 @@ export const GroceriesList = () => {
             </Box>
           )
         })}
+      {noGroceries && !loading ? <NoGroceries /> : null}
+
     </Container>
   )
 }

@@ -12,7 +12,6 @@ const PrivateRoutes = () => {
     const getSession = async () => {
       try {
         const { data } = await supabase.auth.getSession()
-        // else navigate('/home)
         if (!data.session) return navigate('/')
         if (data) return setLoading(false)
       } catch (error) {
@@ -28,7 +27,9 @@ const PrivateRoutes = () => {
     : (
       <>
         <NavBar />
-        <Outlet />
+        <div style={{ margin: '0 0 4.5rem' }}>
+          <Outlet />
+        </div>
         <BottomNav />
       </>
       )
