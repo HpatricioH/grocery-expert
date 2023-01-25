@@ -1,22 +1,31 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../../utilities/supabaseClient'
-import { Box, Typography } from '@mui/material'
+import { Box } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import ModalUpdate from '../ModalUpdate/ModalUpdate'
+import { GroceriesCard } from '../GroceriesCard/GroceriesCard'
+import { useGroceries } from '../../hooks/useGroceries'
 
 export const PantryItemList = ({ newItem }) => {
   const [groceries, setGroceries] = useState(null)
   const [selectedGrocery, setSelectedGrocery] = useState(null)
   const [open, setOpen] = useState(false)
+  const { setProductCount } = useGroceries()
+  const productsToBuy = groceries?.filter((el) => el?.quantity === 0)
 
+  // update badge for grocery icon in bottom nav
+  setProductCount(productsToBuy?.length)
+
+  // handle open and close modal
   const handleClose = () => setOpen(false)
 
-  const handleOpen = async (id) => {
-    const grocery = await supabase.from('groceries').select().eq('id', id)
+  const handleOpen = (id) => {
+    const grocery = groceries.filter((el) => el.id === id)
     setSelectedGrocery(grocery)
     setOpen(true)
   }
 
+  // get groceries available
   const getGroceries = async () => {
     try {
       const { data } = await supabase.from('groceries').select('name, quantity, image, id')
@@ -41,31 +50,17 @@ export const PantryItemList = ({ newItem }) => {
           }}
         >
 
-          {/* grocery name  */}
-          <Typography style={{
-            placeSelf: 'center',
-            fontSize: '0.8rem',
-            width: '8rem'
-          }}
-          >
-            {grocery?.name}
-          </Typography>
-
-          <Box style={{ display: 'flex', cursor: 'pointer', placeSelf: 'center' }}>
-            <p style={{ margin: 0 }}>{grocery?.quantity}</p>
-          </Box>
-
-          {/* grocery images */}
-          <img
-            src={grocery?.image}
-            alt={grocery?.name}
-            className='ingredient__img'
+          <GroceriesCard
+            name={grocery?.name}
+            quantity={grocery?.quantity}
+            image={grocery?.image}
           />
+
           <EditIcon color='primary' style={{ placeSelf: 'center' }} onClick={() => handleOpen(grocery.id)} />
           <ModalUpdate
             handleClose={handleClose}
             open={open}
-            grocery={selectedGrocery?.data[0]}
+            grocery={selectedGrocery?.[0]}
             getGroceries={getGroceries}
           />
 

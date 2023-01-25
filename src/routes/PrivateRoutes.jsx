@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import BottomNav from '../Components/BottomNav/BottomNav'
 import NavBar from '../Components/NavBar/NavBar'
+import { GroceriesProvider } from '../context/GroceriesListContext'
 import { supabase } from '../utilities/supabaseClient'
 
 const PrivateRoutes = () => {
@@ -12,7 +13,6 @@ const PrivateRoutes = () => {
     const getSession = async () => {
       try {
         const { data } = await supabase.auth.getSession()
-        // else navigate('/home)
         if (!data.session) return navigate('/')
         if (data) return setLoading(false)
       } catch (error) {
@@ -27,9 +27,13 @@ const PrivateRoutes = () => {
     ? null
     : (
       <>
-        <NavBar />
-        <Outlet />
-        <BottomNav />
+        <GroceriesProvider>
+          <NavBar />
+          <div style={{ margin: '0 0 4.5rem' }}>
+            <Outlet />
+          </div>
+          <BottomNav />
+        </GroceriesProvider>
       </>
       )
 }

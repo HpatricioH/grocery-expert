@@ -9,6 +9,7 @@ import { UserProvider } from './context/UserContext'
 import React from 'react'
 import PantryPage from './Components/PantryPage/PantryPage'
 import RecipesPage from './Components/RecipesPage/RecipesPage'
+import { GroceriesList } from './Components/GroceriesList/GroceriesList'
 
 function App () {
   return (
@@ -23,6 +24,7 @@ function App () {
               <Route path='/home' element={<Home />} exact />
               <Route path='/pantry' element={<PantryPage />} />
               <Route path='/recipes' element={<RecipesPage />} />
+              <Route path='/groceries' element={<GroceriesList />} />
             </Route>
           </Routes>
         </UserProvider>
