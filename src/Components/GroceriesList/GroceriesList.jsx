@@ -5,11 +5,26 @@ import { LoadingSpinner } from '../../utilities/LoadingSpinner'
 import { supabase } from '../../utilities/supabaseClient'
 import { GroceriesCard } from '../GroceriesCard/GroceriesCard'
 import { NoGroceries } from '../NoGroceries/NoGroceries'
+import EditIcon from '@mui/icons-material/Edit'
+import ModalUpdate from '../ModalUpdate/ModalUpdate'
 
 export const GroceriesList = () => {
   const [list, setList] = useState(null)
   const [loading, setLoading] = useState(false)
   const [noGroceries, setNoGroceries] = useState(false)
+  const [open, setOpen] = useState(false)
+  const [singleProduct, setSingleProduct] = useState(null)
+
+  const handleClose = () => {
+    setList(null)
+    setOpen(false)
+  }
+
+  const handleOpen = (id) => {
+    const oneProduct = list.filter((el) => el?.id === id)
+    setSingleProduct(oneProduct)
+    setOpen(true)
+  }
 
   const getGroceriesList = async () => {
     try {
@@ -60,6 +75,13 @@ export const GroceriesList = () => {
                 name={product?.name}
                 quantity={product?.quantity}
                 image={product?.image}
+              />
+              <EditIcon color='primary' style={{ placeSelf: 'center' }} onClick={() => handleOpen(product?.id)} />
+              <ModalUpdate
+                handleClose={handleClose}
+                open={open}
+                grocery={singleProduct?.[0]}
+                getGroceries={getGroceriesList}
               />
             </Box>
           )

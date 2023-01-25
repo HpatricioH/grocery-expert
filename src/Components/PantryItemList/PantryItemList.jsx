@@ -12,8 +12,8 @@ export const PantryItemList = ({ newItem }) => {
 
   const handleClose = () => setOpen(false)
 
-  const handleOpen = async (id) => {
-    const grocery = await supabase.from('groceries').select().eq('id', id)
+  const handleOpen = (id) => {
+    const grocery = groceries.filter((el) => el.id === id)
     setSelectedGrocery(grocery)
     setOpen(true)
   }
@@ -52,7 +52,7 @@ export const PantryItemList = ({ newItem }) => {
           <ModalUpdate
             handleClose={handleClose}
             open={open}
-            grocery={selectedGrocery?.data[0]}
+            grocery={selectedGrocery?.[0]}
             getGroceries={getGroceries}
           />
 
