@@ -11,11 +11,14 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 import { supabase } from '../../utilities/supabaseClient'
+import { useGroceries } from '../../hooks/useGroceries'
+import { Badge } from '@mui/material'
 
 const settings = ['Profile', 'Logout']
 
 const BottomNav = () => {
   const { handleLogOut, setUser } = useAuth()
+  const { productCount } = useGroceries()
   const [value, setValue] = useState()
   const [anchorElUser, setAnchorElUser] = useState(null)
   const navigate = useNavigate()
@@ -42,7 +45,17 @@ const BottomNav = () => {
   }, [])
 
   return (
-    <Box sx={{ width: '100%', borderTop: '1px solid #3D550C', margin: '1rem 0 0', position: 'fixed', bottom: 0 }} component='footer'>
+    <Box
+      sx={{
+        width: '100%',
+        borderTop: '1px solid #3D550C',
+        padding: '1rem 0 0',
+        position: 'fixed',
+        bottom: 0,
+        backgroundColor: '#fff'
+      }}
+      component='footer'
+    >
       <BottomNavigation
         showLabels
         value={value}
@@ -59,7 +72,19 @@ const BottomNav = () => {
         }}
       >
 
-        <BottomNavigationAction label='Groceries' icon={<Link to='/groceries' style={{ color: 'inherit' }}><ShoppingCartIcon /></Link>} />
+        <BottomNavigationAction
+          label='Groceries'
+          icon={
+            <Link
+              to='/groceries'
+              style={{ color: 'inherit' }}
+            >
+              <Badge badgeContent={productCount} color='primary'>
+                <ShoppingCartIcon />
+              </Badge>
+            </Link>
+          }
+        />
         <BottomNavigationAction label='Favorites' icon={<FavoriteIcon />} />
         <BottomNavigationAction label='Profile' icon={<PersonIcon />} onClick={handleOpenUserMenu} />
         <Menu

@@ -4,12 +4,19 @@ import { Box } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import ModalUpdate from '../ModalUpdate/ModalUpdate'
 import { GroceriesCard } from '../GroceriesCard/GroceriesCard'
+import { useGroceries } from '../../hooks/useGroceries'
 
 export const PantryItemList = ({ newItem }) => {
   const [groceries, setGroceries] = useState(null)
   const [selectedGrocery, setSelectedGrocery] = useState(null)
   const [open, setOpen] = useState(false)
+  const { setProductCount } = useGroceries()
+  const productsToBuy = groceries?.filter((el) => el?.quantity === 0)
 
+  // update badge for grocery icon in bottom nav
+  setProductCount(productsToBuy?.length)
+
+  // handle open and close modal
   const handleClose = () => setOpen(false)
 
   const handleOpen = (id) => {
@@ -18,6 +25,7 @@ export const PantryItemList = ({ newItem }) => {
     setOpen(true)
   }
 
+  // get groceries available
   const getGroceries = async () => {
     try {
       const { data } = await supabase.from('groceries').select('name, quantity, image, id')

@@ -7,6 +7,7 @@ import { GroceriesCard } from '../GroceriesCard/GroceriesCard'
 import { NoGroceries } from '../NoGroceries/NoGroceries'
 import EditIcon from '@mui/icons-material/Edit'
 import ModalUpdate from '../ModalUpdate/ModalUpdate'
+import { useGroceries } from '../../hooks/useGroceries'
 
 export const GroceriesList = () => {
   const [list, setList] = useState(null)
@@ -14,7 +15,17 @@ export const GroceriesList = () => {
   const [noGroceries, setNoGroceries] = useState(false)
   const [open, setOpen] = useState(false)
   const [singleProduct, setSingleProduct] = useState(null)
+  const { setProductCount } = useGroceries()
+  const countGroceries = list?.length
 
+  // update groceries badge in bottom navbar
+  if (countGroceries) {
+    setProductCount(countGroceries)
+  } else {
+    setProductCount()
+  }
+
+  // manage close and open modal
   const handleClose = () => {
     setList(null)
     setOpen(false)
@@ -26,6 +37,7 @@ export const GroceriesList = () => {
     setOpen(true)
   }
 
+  // get groceries only with quantity 0 and display
   const getGroceriesList = async () => {
     try {
       setLoading(true)

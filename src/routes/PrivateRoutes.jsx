@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import BottomNav from '../Components/BottomNav/BottomNav'
 import NavBar from '../Components/NavBar/NavBar'
+import { GroceriesProvider } from '../context/GroceriesListContext'
 import { supabase } from '../utilities/supabaseClient'
 
 const PrivateRoutes = () => {
@@ -26,11 +27,13 @@ const PrivateRoutes = () => {
     ? null
     : (
       <>
-        <NavBar />
-        <div style={{ margin: '0 0 4.5rem' }}>
-          <Outlet />
-        </div>
-        <BottomNav />
+        <GroceriesProvider>
+          <NavBar />
+          <div style={{ margin: '0 0 4.5rem' }}>
+            <Outlet />
+          </div>
+          <BottomNav />
+        </GroceriesProvider>
       </>
       )
 }
