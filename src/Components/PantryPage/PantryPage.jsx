@@ -50,6 +50,18 @@ const PantryPage = () => {
 
   return (
     <Container component='section'>
+      <Typography
+        variant='h4'
+        component='h1'
+        textAlign='center'
+        fontFamily={headingFont.typography.fontFamily}
+        fontWeight='semi-bold'
+        fontSize='4rem'
+        letterSpacing='0.2rem'
+        color='#3D550C'
+        padding='1.5rem 0 0'
+      >Pantry
+      </Typography>
       <Autocomplete
         disablePortal
         id='combo-box-demo'
@@ -67,18 +79,7 @@ const PantryPage = () => {
         : <SearchGroceries value={value} addGroceries={addGroceries} />}
 
       <div>
-        <Typography
-          variant='h4'
-          component='h1'
-          textAlign='center'
-          fontFamily={headingFont.typography.fontFamily}
-          fontWeight='semi-bold'
-          fontSize='4rem'
-          letterSpacing='0.2rem'
-          color='#3D550C'
-          padding='1.5rem 0 0'
-        >Pantry
-        </Typography>
+
         <PantryItemList newItem={newItem} />
       </div>
     </Container>

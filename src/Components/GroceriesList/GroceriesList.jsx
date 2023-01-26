@@ -22,7 +22,7 @@ export const GroceriesList = () => {
   if (countGroceries) {
     setProductCount(countGroceries)
   } else {
-    setProductCount()
+    setProductCount(0)
   }
 
   // manage close and open modal

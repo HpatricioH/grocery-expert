@@ -79,7 +79,7 @@ const BottomNav = () => {
               to='/groceries'
               style={{ color: 'inherit' }}
             >
-              <Badge badgeContent={productCount} color='primary'>
+              <Badge badgeContent={productCount} color='success' showZero>
                 <ShoppingCartIcon />
               </Badge>
             </Link>

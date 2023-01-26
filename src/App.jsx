@@ -10,6 +10,7 @@ import React from 'react'
 import PantryPage from './Components/PantryPage/PantryPage'
 import RecipesPage from './Components/RecipesPage/RecipesPage'
 import { GroceriesList } from './Components/GroceriesList/GroceriesList'
+import { IngredientRecipes } from './Components/IngredientRecipes/IngredientRecipes'
 
 function App () {
   return (
@@ -25,6 +26,7 @@ function App () {
               <Route path='/pantry' element={<PantryPage />} />
               <Route path='/recipes' element={<RecipesPage />} />
               <Route path='/groceries' element={<GroceriesList />} />
+              <Route path='/recipes/:id' element={<IngredientRecipes />} />
             </Route>
           </Routes>
         </UserProvider>

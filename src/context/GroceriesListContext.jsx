@@ -3,7 +3,7 @@ import { createContext, useState } from 'react'
 const GroceriesListContext = createContext()
 
 export const GroceriesProvider = ({ children }) => {
-  const [productCount, setProductCount] = useState()
+  const [productCount, setProductCount] = useState(0)
 
   const value = {
     setProductCount,
