@@ -7,48 +7,37 @@ import ImageListItem from '@mui/material/ImageListItem'
 import ImageListItemBar from '@mui/material/ImageListItemBar'
 import { Container } from '@mui/material'
 
-export const IngredientRecipes = () => {
+export const IngredientRecipes = ({ name }) => {
   const [groceryName, setGroceryName] = useState(null)
-  const [recipes, setRecipes] = useState(null)
-  const [loading, setLoading] = useState(false)
+  const [recipes, setRecipes] = useState([])
   const { id } = useParams()
-  const URL = 'https://www.themealdb.com/api/json/v2/9973533/filter.php?i='
+  const URL = `https://www.themealdb.com/api/json/v2/9973533/filter.php?i=${groceryName?.name}`
 
-  const getGroceryName = async () => {
-    try {
-      setLoading(true)
-      const { data } = await supabase.from('groceries').select('name').eq('id', id)
-      setGroceryName(data?.[0])
-    } catch (error) {
-      console.log(error)
-    } finally {
-      setLoading(false)
+  useEffect(() => {
+    const getGroceryName = async () => {
+      try {
+        const { data } = await supabase.from('groceries').select('name').eq('id', id)
+        setGroceryName(data?.[0])
+      } catch (error) {
+        console.log(error)
+      }
     }
-  }
-  console.log(groceryName?.name)
-  console.log(loading)
+
+    getGroceryName()
+  }, [])
 
   const getRecipes = async () => {
     try {
-      if (!loading) {
-        const { data } = await axios.get(`${URL}${groceryName?.name}`)
-        setRecipes(data)
-      }
+      const { data } = await axios.get(`${URL}`)
+      setRecipes(data)
     } catch (error) {
       console.log(error)
     }
   }
 
   useEffect(() => {
-    getGroceryName()
-    if (groceryName) {
-      getRecipes()
-    }
-  }, [])
-
-  // console.log(recipes?.meals)
-  // console.log(groceryName)
-  // console.log(loading)
+    getRecipes()
+  }, [groceryName])
 
   return (
     <Container component='section'>

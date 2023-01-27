@@ -35,6 +35,7 @@ export default function RecipesPage () {
               />
             </ImageListItem>
           </Link>
+
         ))}
       </ImageList>
     </Container>

@@ -10,7 +10,8 @@ import { SearchGroceries } from '../SearchGroceries/SearchGroceries'
 
 const PantryPage = () => {
   const { user } = useAuth()
-  const [ingredients, setIngredients] = useState()
+  const [ingredients, setIngredients] = useState(null)
+  const [pantryItems, setPantryItems] = useState([])
   const [value, setValue] = useState()
   const [newItem, setNewItem] = useState(null)
   const url = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list'
@@ -19,7 +20,7 @@ const PantryPage = () => {
     async function getIngredients () {
       try {
         const response = await axios.get(url)
-        setIngredients(response.data)
+        setIngredients(response?.data)
       } catch (error) {
         console.log(error)
       }
@@ -46,7 +47,11 @@ const PantryPage = () => {
     }
   }
 
-  const pantryItems = ingredients?.meals.map(ingredient => ingredient.strIngredient)
+  useEffect(() => {
+    if (ingredients?.meals) {
+      setPantryItems(ingredients.meals.map(ingredient => ingredient.strIngredient))
+    }
+  }, [ingredients])
 
   return (
     <Container component='section'>
