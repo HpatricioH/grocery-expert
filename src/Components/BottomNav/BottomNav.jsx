@@ -18,7 +18,7 @@ const settings = ['Profile', 'Logout']
 
 const BottomNav = () => {
   const { handleLogOut, setUser } = useAuth()
-  const { productCount } = useGroceries()
+  const { groceriesCount } = useGroceries()
   const [value, setValue] = useState()
   const [anchorElUser, setAnchorElUser] = useState(null)
   const navigate = useNavigate()
@@ -79,7 +79,7 @@ const BottomNav = () => {
               to='/groceries'
               style={{ color: 'inherit' }}
             >
-              <Badge badgeContent={productCount} color='success' showZero>
+              <Badge badgeContent={groceriesCount} color='success' showZero>
                 <ShoppingCartIcon />
               </Badge>
             </Link>

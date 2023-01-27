@@ -6,6 +6,7 @@ import headingFont from '../../styles/fontTheme'
 import { useState } from 'react'
 import { Count } from '../../utilities/Count'
 import { supabase } from '../../utilities/supabaseClient'
+import { useGroceries } from '../../hooks/useGroceries'
 
 const style = {
   position: 'absolute',
@@ -21,6 +22,7 @@ const style = {
 
 const ModalUpdate = ({ handleClose, open, grocery, getGroceries }) => {
   const [count, setCount] = useState(0)
+  const { getGroceriesCount } = useGroceries()
 
   // update groceries quantity
   const handleClickUpdate = async () => {
@@ -28,6 +30,7 @@ const ModalUpdate = ({ handleClose, open, grocery, getGroceries }) => {
       await supabase.from('groceries').update({ quantity: count }).eq('id', grocery?.id)
       getGroceries()
       handleClose()
+      getGroceriesCount()
       setCount(0)
     } else {
       // eslint-disable-next-line no-undef

@@ -19,7 +19,6 @@ const PrivateRoutes = () => {
         console.log(error)
       }
     }
-
     getSession()
   }, [])
 
@@ -27,8 +26,8 @@ const PrivateRoutes = () => {
     ? null
     : (
       <>
+        <NavBar />
         <GroceriesProvider>
-          <NavBar />
           <div style={{ margin: '0 0 4.5rem' }}>
             <Outlet />
           </div>
