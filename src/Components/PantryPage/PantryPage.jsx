@@ -8,7 +8,7 @@ import { supabase } from '../../utilities/supabaseClient'
 import { PantryItemList } from '../PantryItemList/PantryItemList'
 import { SearchGroceries } from '../SearchGroceries/SearchGroceries'
 
-const PantryPage = () => {
+export const PantryPage = () => {
   const { user } = useAuth()
   const [ingredients, setIngredients] = useState(null)
   const [pantryItems, setPantryItems] = useState([])
@@ -91,5 +91,3 @@ const PantryPage = () => {
 
   )
 }
-
-export default PantryPage

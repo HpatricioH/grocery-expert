@@ -6,7 +6,7 @@ import ImageListItemBar from '@mui/material/ImageListItemBar'
 import { Container } from '@mui/material'
 import { Link } from 'react-router-dom'
 
-export default function RecipesPage () {
+export const RecipesPage = () => {
   const [pantryProducts, setPantryProducts] = useState(null)
 
   const getPantryGroceries = async () => {

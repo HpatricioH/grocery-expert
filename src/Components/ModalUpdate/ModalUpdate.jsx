@@ -31,7 +31,6 @@ const ModalUpdate = ({ handleClose, open, grocery, getGroceries }) => {
       getGroceries()
       handleClose()
       getGroceriesCount()
-      setCount(0)
     } else {
       // eslint-disable-next-line no-undef
       alert(`You already have ${grocery?.name}`)
