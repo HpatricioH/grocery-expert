@@ -1,20 +1,32 @@
-import { ImportExport } from '@mui/icons-material'
 import { Box, Container, Modal, Typography } from '@mui/material'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import headingFont from '../../styles/fontTheme'
 import Buttons from '../../utilities/Buttons'
+import { RecipeIngredients } from '../RecipeIngredients/RecipeIngredients'
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  position: 'relative',
+  zIndex: 0,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  margin: 'auto'
+}
+
+const modalWrapper = {
+  overflow: 'auto',
+  maxHeight: '100vh',
+  display: 'flex'
+}
+
+const modalContentStyle = {
+  position: 'relative',
+  background: '#fff',
   boxShadow: 24,
-  p: 4
+  width: '80%',
+  padding: '1rem 1rem'
+
 }
 
 export const ModalRecipes = ({ open, handleClose, id }) => {
@@ -40,11 +52,13 @@ export const ModalRecipes = ({ open, handleClose, id }) => {
       onClose={handleClose}
       aria-labelledby='modal-title'
       aria-describedby='modal-description'
+      sx={modalWrapper}
     >
       <Box sx={style}>
         {recipe?.map((item) => {
           return (
-            <Container key={item.idMeals}>
+
+            <Container sx={modalContentStyle} key={item.idMeals}>
               <Typography
                 id='modal-title'
                 variant='h6'
@@ -61,6 +75,8 @@ export const ModalRecipes = ({ open, handleClose, id }) => {
                 {item.strInstructions}
               </Typography>
 
+              <RecipeIngredients recipe={item} />
+
               <Buttons
                 style={{ color: '#fff', margin: '1.5rem 0 0' }}
                 onClick={handleClickClose}
@@ -68,6 +84,7 @@ export const ModalRecipes = ({ open, handleClose, id }) => {
                 Close
               </Buttons>
             </Container>
+
           )
         })}
       </Box>
