@@ -3,9 +3,12 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { supabase } from '../../utilities/supabaseClient'
 import { ImageList, ImageListItem, ImageListItemBar, Container } from '@mui/material'
+import FavoriteIcon from '@mui/icons-material/Favorite'
 import { ModalRecipes } from '../ModalRecipes/ModalRecipes'
+import { useAuth } from '../../hooks/useAuth'
 
 export const IngredientRecipes = () => {
+  const { user } = useAuth()
   const [groceryName, setGroceryName] = useState(null)
   const [recipes, setRecipes] = useState([])
   const [open, setOpen] = useState(false)
@@ -46,6 +49,26 @@ export const IngredientRecipes = () => {
     getRecipes()
   }, [groceryName])
 
+  // add recipes to favorite list
+  const handleClick = async (item) => {
+    const { error } = await supabase
+      .from('favorites')
+      .insert({
+        user_id: user.id,
+        idRecipe: item.idMeal,
+        name: item.strMeal,
+        image: item.strMealThumb
+      })
+
+    if (!error) {
+      // eslint-disable-next-line no-undef
+      alert(`${item.strMeal} added to Favorite Recipes`)
+    } else {
+      // eslint-disable-next-line no-undef
+      alert(`${item.strMeal} already exist in you Favorite Recipes`)
+    }
+  }
+
   return (
     <Container component='section'>
       <ImageList sx={{ width: 400, height: '100%' }}>
@@ -62,6 +85,10 @@ export const IngredientRecipes = () => {
             <ImageListItemBar
               title={item.strMeal}
               sx={{ textAlign: 'center' }}
+            />
+            <FavoriteIcon
+              sx={{ position: 'absolute', right: '0.5rem', top: '0.5rem', color: 'rgba(255, 55, 55)', cursor: 'pointer' }}
+              onClick={() => handleClick(item)}
             />
             <ModalRecipes open={open} handleClose={handleClose} id={idRecipe} />
           </ImageListItem>
