@@ -7,6 +7,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import { ModalRecipes } from '../ModalRecipes/ModalRecipes'
 import { useAuth } from '../../hooks/useAuth'
 
+// TODO: change name of this component to only recipes instead of IngredientRecipes
 export const IngredientRecipes = () => {
   const { user } = useAuth()
   const [groceryName, setGroceryName] = useState(null)

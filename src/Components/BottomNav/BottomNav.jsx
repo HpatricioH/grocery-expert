@@ -95,6 +95,7 @@ const BottomNav = () => {
             </Link>
           }
         />
+
         <BottomNavigationAction label='Profile' icon={<PersonIcon />} onClick={handleOpenUserMenu} />
         <Menu
           sx={{ mt: '-35px' }}
