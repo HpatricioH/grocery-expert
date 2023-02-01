@@ -85,7 +85,16 @@ const BottomNav = () => {
             </Link>
           }
         />
-        <BottomNavigationAction label='Favorites' icon={<FavoriteIcon />} />
+        <BottomNavigationAction
+          label='Favorites' icon={
+            <Link
+              to='/favorites'
+              style={{ color: 'inherit' }}
+            >
+              <FavoriteIcon />
+            </Link>
+          }
+        />
         <BottomNavigationAction label='Profile' icon={<PersonIcon />} onClick={handleOpenUserMenu} />
         <Menu
           sx={{ mt: '-35px' }}
