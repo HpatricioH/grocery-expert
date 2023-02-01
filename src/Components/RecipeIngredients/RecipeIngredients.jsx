@@ -19,8 +19,7 @@ export const RecipeIngredients = ({ recipe }) => {
           <li key={i}>
             <span className='list__elements'>
               {ingredient.measure}
-            </span>
-            {ingredient.ingredient}
+            </span> {ingredient.ingredient}
           </li>
         )
       })}
