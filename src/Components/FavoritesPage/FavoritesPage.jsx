@@ -1,13 +1,17 @@
-import { Container, ImageList, ImageListItem, ImageListItemBar } from '@mui/material'
+import { Container, IconButton, ImageList, ImageListItem, ImageListItemBar } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { useEffect, useState } from 'react'
 import { supabase } from '../../utilities/supabaseClient'
 import { ModalRecipes } from '../ModalRecipes/ModalRecipes'
+import { useLocation } from 'react-router-dom'
+import '../../styles/GlobalCssFavorites.css'
 
 export const FavoritesPage = () => {
   const [open, setOpen] = useState(false)
   const [recipes, setRecipes] = useState(null)
   const [idRecipe, setIdRecipe] = useState(null)
+  const [recipeDeleted, setRecipeDeleted] = useState(false)
+  const location = useLocation()
 
   const handleClose = () => setOpen(false)
 
@@ -19,10 +23,12 @@ export const FavoritesPage = () => {
   }
 
   const handleClick = async (item) => {
+    setRecipeDeleted(false)
     const { error } = await supabase.from('favorites').delete().eq('id', item.id)
     if (!error) {
       // eslint-disable-next-line no-undef
       alert(`${item.name} was removed from favorites`)
+      setRecipeDeleted(true)
     }
   }
 
@@ -32,7 +38,7 @@ export const FavoritesPage = () => {
       setRecipes(data)
     }
     getFavoritesRecipes()
-  }, [recipes])
+  }, [recipeDeleted])
 
   return (
     <Container component='section'>
@@ -49,13 +55,18 @@ export const FavoritesPage = () => {
             />
             <ImageListItemBar
               title={item.name}
-              sx={{ textAlign: 'center' }}
+              sx={{ backgroundColor: 'rgba(51, 51, 51, 0.85)' }}
+              actionIcon={
+                <IconButton
+                  sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                  onClick={() => handleClick(item)}
+                >
+                  <DeleteIcon />
+
+                </IconButton>
+              }
             />
-            <DeleteIcon
-              sx={{ position: 'absolute', right: '0.5rem', top: '0.5rem', color: 'rgba(255, 55, 55)', cursor: 'pointer' }}
-              onClick={() => handleClick(item)}
-            />
-            <ModalRecipes open={open} handleClose={handleClose} id={idRecipe} />
+            <ModalRecipes open={open} handleClose={handleClose} id={idRecipe} pathName={location.pathname} />
           </ImageListItem>
         ))}
       </ImageList>

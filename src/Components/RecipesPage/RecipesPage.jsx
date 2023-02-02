@@ -31,7 +31,6 @@ export const RecipesPage = () => {
               />
               <ImageListItemBar
                 title={item.name}
-                sx={{ textAlign: 'center' }}
               />
             </ImageListItem>
           </Link>
