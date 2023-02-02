@@ -12,6 +12,7 @@ import { RecipesPage } from './Components/RecipesPage/RecipesPage'
 import { GroceriesList } from './Components/GroceriesList/GroceriesList'
 import { IngredientRecipes } from './Components/IngredientRecipes/IngredientRecipes'
 import { FavoritesPage } from './Components/FavoritesPage/FavoritesPage'
+import { ProfilePage } from './Components/ProfilePage/ProfilePage'
 
 function App () {
   return (
@@ -29,6 +30,7 @@ function App () {
               <Route path='/groceries' element={<GroceriesList />} />
               <Route path='/recipes/:id' element={<IngredientRecipes />} />
               <Route path='/favorites' element={<FavoritesPage />} />
+              <Route path='/profile' element={<ProfilePage />} />
             </Route>
           </Routes>
         </UserProvider>
