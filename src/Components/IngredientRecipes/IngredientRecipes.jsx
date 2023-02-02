@@ -2,10 +2,11 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { supabase } from '../../utilities/supabaseClient'
-import { ImageList, ImageListItem, ImageListItemBar, Container } from '@mui/material'
+import { ImageList, ImageListItem, ImageListItemBar, Container, IconButton } from '@mui/material'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import { ModalRecipes } from '../ModalRecipes/ModalRecipes'
 import { useAuth } from '../../hooks/useAuth'
+import '../../styles/GlobalCssFavorites.css'
 
 // TODO: change name of this component to only recipes instead of IngredientRecipes
 export const IngredientRecipes = () => {
@@ -85,11 +86,16 @@ export const IngredientRecipes = () => {
             />
             <ImageListItemBar
               title={item.strMeal}
-              sx={{ textAlign: 'center' }}
-            />
-            <FavoriteIcon
-              sx={{ position: 'absolute', right: '0.5rem', top: '0.5rem', color: 'rgba(255, 55, 55)', cursor: 'pointer' }}
-              onClick={() => handleClick(item)}
+              sx={{ backgroundColor: 'rgba(51, 51, 51, 0.85)' }}
+              actionIcon={
+                <IconButton
+                  sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                  onClick={() => handleClick(item)}
+                >
+                  <FavoriteIcon />
+
+                </IconButton>
+              }
             />
             <ModalRecipes open={open} handleClose={handleClose} id={idRecipe} />
           </ImageListItem>

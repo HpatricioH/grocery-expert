@@ -70,19 +70,34 @@ export const ModalRecipes = ({ open, handleClose, id }) => {
               >
                 {item.strMeal}
               </Typography>
-              <img src={item.strMealThumb} alt={item.strMeal} style={{ width: '10rem' }} />
+              <Box sx={{ display: 'flex', justifyContent: 'center', padding: '1rem' }}>
+                <img src={item.strMealThumb} alt={item.strMeal} style={{ width: '12rem' }} />
+              </Box>
               <Typography>
                 {item.strInstructions}
               </Typography>
 
-              <RecipeIngredients recipe={item} />
-
-              <Buttons
-                style={{ color: '#fff', margin: '1.5rem 0 0' }}
-                onClick={handleClickClose}
+              <Typography
+                id='modal-title'
+                padding='1rem 0 0'
+                variant='h6'
+                component='h3'
+                fontFamily={headingFont.typography.fontFamily}
+                fontSize='1.8rem'
+                letterSpacing='0.1rem'
+                color='#3D550C'
               >
-                Close
-              </Buttons>
+                Ingredients
+              </Typography>
+              <RecipeIngredients recipe={item} />
+              <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <Buttons
+                  style={{ color: '#fff', margin: '1.5rem 0 0' }}
+                  onClick={handleClickClose}
+                >
+                  Close
+                </Buttons>
+              </Box>
             </Container>
 
           )
