@@ -1,32 +1,21 @@
-import Box from '@mui/material/Box'
-import BottomNavigation from '@mui/material/BottomNavigation'
-import BottomNavigationAction from '@mui/material/BottomNavigationAction'
+import { Box, BottomNavigation, BottomNavigationAction, Badge } from '@mui/material'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import PersonIcon from '@mui/icons-material/Person'
-import Typography from '@mui/material/Typography'
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
 import { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 import { supabase } from '../../utilities/supabaseClient'
 import { useGroceries } from '../../hooks/useGroceries'
-import { Badge } from '@mui/material'
+
+import { ProfileMenu } from '../ProfileMenu/ProfileMenu'
 import './bottomNav.css'
 
-const settings = ['Profile', 'Logout']
-
 const BottomNav = () => {
-  const { handleLogOut, setUser } = useAuth()
+  const { setUser } = useAuth()
   const { groceriesCount } = useGroceries()
   const [value, setValue] = useState()
   const [anchorElUser, setAnchorElUser] = useState(null)
-  const navigate = useNavigate()
-
-  const logoutUser = () => {
-    handleLogOut(navigate)
-  }
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget)
@@ -84,10 +73,11 @@ const BottomNav = () => {
                 <ShoppingCartIcon />
               </Badge>
             </Link>
-          }
+         }
         />
         <BottomNavigationAction
-          label='Favorites' icon={
+          label='Favorites'
+          icon={
             <Link
               to='/favorites'
               style={{ color: 'inherit' }}
@@ -97,37 +87,17 @@ const BottomNav = () => {
           }
         />
 
-        <BottomNavigationAction label='Profile' icon={<PersonIcon />} onClick={handleOpenUserMenu} />
-        <Menu
-          sx={{ mt: '-35px' }}
-          id='menu-appbar'
-          anchorEl={anchorElUser}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right'
-          }}
-          keepMounted
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right'
-          }}
-          open={Boolean(anchorElUser)}
-          onClose={handleCloseUserMenu}
-        >
-          {settings.map((setting, index) => (
-            <MenuItem
-              key={index}
-              onClick={setting === 'Logout'
-                ? logoutUser
-                : handleCloseUserMenu}
-            >
-              {setting === 'Profile'
-                ? <Link to='/profile' className='menu__link'><Typography textAlign='center'>{setting}</Typography></Link>
-                : <Typography textAlign='center'>{setting}</Typography>}
-            </MenuItem>
-          ))}
-        </Menu>
+        <BottomNavigationAction
+          label='Profile'
+          icon={<PersonIcon />}
+          onClick={handleOpenUserMenu}
+        />
       </BottomNavigation>
+
+      <ProfileMenu
+        anchorElUser={anchorElUser}
+        handleCloseUserMenu={handleCloseUserMenu}
+      />
     </Box>
   )
 }

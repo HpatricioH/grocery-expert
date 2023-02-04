@@ -57,8 +57,7 @@ export const ModalRecipes = ({ open, handleClose, id }) => {
       <Box sx={style}>
         {recipe?.map((item) => {
           return (
-
-            <Container sx={modalContentStyle} key={item.idMeals}>
+            <Container sx={modalContentStyle} key={item?.idMeal}>
               <Typography
                 id='modal-title'
                 variant='h6'
