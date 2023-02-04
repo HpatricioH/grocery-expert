@@ -57,7 +57,7 @@ export const GroceriesList = () => {
         color='#3D550C'
         padding='1.5rem 0 0'
       >
-        Groceries List
+        Grocery List
       </Typography>
 
       {loading

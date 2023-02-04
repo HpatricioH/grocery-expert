@@ -6,9 +6,13 @@ import FormInput from '../../utilities/FormInput'
 import Container from '@mui/system/Container'
 import Buttons from '../../utilities/Buttons'
 import { useState } from 'react'
+import { supabase } from '../../utilities/supabaseClient'
+import { useAuth } from '../../hooks/useAuth'
 
 export const ProfilePage = () => {
+  const { user } = useAuth()
   const [formError, setFormError] = useState(false)
+  const [error, setError] = useState(null)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -16,10 +20,19 @@ export const ProfilePage = () => {
 
     if (!name.value.trim() && !userName.value.trim()) {
       setFormError(true)
-    }
+      setError('Please Fill all the Fields!')
+    } else {
+      const { error } = await supabase.from('profiles').insert({
+        id: user.id,
+        full_name: name.value,
+        username: userName.value
+      })
 
-    console.log(name.value)
-    console.log(userName.value)
+      if (error) {
+        setFormError(true)
+        setError(error)
+      }
+    }
   }
 
   return (
@@ -51,6 +64,7 @@ export const ProfilePage = () => {
               autoComplete='name'
               autoFocus
               error={formError}
+              helperText={error}
             />
 
             <FormInput
@@ -60,6 +74,7 @@ export const ProfilePage = () => {
               autoComplete='user name'
               autoFocus
               error={formError}
+              helperText={error}
             />
 
             <Buttons
