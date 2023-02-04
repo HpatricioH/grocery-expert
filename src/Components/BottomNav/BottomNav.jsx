@@ -13,6 +13,7 @@ import { useAuth } from '../../hooks/useAuth'
 import { supabase } from '../../utilities/supabaseClient'
 import { useGroceries } from '../../hooks/useGroceries'
 import { Badge } from '@mui/material'
+import './bottomNav.css'
 
 const settings = ['Profile', 'Logout']
 
@@ -59,7 +60,7 @@ const BottomNav = () => {
       <BottomNavigation
         showLabels
         value={value}
-        onChange={(event, newValue) => {
+        onChange={(newValue) => {
           setValue(newValue)
         }}
         sx={{
@@ -120,7 +121,9 @@ const BottomNav = () => {
                 ? logoutUser
                 : handleCloseUserMenu}
             >
-              <Typography textAlign='center'>{setting}</Typography>
+              {setting === 'Profile'
+                ? <Link to='/profile' className='menu__link'><Typography textAlign='center'>{setting}</Typography></Link>
+                : <Typography textAlign='center'>{setting}</Typography>}
             </MenuItem>
           ))}
         </Menu>
