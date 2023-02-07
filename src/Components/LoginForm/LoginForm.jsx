@@ -8,6 +8,8 @@ import Buttons from '../../utilities/Buttons'
 import headingFont from '../../styles/fontTheme'
 import { supabase } from '../../utilities/supabaseClient'
 import { auth } from '../../utilities/auth'
+import GoogleButton from '../../utilities/GoogleButton'
+import googleIcon from '../../assets/pictures/goggleIcon.png'
 
 export const LoginForm = () => {
   const [error, setError] = useState(null)
@@ -108,11 +110,26 @@ export const LoginForm = () => {
               flexDirection='row'
               alignItems='center'
               justifyContent='space-between'
-              marginTop='1.5rem'
+              margin='1.5rem 0'
+
             >
               <Link>Forgot Password?</Link>
               <Link to='/signUp'>Sign Up</Link>
             </Box>
+            <Typography
+              component='h5'
+              variant='h5'
+              fontWeight='semi-bold'
+              fontSize='1.1rem'
+              color='#3D550C'
+              textAlign='center'
+            >
+              or
+            </Typography>
+            <GoogleButton variant='outlined'>
+              <img src={googleIcon} alt='google icon' className='icon' style={{ width: '1.2rem' }} />
+              Sign in with Google
+            </GoogleButton>
           </Box>
         </Box>
       </Container>
