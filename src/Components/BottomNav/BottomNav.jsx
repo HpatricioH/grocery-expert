@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 import { supabase } from '../../utilities/supabaseClient'
 import { useGroceries } from '../../hooks/useGroceries'
-
 import { ProfileMenu } from '../ProfileMenu/ProfileMenu'
 import './bottomNav.css'
 
