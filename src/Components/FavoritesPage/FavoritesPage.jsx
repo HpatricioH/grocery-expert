@@ -12,6 +12,8 @@ export const FavoritesPage = () => {
   const [idRecipe, setIdRecipe] = useState(null)
   const [recipeDeleted, setRecipeDeleted] = useState(false)
   const location = useLocation()
+  const storageKey = import.meta.env.VITE_LOCALSTORAGE
+  const user = JSON.parse(window.localStorage.getItem(storageKey))
 
   const handleClose = () => setOpen(false)
 
@@ -34,13 +36,13 @@ export const FavoritesPage = () => {
 
   useEffect(() => {
     const getFavoritesRecipes = async () => {
-      const { data } = await supabase.from('favorites').select('idRecipe, name, image, id')
+      const { data } = await supabase.from('favorites').select('idRecipe, name, image, id').eq('user_id', user.user.id)
       setRecipes(data)
     }
     getFavoritesRecipes()
   }, [recipeDeleted])
 
-  return (
+  return user && (
     <Container component='section'>
       <ImageList sx={{ width: 400, height: '100%' }}>
         <ImageListItem key='Subheader' cols={2} />
