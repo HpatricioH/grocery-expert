@@ -70,7 +70,7 @@ export const PantryPage = () => {
       <Autocomplete
         disablePortal
         id='combo-box-demo'
-        onChange={(e, newValue) => {
+        onChange={(newValue) => {
           setValue(newValue)
         }}
         options={pantryItems}

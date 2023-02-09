@@ -72,8 +72,8 @@ export const IngredientRecipes = () => {
   }
 
   return (
-    <Container component='section'>
-      <ImageList sx={{ width: 400, height: '100%' }}>
+    <Container component='section' sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <ImageList sx={{ width: 360, height: '100%' }}>
         <ImageListItem key='Subheader' cols={2} />
         {recipes?.meals?.map((item) => (
 

@@ -1,18 +1,18 @@
-import { ImageList, ImageListItem, Typography } from '@mui/material'
+import { Container, ImageList, ImageListItem, Typography } from '@mui/material'
 import groceries from '../../assets/pictures/groceries.jpg'
 import headingFont from '../../styles/fontTheme'
 
 export const NoGroceries = () => {
   return (
-    <>
+    <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <ImageList
         sx={{
-          width: 395,
-          height: 595,
+          width: 344,
+          height: 600,
           position: 'relative'
         }}
         cols={1}
-        rowHeight={500}
+        rowHeight={530}
       >
         <ImageListItem sx={{ objectFit: 'none ' }}>
           <img
@@ -30,7 +30,7 @@ export const NoGroceries = () => {
           fontFamily={headingFont.typography.fontFamily}
           color='#fff'
           top='15rem'
-          fontSize='3.5rem'
+          fontSize='2.8rem'
           textAlign='center'
           width='100%'
           backgroundColor='#333'
@@ -38,6 +38,6 @@ export const NoGroceries = () => {
           No Groceries List
         </Typography>
       </ImageList>
-    </>
+    </Container>
   )
 }
