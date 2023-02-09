@@ -45,51 +45,54 @@ export const GroceriesList = () => {
   }, [])
 
   return (
-    <Container component='section'>
-      <Typography
-        variant='h4'
-        component='h1'
-        textAlign='center'
-        fontFamily={headingFont.typography.fontFamily}
-        fontWeight='semi-bold'
-        fontSize='4rem'
-        letterSpacing='0.2rem'
-        color='#3D550C'
-        padding='1.5rem 0 0'
-      >
-        Grocery List
-      </Typography>
+    <>
 
-      {loading
-        ? <LoadingSpinner />
+      <Container component='section'>
+        <Typography
+          variant='h4'
+          component='h1'
+          textAlign='center'
+          fontFamily={headingFont.typography.fontFamily}
+          fontWeight='semi-bold'
+          fontSize='4rem'
+          letterSpacing='0.2rem'
+          color='#3D550C'
+          padding='1.5rem 0 0'
+        >
+          Grocery List
+        </Typography>
 
-        : list?.map((product) => {
-          return (
-            <Box
-              key={product?.id} style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                padding: '1rem 0',
-                borderBottom: '1px solid #3D550C'
-              }}
-            >
-              <GroceriesCard
-                name={product?.name}
-                quantity={product?.quantity}
-                image={product?.image}
-              />
-              <EditIcon color='primary' style={{ placeSelf: 'center' }} onClick={() => handleOpen(product?.id)} />
-              <ModalUpdate
-                handleClose={handleClose}
-                open={open}
-                grocery={singleProduct?.[0]}
-                getGroceries={getGroceriesList}
-              />
-            </Box>
-          )
-        })}
+        {loading
+          ? <LoadingSpinner />
+
+          : list?.map((product) => {
+            return (
+              <Box
+                key={product?.id} style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  padding: '1rem 0',
+                  borderBottom: '1px solid #3D550C'
+                }}
+              >
+                <GroceriesCard
+                  name={product?.name}
+                  quantity={product?.quantity}
+                  image={product?.image}
+                />
+                <EditIcon color='primary' style={{ placeSelf: 'center' }} onClick={() => handleOpen(product?.id)} />
+                <ModalUpdate
+                  handleClose={handleClose}
+                  open={open}
+                  grocery={singleProduct?.[0]}
+                  getGroceries={getGroceriesList}
+                />
+              </Box>
+            )
+          })}
+
+      </Container>
       {noGroceries && !loading ? <NoGroceries /> : null}
-
-    </Container>
+    </>
   )
 }
