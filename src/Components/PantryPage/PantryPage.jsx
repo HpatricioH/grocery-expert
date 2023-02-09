@@ -33,15 +33,15 @@ export const PantryPage = () => {
     const userId = user.id
 
     try {
-      const { data, error } = await supabase.from('groceries')
+      const { data } = await supabase.from('groceries')
         .insert({
           user_id: userId,
           name: value,
           image,
           quantity
         }).select('name, quantity, image, id')
-      console.log(error)
       setNewItem(data)
+      setValue()
     } catch (error) {
       console.log(error)
     }
