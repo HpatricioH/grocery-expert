@@ -34,10 +34,11 @@ export const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const { email, password } = e.target
-    // TODO: add Google social login
+    const { email, password } = Object.fromEntries(
+      new window.FormData(e.target)
+    )
 
-    const token = await auth(email.value, password.value)
+    const token = await auth(email, password)
 
     if (token.error) {
       setFormError(true)

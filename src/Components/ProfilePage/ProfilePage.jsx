@@ -20,7 +20,6 @@ export const ProfilePage = () => {
       new window.FormData(e.target)
     )
 
-    // TODO: fix problem with when updating existing profile
     if (!name && !userName) {
       setFormError(true)
       setError('Please Fill all the Fields!')
@@ -30,9 +29,10 @@ export const ProfilePage = () => {
         full_name: name,
         username: userName
       })
+
       if (error) {
         setFormError(true)
-        setError(error)
+        setError('Profile already updated!')
       }
     }
   }
