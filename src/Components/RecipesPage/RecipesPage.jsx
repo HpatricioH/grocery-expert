@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../../utilities/supabaseClient'
-import ImageList from '@mui/material/ImageList'
-import ImageListItem from '@mui/material/ImageListItem'
-import ImageListItemBar from '@mui/material/ImageListItemBar'
-import { Container } from '@mui/material'
 import { Link } from 'react-router-dom'
+import '../../styles/recipes.css'
 
 export const RecipesPage = () => {
   const [pantryProducts, setPantryProducts] = useState(null)
@@ -15,28 +12,31 @@ export const RecipesPage = () => {
     setPantryProducts(filteredGroceries)
   }
 
-  useEffect(() => { getPantryGroceries() }, [])
+  useEffect(() => {
+    getPantryGroceries()
+  }, [])
 
   return (
-    <Container component='section' sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <ImageList sx={{ width: 360, height: '100%' }}>
-        <ImageListItem key='Subheader' cols={2} />
+    <section className='container'>
+      <ul className='recipes__container'>
         {pantryProducts?.map((item) => (
-          <Link to={`/recipes/${item.id}`} key={item.id}>
-            <ImageListItem>
+          <Link to={`/recipes/${item.id}`} key={item.id} className='recipes__link'>
+            <li className='image__container'>
               <img
                 src={`${item.image}?w=248&fit=crop&auto=format`}
                 alt={item.name}
                 loading='lazy'
+                className='image'
               />
-              <ImageListItemBar
-                title={item.name}
-              />
-            </ImageListItem>
+              <div className='recipes__title'>
+                <h3>{item.name}</h3>
+              </div>
+            </li>
+
           </Link>
 
         ))}
-      </ImageList>
-    </Container>
+      </ul>
+    </section>
   )
 }
