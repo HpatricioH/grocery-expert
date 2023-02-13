@@ -1,16 +1,14 @@
 import { useEffect, useState } from 'react'
-import { supabase } from '../../utilities/supabaseClient'
 import { Box } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import ModalUpdate from '../ModalUpdate/ModalUpdate'
 import { GroceriesCard } from '../GroceriesCard/GroceriesCard'
+import { getGroceries } from '../../utilities/getGroceries'
 
 export const PantryItemList = ({ newItem }) => {
   const [groceries, setGroceries] = useState(null)
   const [selectedGrocery, setSelectedGrocery] = useState(null)
   const [open, setOpen] = useState(false)
-  const storageKey = import.meta.env.VITE_LOCALSTORAGE
-  const user = JSON.parse(window.localStorage.getItem(storageKey))
 
   // handle open and close modal
   const handleClose = () => setOpen(false)
@@ -21,17 +19,13 @@ export const PantryItemList = ({ newItem }) => {
     setOpen(true)
   }
 
-  // get groceries available
-  const getGroceries = async () => {
-    try {
-      const { data } = await supabase.from('groceries').select('name, quantity, image, id').eq('user_id', user.user.id)
-      setGroceries(data)
-    } catch (error) {
-      console.log(error)
-    }
-  }
   useEffect(() => {
-    getGroceries()
+    // get groceries available
+    const getPantry = async () => {
+      const getProducts = await getGroceries()
+      setGroceries(getProducts)
+    }
+    getPantry()
   }, [newItem])
 
   return (
