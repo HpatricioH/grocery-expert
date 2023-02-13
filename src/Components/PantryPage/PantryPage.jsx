@@ -49,7 +49,7 @@ export const PantryPage = () => {
 
   useEffect(() => {
     if (ingredients?.meals) {
-      setPantryItems(ingredients.meals.map(ingredient => ingredient.strIngredient))
+      setPantryItems(ingredients?.meals?.map(ingredient => ingredient.strIngredient))
     }
   }, [ingredients])
 
@@ -70,7 +70,7 @@ export const PantryPage = () => {
       <Autocomplete
         disablePortal
         id='combo-box-demo'
-        onChange={(newValue) => {
+        onChange={(e, newValue) => {
           setValue(newValue)
         }}
         options={pantryItems}
