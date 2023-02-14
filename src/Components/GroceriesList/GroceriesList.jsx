@@ -7,30 +7,19 @@ import { GroceriesCard } from '../GroceriesCard/GroceriesCard'
 import { NoGroceries } from '../NoGroceries/NoGroceries'
 import EditIcon from '@mui/icons-material/Edit'
 import ModalUpdate from '../ModalUpdate/ModalUpdate'
+import { modal } from '../../utilities/modal'
 
 export const GroceriesList = () => {
   const [list, setList] = useState(null)
   const [loading, setLoading] = useState(false)
   const [noGroceries, setNoGroceries] = useState(false)
-  const [open, setOpen] = useState(false)
-  const [singleProduct, setSingleProduct] = useState(null)
-
-  // manage close and open modal
-  const handleClose = () => {
-    setList(null)
-    setOpen(false)
-  }
-
-  const handleOpen = (id) => {
-    const oneProduct = list.filter((el) => el?.id === id)
-    setSingleProduct(oneProduct)
-    setOpen(true)
-  }
+  const { handleOpen, handleClose, open, singleProduct } = modal()
 
   // get groceries only with quantity 0 and display
   const getGroceriesList = async () => {
     try {
       setLoading(true)
+      setList(null)
       const { data } = await supabase.from('groceries').select().eq('quantity', '0')
       !data?.length ? setNoGroceries(true) : setList(data)
     } catch (error) {
@@ -80,7 +69,7 @@ export const GroceriesList = () => {
                   quantity={product?.quantity}
                   image={product?.image}
                 />
-                <EditIcon color='primary' style={{ placeSelf: 'center' }} onClick={() => handleOpen(product?.id)} />
+                <EditIcon color='primary' style={{ placeSelf: 'center' }} onClick={() => handleOpen(product?.id, list)} />
                 <ModalUpdate
                   handleClose={handleClose}
                   open={open}

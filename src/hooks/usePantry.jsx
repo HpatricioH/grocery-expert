@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getGroceries } from '../utilities/getGroceries'
 
 export const usePantry = (newItem) => {
@@ -6,22 +6,21 @@ export const usePantry = (newItem) => {
   const [groceries, setGroceries] = useState(null)
   const [error, setError] = useState(null)
 
-  const getPantryProducts = useCallback(async () => {
-    try {
-      setLoading(true)
-      setError(null)
-      const getProducts = await getGroceries()
-      setGroceries(getProducts)
-    } catch (error) {
-      setError(error.message)
-    } finally {
-      setLoading(false)
+  useEffect(() => {
+    const getPantry = async () => {
+      try {
+        setLoading(true)
+        setError(null)
+        const getProducts = await getGroceries()
+        setGroceries(getProducts)
+      } catch (error) {
+        setError(error.message)
+      } finally {
+        setLoading(false)
+      }
     }
+    getPantry()
   }, [newItem])
 
-  const getOneProduct = (id) => {
-    return groceries?.filter((el) => el.id === id)
-  }
-
-  return { loading, groceries, error, getPantryProducts, getOneProduct }
+  return { loading, groceries, error }
 }
