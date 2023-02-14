@@ -4,9 +4,10 @@ import EditIcon from '@mui/icons-material/Edit'
 import ModalUpdate from '../ModalUpdate/ModalUpdate'
 import { GroceriesCard } from '../GroceriesCard/GroceriesCard'
 import { getGroceries } from '../../utilities/getGroceries'
+import { usePantry } from '../../hooks/usePantry'
 
 export const PantryItemList = ({ newItem }) => {
-  const [groceries, setGroceries] = useState(null)
+  const { getPantryProducts, groceries, getOneProduct } = usePantry()
   const [selectedGrocery, setSelectedGrocery] = useState(null)
   const [open, setOpen] = useState(false)
 
@@ -14,7 +15,7 @@ export const PantryItemList = ({ newItem }) => {
   const handleClose = () => setOpen(false)
 
   const handleOpen = (id) => {
-    const grocery = groceries.filter((el) => el.id === id)
+    const grocery = getOneProduct(id)
     setSelectedGrocery(grocery)
     setOpen(true)
   }
@@ -22,8 +23,7 @@ export const PantryItemList = ({ newItem }) => {
   useEffect(() => {
     // get groceries available
     const getPantry = async () => {
-      const getProducts = await getGroceries()
-      setGroceries(getProducts)
+      await getPantryProducts(newItem)
     }
     getPantry()
   }, [newItem])
