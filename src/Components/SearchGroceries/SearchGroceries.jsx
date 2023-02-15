@@ -5,7 +5,7 @@ import { Count } from '../../utilities/Count'
 import { useCount } from '../../hooks/useCount'
 
 export const SearchGroceries = ({ value, addGroceries }) => {
-  const { count, handleIncrease, handleDecrease } = useCount()
+  const { count, handleIncrease, handleDecrease } = useCount({ quantity: 0 })
   const groceryImage = `https://www.themealdb.com/images/ingredients/${value}.png`
 
   // add grocery items to DB
@@ -21,9 +21,17 @@ export const SearchGroceries = ({ value, addGroceries }) => {
     <Box style={{ display: 'flex', justifyContent: 'space-between' }}>
 
       {/* grocery name  */}
-      <Typography style={{ placeSelf: 'center', fontSize: '0.8rem' }}>{value}</Typography>
+      <Typography
+        style={{ placeSelf: 'center', fontSize: '0.8rem' }}
+      >
+        {value}
+      </Typography>
 
-      <Count count={count} handleIncrease={handleIncrease} handleDecrease={handleDecrease} />
+      <Count
+        count={count}
+        handleIncrease={handleIncrease}
+        handleDecrease={handleDecrease}
+      />
 
       {/* grocery images */}
       <img
@@ -31,7 +39,12 @@ export const SearchGroceries = ({ value, addGroceries }) => {
         alt={value}
         className='ingredient__img'
       />
-      <Buttons style={{ height: '1.8rem', placeSelf: 'center', color: '#fff' }} onClick={handleAddItem}>Add</Buttons>
+      <Buttons
+        style={{ height: '1.8rem', placeSelf: 'center', color: '#fff' }}
+        onClick={handleAddItem}
+      >
+        Add
+      </Buttons>
     </Box>
   )
 }

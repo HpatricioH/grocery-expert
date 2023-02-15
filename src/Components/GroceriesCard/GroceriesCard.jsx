@@ -6,15 +6,18 @@ import { Count } from '../../utilities/Count'
 import { supabase } from '../../utilities/supabaseClient'
 import { useGroceries } from '../../hooks/useGroceries'
 
-export const GroceriesCard = ({ name, quantity, image, id }) => {
+export const GroceriesCard = ({ name, quantity, image, id, getPantry }) => {
   const { count, handleIncrease, handleDecrease } = useCount({ quantity })
   const { getGroceriesCount } = useGroceries()
 
   const handleClick = async () => {
     if (count !== quantity) {
-      const { data } = await supabase.from('groceries').update({ quantity: count }).eq('id', id).select()
+      await supabase.from('groceries')
+        .update({ quantity: count })
+        .eq('id', id)
+        .select()
       getGroceriesCount()
-      console.log(data)
+      getPantry()
     } else {
       // eslint-disable-next-line no-undef
       alert(`You already have ${quantity} ${name} in the pantry`)

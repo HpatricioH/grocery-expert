@@ -1,41 +1,15 @@
 import { Box, Container, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
 import headingFont from '../../styles/fontTheme'
 import { LoadingSpinner } from '../../utilities/LoadingSpinner'
-import { supabase } from '../../utilities/supabaseClient'
 import { GroceriesCard } from '../GroceriesCard/GroceriesCard'
 import { NoGroceries } from '../NoGroceries/NoGroceries'
-import EditIcon from '@mui/icons-material/Edit'
-import ModalUpdate from '../ModalUpdate/ModalUpdate'
-import { modal } from '../../utilities/modal'
+import { usePantry } from '../../hooks/usePantry'
 
 export const GroceriesList = () => {
-  const [list, setList] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [noGroceries, setNoGroceries] = useState(false)
-  const { handleOpen, handleClose, open, singleProduct } = modal()
-
-  // get groceries only with quantity 0 and display
-  const getGroceriesList = async () => {
-    try {
-      setLoading(true)
-      setList(null)
-      const { data } = await supabase.from('groceries').select().eq('quantity', '0')
-      !data?.length ? setNoGroceries(true) : setList(data)
-    } catch (error) {
-      console.log(error)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    getGroceriesList()
-  }, [])
+  const { groceryList, loading, getPantry } = usePantry()
 
   return (
     <>
-
       <Container component='section'>
         <Typography
           variant='h4'
@@ -53,11 +27,10 @@ export const GroceriesList = () => {
 
         {loading
           ? <LoadingSpinner />
-
-          : list?.map((product) => {
+          : groceryList?.map((grocery) => {
             return (
               <Box
-                key={product?.id} style={{
+                key={grocery?.id} style={{
                   display: 'flex',
                   justifyContent: 'space-between',
                   padding: '1rem 0',
@@ -65,23 +38,17 @@ export const GroceriesList = () => {
                 }}
               >
                 <GroceriesCard
-                  name={product?.name}
-                  quantity={product?.quantity}
-                  image={product?.image}
-                />
-                <EditIcon color='primary' style={{ placeSelf: 'center' }} onClick={() => handleOpen(product?.id, list)} />
-                <ModalUpdate
-                  handleClose={handleClose}
-                  open={open}
-                  grocery={singleProduct?.[0]}
-                  getGroceries={getGroceriesList}
+                  name={grocery?.name}
+                  quantity={grocery?.quantity}
+                  image={grocery?.image}
+                  id={grocery?.id}
+                  getPantry={getPantry}
                 />
               </Box>
             )
           })}
-
       </Container>
-      {noGroceries && !loading ? <NoGroceries /> : null}
+      {groceryList?.length === 0 && !loading ? <NoGroceries /> : null}
     </>
   )
 }

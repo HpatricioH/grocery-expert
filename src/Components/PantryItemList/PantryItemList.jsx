@@ -4,7 +4,7 @@ import { usePantry } from '../../hooks/usePantry'
 import { LoadingSpinner } from '../../utilities/LoadingSpinner'
 
 export const PantryItemList = ({ newItem }) => {
-  const { groceries, loading } = usePantry(newItem)
+  const { groceries, loading, getPantry } = usePantry(newItem)
 
   return loading
     ? <LoadingSpinner />
@@ -24,6 +24,7 @@ export const PantryItemList = ({ newItem }) => {
                 quantity={grocery?.quantity}
                 image={grocery?.image}
                 id={grocery?.id}
+                getPantry={getPantry}
               />
             </Box>
           )
