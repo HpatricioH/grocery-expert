@@ -1,7 +1,29 @@
 import React from 'react'
-import { Box, Typography } from '@mui/material'
+import { Typography } from '@mui/material'
+import EditIcon from '@mui/icons-material/Edit'
+import { useCount } from '../../hooks/useCount'
+import { Count } from '../../utilities/Count'
+import { supabase } from '../../utilities/supabaseClient'
+import { useGroceries } from '../../hooks/useGroceries'
 
-export const GroceriesCard = ({ name, quantity, image }) => {
+export const GroceriesCard = ({ name, quantity, image, id, getPantry }) => {
+  const { count, handleIncrease, handleDecrease } = useCount({ quantity })
+  const { getGroceriesCount } = useGroceries()
+
+  const handleClick = async () => {
+    if (count !== quantity) {
+      await supabase.from('groceries')
+        .update({ quantity: count })
+        .eq('id', id)
+        .select()
+      getGroceriesCount()
+      getPantry()
+    } else {
+      // eslint-disable-next-line no-undef
+      alert(`You already have ${quantity} ${name} in the pantry`)
+    }
+  }
+
   return (
     <>
       {/* grocery name  */}
@@ -15,9 +37,11 @@ export const GroceriesCard = ({ name, quantity, image }) => {
       </Typography>
 
       {/* grocery quantity */}
-      <Box style={{ display: 'flex', cursor: 'pointer', placeSelf: 'center' }}>
-        <p style={{ margin: 0 }}>{quantity}</p>
-      </Box>
+      <Count
+        count={count}
+        handleIncrease={handleIncrease}
+        handleDecrease={handleDecrease}
+      />
 
       {/* grocery images */}
       <img
@@ -25,6 +49,11 @@ export const GroceriesCard = ({ name, quantity, image }) => {
         alt={name}
         className='ingredient__img'
         loading='lazy'
+      />
+      <EditIcon
+        color='primary'
+        style={{ placeSelf: 'center' }}
+        onClick={() => handleClick()}
       />
     </>
   )

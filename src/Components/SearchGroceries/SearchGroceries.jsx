@@ -1,18 +1,17 @@
 import { Box, Typography } from '@mui/material'
-import React, { useState } from 'react'
 import './searchGroceries.css'
 import Buttons from '../../utilities/Buttons'
 import { Count } from '../../utilities/Count'
+import { useCount } from '../../hooks/useCount'
 
 export const SearchGroceries = ({ value, addGroceries }) => {
-  const [count, setCount] = useState(0)
+  const { count, handleIncrease, handleDecrease } = useCount({ quantity: 0 })
   const groceryImage = `https://www.themealdb.com/images/ingredients/${value}.png`
 
   // add grocery items to DB
   const handleAddItem = async () => {
     if (count > 0) {
       addGroceries(groceryImage, count)
-      setCount(0)
     } else {
       console.log('add quantity')
     }
@@ -22,9 +21,17 @@ export const SearchGroceries = ({ value, addGroceries }) => {
     <Box style={{ display: 'flex', justifyContent: 'space-between' }}>
 
       {/* grocery name  */}
-      <Typography style={{ placeSelf: 'center', fontSize: '0.8rem' }}>{value}</Typography>
+      <Typography
+        style={{ placeSelf: 'center', fontSize: '0.8rem' }}
+      >
+        {value}
+      </Typography>
 
-      <Count count={count} setCount={setCount} />
+      <Count
+        count={count}
+        handleIncrease={handleIncrease}
+        handleDecrease={handleDecrease}
+      />
 
       {/* grocery images */}
       <img
@@ -32,7 +39,12 @@ export const SearchGroceries = ({ value, addGroceries }) => {
         alt={value}
         className='ingredient__img'
       />
-      <Buttons style={{ height: '1.8rem', placeSelf: 'center', color: '#fff' }} onClick={handleAddItem}>Add</Buttons>
+      <Buttons
+        style={{ height: '1.8rem', placeSelf: 'center', color: '#fff' }}
+        onClick={handleAddItem}
+      >
+        Add
+      </Buttons>
     </Box>
   )
 }
