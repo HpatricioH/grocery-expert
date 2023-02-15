@@ -12,7 +12,8 @@ export const usePantry = (newItem) => {
         setLoading(true)
         setError(null)
         const getProducts = await getGroceries()
-        setGroceries(getProducts)
+        const groceriesAvailable = getProducts.filter((el) => el.quantity > 0)
+        setGroceries(groceriesAvailable)
       } catch (error) {
         setError(error.message)
       } finally {

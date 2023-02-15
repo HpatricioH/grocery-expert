@@ -24,13 +24,15 @@ const ModalUpdate = ({ handleClose, open, grocery, getGroceries }) => {
   const [count, setCount] = useState(0)
   const { getGroceriesCount } = useGroceries()
 
+  // TODO: create another service to update and another hook that controls the updating functionality
   // update groceries quantity
   const handleClickUpdate = async () => {
     if (count !== grocery?.quantity) {
-      await supabase.from('groceries').update({ quantity: count }).eq('id', grocery?.id)
+      const { data } = await supabase.from('groceries').update({ quantity: count }).eq('id', grocery?.id).select()
       getGroceries()
       handleClose()
       getGroceriesCount()
+      console.log(data)
     } else {
       // eslint-disable-next-line no-undef
       alert(`You already have ${grocery?.name}`)
