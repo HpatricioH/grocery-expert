@@ -1,37 +1,16 @@
 import { Autocomplete, Container, Typography } from '@mui/material'
-import { useState } from 'react'
+import { useAddGroceries } from '../../hooks/useAddGroceries'
 import { useAuth } from '../../hooks/useAuth'
 import { useGetIngredients } from '../../hooks/useGetIngredients'
 import headingFont from '../../styles/fontTheme'
 import FormInput from '../../utilities/FormInput'
-import { supabase } from '../../utilities/supabaseClient'
 import { PantryItemList } from '../PantryItemList/PantryItemList'
 import { SearchGroceries } from '../SearchGroceries/SearchGroceries'
 
 export const PantryPage = () => {
   const { user } = useAuth()
   const { pantryItems } = useGetIngredients()
-  const [value, setValue] = useState()
-  const [newItem, setNewItem] = useState(null)
-
-  // insert data into DB
-  const addGroceries = async (image, quantity) => {
-    const userId = user.id
-
-    try {
-      const { data } = await supabase.from('groceries')
-        .insert({
-          user_id: userId,
-          name: value,
-          image,
-          quantity
-        }).select('name, quantity, image, id')
-      setNewItem(data)
-      setValue()
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  const { value, newItem, setValue, addGroceries } = useAddGroceries(user)
 
   return (
     <Container component='section'>
