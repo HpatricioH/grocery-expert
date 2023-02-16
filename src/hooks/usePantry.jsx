@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react'
-import { getGroceries } from '../utilities/getGroceries'
+import { useCallback, useEffect, useState } from 'react'
+import { getGroceries } from '../services/getGroceries'
 
-export const usePantry = (newItem) => {
+export const usePantry = (newItem, value) => {
   const [loading, setLoading] = useState(false)
   const [groceries, setGroceries] = useState(null)
   const [groceryList, setGroceryList] = useState(null)
   const [error, setError] = useState(null)
 
-  const getPantry = async () => {
+  const getPantry = useCallback(async () => {
     try {
       setLoading(true)
       setError(null)
@@ -21,7 +21,7 @@ export const usePantry = (newItem) => {
     } finally {
       setLoading(false)
     }
-  }
+  }, [groceries, groceryList])
 
   useEffect(() => {
     getPantry()

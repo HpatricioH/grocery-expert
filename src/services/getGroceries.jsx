@@ -1,4 +1,4 @@
-import { supabase } from './supabaseClient'
+import { supabase } from '../utilities/supabaseClient'
 
 export const getGroceries = async () => {
   const storageKey = import.meta.env.VITE_LOCALSTORAGE

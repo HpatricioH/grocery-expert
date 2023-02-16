@@ -1,7 +1,7 @@
 import { Autocomplete, Container, Typography } from '@mui/material'
-import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useAuth } from '../../hooks/useAuth'
+import { useGetIngredients } from '../../hooks/useGetIngredients'
 import headingFont from '../../styles/fontTheme'
 import FormInput from '../../utilities/FormInput'
 import { supabase } from '../../utilities/supabaseClient'
@@ -10,23 +10,9 @@ import { SearchGroceries } from '../SearchGroceries/SearchGroceries'
 
 export const PantryPage = () => {
   const { user } = useAuth()
-  const [ingredients, setIngredients] = useState(null)
-  const [pantryItems, setPantryItems] = useState([])
+  const { pantryItems } = useGetIngredients()
   const [value, setValue] = useState()
   const [newItem, setNewItem] = useState(null)
-  const url = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list'
-
-  useEffect(() => {
-    async function getIngredients () {
-      try {
-        const response = await axios.get(url)
-        setIngredients(response?.data)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    getIngredients()
-  }, [])
 
   // insert data into DB
   const addGroceries = async (image, quantity) => {
@@ -46,12 +32,6 @@ export const PantryPage = () => {
       console.log(error)
     }
   }
-
-  useEffect(() => {
-    if (ingredients?.meals) {
-      setPantryItems(ingredients?.meals?.map(ingredient => ingredient.strIngredient))
-    }
-  }, [ingredients])
 
   return (
     <Container component='section'>
@@ -85,7 +65,7 @@ export const PantryPage = () => {
 
       <div>
 
-        <PantryItemList newItem={newItem} />
+        <PantryItemList newItem={newItem} value={value} />
       </div>
     </Container>
 
