@@ -7,11 +7,14 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import { ModalRecipes } from '../ModalRecipes/ModalRecipes'
 import { useAuth } from '../../hooks/useAuth'
 import '../../styles/GlobalCssFavorites.css'
+import { getGroceries } from '../../services/getGroceries'
+import { useGetRecipes } from '../../hooks/useGetRecipes'
 
 // TODO: change name of this component to only recipes instead of IngredientRecipes
 export const IngredientRecipes = () => {
   const { user } = useAuth()
   const [groceryName, setGroceryName] = useState(null)
+  // const { recipes } = useGetRecipes(id)
   const [recipes, setRecipes] = useState([])
   const [open, setOpen] = useState(false)
   const [idRecipe, setIdRecipe] = useState(null)
@@ -27,14 +30,10 @@ export const IngredientRecipes = () => {
 
   useEffect(() => {
     const getGroceryName = async () => {
-      try {
-        const { data } = await supabase.from('groceries').select('name').eq('id', id)
-        setGroceryName(data?.[0])
-      } catch (error) {
-        console.log(error)
-      }
+      const singleData = await getGroceries()
+      const data = singleData?.filter((el) => el.id === Number(id))
+      setGroceryName(data[0])
     }
-
     getGroceryName()
   }, [])
 
