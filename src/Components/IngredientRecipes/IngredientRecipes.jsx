@@ -1,66 +1,24 @@
-import axios from 'axios'
-import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { supabase } from '../../utilities/supabaseClient'
 import { ImageList, ImageListItem, ImageListItemBar, Container, IconButton } from '@mui/material'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import { ModalRecipes } from '../ModalRecipes/ModalRecipes'
 import { useAuth } from '../../hooks/useAuth'
 import '../../styles/GlobalCssFavorites.css'
+import { useGetRecipes } from '../../hooks/useGetRecipes'
+import { LoadingSpinner } from '../../utilities/LoadingSpinner'
+import { modal } from '../../utilities/modal'
+import { addFavorites } from '../../services/addFavorites'
 
 // TODO: change name of this component to only recipes instead of IngredientRecipes
 export const IngredientRecipes = () => {
   const { user } = useAuth()
-  const [groceryName, setGroceryName] = useState(null)
-  const [recipes, setRecipes] = useState([])
-  const [open, setOpen] = useState(false)
-  const [idRecipe, setIdRecipe] = useState(null)
   const { id } = useParams()
-  const URL = `https://www.themealdb.com/api/json/v2/9973533/filter.php?i=${groceryName?.name}`
-
-  const handleClose = () => setOpen(false)
-  const handleOpen = (id) => {
-    const singleRecipe = recipes?.meals?.filter((el) => el.idMeal === id)
-    setIdRecipe(singleRecipe[0].idMeal)
-    setOpen(true)
-  }
-
-  useEffect(() => {
-    const getGroceryName = async () => {
-      try {
-        const { data } = await supabase.from('groceries').select('name').eq('id', id)
-        setGroceryName(data?.[0])
-      } catch (error) {
-        console.log(error)
-      }
-    }
-
-    getGroceryName()
-  }, [])
-
-  const getRecipes = async () => {
-    try {
-      const { data } = await axios.get(`${URL}`)
-      setRecipes(data)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  useEffect(() => {
-    getRecipes()
-  }, [groceryName])
+  const { recipes, loading } = useGetRecipes(id)
+  const { handleOpen, handleClose, open, idRecipe } = modal()
 
   // add recipes to favorite list
   const handleClick = async (item) => {
-    const { error } = await supabase
-      .from('favorites')
-      .insert({
-        user_id: user.id,
-        idRecipe: item.idMeal,
-        name: item.strMeal,
-        image: item.strMealThumb
-      })
+    const error = await addFavorites(item, user)
 
     if (!error) {
       // eslint-disable-next-line no-undef
@@ -71,36 +29,38 @@ export const IngredientRecipes = () => {
     }
   }
 
-  return (
-    <Container component='section' sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <ImageList sx={{ width: 360, height: '100%' }}>
-        <ImageListItem key='Subheader' cols={2} />
-        {recipes?.meals?.map((item) => (
+  return loading
+    ? <LoadingSpinner />
+    : (
+      <Container component='section' sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <ImageList sx={{ width: 360, height: '100%' }}>
+          <ImageListItem key='Subheader' cols={2} />
+          {recipes?.meals?.map((item) => (
 
-          <ImageListItem key={item.idMeal}>
-            <img
-              src={`${item.strMealThumb}?w=248&fit=crop&auto=format`}
-              alt={item.strMeal}
-              loading='lazy'
-              onClick={() => handleOpen(item.idMeal)}
-            />
-            <ImageListItemBar
-              title={item.strMeal}
-              sx={{ backgroundColor: 'rgba(51, 51, 51, 0.85)' }}
-              actionIcon={
-                <IconButton
-                  sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                  onClick={() => handleClick(item)}
-                >
-                  <FavoriteIcon />
+            <ImageListItem key={item.idMeal}>
+              <img
+                src={`${item.strMealThumb}?w=248&fit=crop&auto=format`}
+                alt={item.strMeal}
+                loading='lazy'
+                onClick={() => handleOpen(item.idMeal, recipes)}
+              />
+              <ImageListItemBar
+                title={item.strMeal}
+                sx={{ backgroundColor: 'rgba(51, 51, 51, 0.85)' }}
+                actionIcon={
+                  <IconButton
+                    sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                    onClick={() => handleClick(item)}
+                  >
+                    <FavoriteIcon />
 
-                </IconButton>
+                  </IconButton>
               }
-            />
-            <ModalRecipes open={open} handleClose={handleClose} id={idRecipe} />
-          </ImageListItem>
-        ))}
-      </ImageList>
-    </Container>
-  )
+              />
+              <ModalRecipes open={open} handleClose={handleClose} id={idRecipe} />
+            </ImageListItem>
+          ))}
+        </ImageList>
+      </Container>
+      )
 }

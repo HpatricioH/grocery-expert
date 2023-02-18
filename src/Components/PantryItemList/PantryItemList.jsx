@@ -1,10 +1,10 @@
 import { Box } from '@mui/material'
 import { GroceriesCard } from '../GroceriesCard/GroceriesCard'
-import { usePantry } from '../../hooks/usePantry'
+import { usePantry } from '../../hooks/usePantry.jsx'
 import { LoadingSpinner } from '../../utilities/LoadingSpinner'
 
-export const PantryItemList = ({ newItem }) => {
-  const { groceries, loading, getPantry } = usePantry(newItem)
+export const PantryItemList = ({ newItem, value }) => {
+  const { groceries, loading, getPantry } = usePantry(newItem, value)
 
   return loading
     ? <LoadingSpinner />
