@@ -10,8 +10,10 @@ import { supabase } from '../../utilities/supabaseClient'
 import { auth } from '../../utilities/auth'
 import GoogleButton from '../../utilities/GoogleButton'
 import googleIcon from '../../assets/pictures/goggleIcon.png'
+import { useAuth } from '../../hooks/useAuth'
 
 export const LoginForm = () => {
+  const { setUser } = useAuth()
   const [error, setError] = useState(null)
   const [formError, setFormError] = useState(false)
   const theme = createTheme()
@@ -22,6 +24,7 @@ export const LoginForm = () => {
       try {
         const { data } = await supabase.auth.getSession()
         if (data.session) {
+          setUser(data?.session?.user)
           navigate('/home')
         }
       } catch (error) {

@@ -6,13 +6,14 @@ import FormInput from '../../utilities/FormInput'
 import Container from '@mui/system/Container'
 import Buttons from '../../utilities/Buttons'
 import { useState } from 'react'
-import { supabase } from '../../utilities/supabaseClient'
-import { useAuth } from '../../hooks/useAuth'
+import { updateProfile } from '../../services/updateProfile'
 
 export const ProfilePage = () => {
-  const { user } = useAuth()
   const [formError, setFormError] = useState(false)
   const [error, setError] = useState(null)
+  const [updateError, setUpdateError] = useState(null)
+  const storageKey = import.meta.env.VITE_LOCALSTORAGE
+  const { user } = JSON.parse(window.localStorage.getItem(storageKey))
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -24,16 +25,13 @@ export const ProfilePage = () => {
       setFormError(true)
       setError('Please Fill all the Fields!')
     } else {
-      const { error } = await supabase.from('profiles').insert({
-        id: user.id,
-        full_name: name,
-        username: userName
-      })
+      const error = await updateProfile(user, name, userName)
+      setUpdateError(error)
+    }
 
-      if (error) {
-        setFormError(true)
-        setError('Profile already updated!')
-      }
+    if (!updateError) {
+      setFormError(true)
+      setError('Can not update an updated profile!')
     }
   }
 
