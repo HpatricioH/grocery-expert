@@ -2,16 +2,13 @@ import { Box, BottomNavigation, BottomNavigationAction, Badge } from '@mui/mater
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import PersonIcon from '@mui/icons-material/Person'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useAuth } from '../../hooks/useAuth'
-import { supabase } from '../../utilities/supabaseClient'
 import { useGroceries } from '../../hooks/useGroceries'
 import { ProfileMenu } from '../ProfileMenu/ProfileMenu'
 import './bottomNav.css'
 
 const BottomNav = () => {
-  const { setUser } = useAuth()
   const { groceriesCount } = useGroceries()
   const [value, setValue] = useState()
   const [anchorElUser, setAnchorElUser] = useState(null)
@@ -23,15 +20,6 @@ const BottomNav = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
   }
-
-  // getUser session information and store it in context
-  useEffect(() => {
-    const getUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser()
-      setUser(user)
-    }
-    getUser()
-  }, [])
 
   return (
     <Box
