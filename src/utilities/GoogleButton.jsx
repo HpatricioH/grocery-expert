@@ -19,6 +19,8 @@ const GoogleButton = ({ name, ...otherProps }) => {
   const signInWithGoogle = async () => {
     await supabase.auth.signInWithOAuth({
       provider: 'google'
+    }, {
+      redirectTo: 'http://127.0.0.1:8080/pantry'
     })
   }
 

@@ -1,38 +1,20 @@
 import { Box, Container, Checkbox, Typography, FormControlLabel, FormControl } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { Link, useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import logo from '../../assets/pictures/logo.png'
 import FormInput from '../../utilities/FormInput'
 import Buttons from '../../utilities/Buttons'
 import headingFont from '../../styles/fontTheme'
-import { supabase } from '../../utilities/supabaseClient'
 import { auth } from '../../utilities/auth'
 import GoogleButton from '../../utilities/GoogleButton'
 import googleIcon from '../../assets/pictures/goggleIcon.png'
-import { useAuth } from '../../hooks/useAuth'
 
 export const LoginForm = () => {
-  const { setUser } = useAuth()
   const [error, setError] = useState(null)
   const [formError, setFormError] = useState(false)
   const theme = createTheme()
   const navigate = useNavigate()
-
-  useEffect(() => {
-    const getSession = async () => {
-      try {
-        const { data } = await supabase.auth.getSession()
-        if (data.session) {
-          setUser(data?.session?.user)
-          navigate('/home')
-        }
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    getSession()
-  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
