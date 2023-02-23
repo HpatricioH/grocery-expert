@@ -1,12 +1,12 @@
 import { Box, Container, Checkbox, Typography, FormControlLabel, FormControl } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { Link, useNavigate } from 'react-router-dom'
-import { supabase } from '../../utilities/supabaseClient'
 import logo from '../../assets/pictures/logo.png'
 import FormInput from '../../utilities/FormInput'
 import Buttons from '../../utilities/Buttons'
 import { useState } from 'react'
 import headingFont from '../../styles/fontTheme'
+import { signUpUser } from '../../services/signUpUser'
 
 export const SignUpPage = () => {
   const [error, setError] = useState(null)
@@ -15,40 +15,25 @@ export const SignUpPage = () => {
   const theme = createTheme()
   const history = useNavigate()
 
-  const createProfile = async (firstName, lastName, userId) => {
-    // TODO: fix this function to store user name into database
-    try {
-      const response = await supabase.from('profiles').insert({
-        first_name: firstName,
-        last_name: lastName,
-        id_user: userId
-      })
-      console.log(response)
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  // TODO: change form first name and last name to one field and update profile in DB
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const { email, password, firstName, lastName } = e.target
+    const { email, password, firstName, lastName } = Object.fromEntries(new window.FormData(e.target))
 
-    if (!email.value && !password.value && !firstName.value && !lastName.value) {
+    if (!email && !password && !firstName && !lastName) {
       setError('Please fill all fields')
       setFormError(true)
     }
 
     try {
-      const response = await supabase.auth.signUp({
-        email: email.value,
-        password: password.value
-      })
+      const response = await signUpUser(email, password)
+
       if (response.error === null) {
         history('/')
         setError(null)
         setFormError(false)
-        await createProfile(firstName.value, lastName.value, response.id)
       } else {
         setPasswordError(response.error.message)
         setFormError(true)

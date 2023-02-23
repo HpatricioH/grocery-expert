@@ -1,6 +1,7 @@
 import { Box, Container, Modal, Typography } from '@mui/material'
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useSingleRecipe } from '../../hooks/useSingleRecipe'
+import { getSingleRecipe } from '../../services/getSingleRecipe'
 import headingFont from '../../styles/fontTheme'
 import Buttons from '../../utilities/Buttons'
 import { RecipeIngredients } from '../RecipeIngredients/RecipeIngredients'
@@ -30,21 +31,12 @@ const modalContentStyle = {
 }
 
 export const ModalRecipes = ({ open, handleClose, id }) => {
-  const [recipe, setRecipe] = useState(null)
-  const URL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
+  const { recipe, setRecipe } = useSingleRecipe(open, id)
 
   const handleClickClose = () => {
     handleClose()
     setRecipe(null)
   }
-
-  useEffect(() => {
-    const fetchRecipe = async () => {
-      const { data } = await axios.get(URL)
-      setRecipe(data?.meals)
-    }
-    fetchRecipe()
-  }, [open])
 
   return (
     <Modal

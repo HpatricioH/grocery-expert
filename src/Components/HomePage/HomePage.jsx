@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
@@ -6,27 +5,13 @@ import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import CardActionArea from '@mui/material/CardActionArea'
 import Container from '@mui/material/Container'
-import axios from 'axios'
 import AvTimerIcon from '@mui/icons-material/AvTimer'
 import PeopleIcon from '@mui/icons-material/People'
 import FastfoodIcon from '@mui/icons-material/Fastfood'
+import { useGetRecipesHome } from '../../hooks/useGetRecipesHome'
 
 const HomePage = () => {
-  const [recipes, setRecipes] = useState(null)
-  const urlKey = import.meta.env.VITE_SPOONACULAR_KEY
-  const URL = `https://api.spoonacular.com/recipes/random?apiKey=${urlKey}&number=3&tags=spanish`
-
-  useEffect(() => {
-    async function getRandomRecipes () {
-      try {
-        const response = await axios.get(URL)
-        setRecipes(response.data.recipes)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    getRandomRecipes()
-  }, [])
+  const { recipes } = useGetRecipesHome()
 
   return (
     <Box
