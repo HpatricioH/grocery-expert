@@ -2,7 +2,6 @@ import { useParams } from 'react-router-dom'
 import { ImageList, ImageListItem, ImageListItemBar, Container, IconButton } from '@mui/material'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import { ModalRecipes } from '../ModalRecipes/ModalRecipes'
-import { useAuth } from '../../hooks/useAuth'
 import '../../styles/GlobalCssFavorites.css'
 import { useGetRecipes } from '../../hooks/useGetRecipes'
 import { LoadingSpinner } from '../../utilities/LoadingSpinner'
@@ -11,16 +10,17 @@ import { addFavorites } from '../../services/addFavorites'
 
 // TODO: change name of this component to only recipes instead of IngredientRecipes
 export const IngredientRecipes = () => {
-  const { user } = useAuth()
   const { id } = useParams()
   const { recipes, loading } = useGetRecipes(id)
   const { handleOpen, handleClose, open, idRecipe } = modal()
+  const storageKey = import.meta.env.VITE_LOCALSTORAGE
+  const user = JSON.parse(window.localStorage.getItem(storageKey))
 
   // add recipes to favorite list
   const handleClick = async (item) => {
     const error = await addFavorites(item, user)
 
-    if (!error) {
+    if (!error.error) {
       // eslint-disable-next-line no-undef
       alert(`${item.strMeal} added to Favorite Recipes`)
     } else {
@@ -42,7 +42,7 @@ export const IngredientRecipes = () => {
                 src={`${item.strMealThumb}?w=248&fit=crop&auto=format`}
                 alt={item.strMeal}
                 loading='lazy'
-                onClick={() => handleOpen(item.idMeal, recipes)}
+                onClick={() => handleOpen(item.idMeal, recipes.meals)}
               />
               <ImageListItemBar
                 title={item.strMeal}
