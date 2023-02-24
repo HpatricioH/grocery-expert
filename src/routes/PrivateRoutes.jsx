@@ -1,9 +1,11 @@
+import loadable from '@loadable/component'
 import { useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
-import BottomNav from '../Components/BottomNav/BottomNav'
-import NavBar from '../Components/NavBar/NavBar'
 import { GroceriesProvider } from '../context/GroceriesListContext'
 import { supabase } from '../utilities/supabaseClient'
+
+const BottomNav = loadable(() => import('../Components/BottomNav/BottomNav'))
+const NavBar = loadable(() => import('../Components/NavBar/NavBar'))
 
 const PrivateRoutes = () => {
   const [loading, setLoading] = useState(true)

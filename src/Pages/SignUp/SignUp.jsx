@@ -1,7 +1,9 @@
 import { SignUpPage } from '../../Components/SignUpPage/SignUpPage'
 
-export const SignUp = () => {
+const SignUp = () => {
   return (
     <SignUpPage />
   )
 }
+
+export default SignUp

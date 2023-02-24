@@ -3,7 +3,7 @@ import { LoadingSpinner } from '../../utilities/LoadingSpinner'
 import '../../styles/recipes.css'
 import { usePantry } from '../../hooks/usePantry'
 
-export const RecipesPage = () => {
+const RecipesPage = () => {
   const { groceries, loading } = usePantry()
 
   return loading
@@ -34,3 +34,5 @@ export const RecipesPage = () => {
       </section>
       )
 }
+
+export default RecipesPage
