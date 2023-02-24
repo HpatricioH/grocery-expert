@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import { BrowserRouter } from 'react-router-dom'
 import { render } from '@testing-library/react'
-import { SignUp } from '../../Pages/SignUp/SignUp'
+import SignUp from '../../Pages/SignUp/SignUp'
 
 describe('Test SignUp', () => {
   it('render SignUp page', () => {
