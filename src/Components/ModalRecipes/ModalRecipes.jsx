@@ -1,7 +1,5 @@
 import { Box, Container, Modal, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
 import { useSingleRecipe } from '../../hooks/useSingleRecipe'
-import { getSingleRecipe } from '../../services/getSingleRecipe'
 import headingFont from '../../styles/fontTheme'
 import Buttons from '../../utilities/Buttons'
 import { RecipeIngredients } from '../RecipeIngredients/RecipeIngredients'

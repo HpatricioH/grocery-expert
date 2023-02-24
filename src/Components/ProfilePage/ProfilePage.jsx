@@ -5,10 +5,11 @@ import headingFont from '../../styles/fontTheme'
 import FormInput from '../../utilities/FormInput'
 import Container from '@mui/system/Container'
 import Buttons from '../../utilities/Buttons'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { updateProfile } from '../../services/updateProfile'
 
 export const ProfilePage = () => {
+  const formRef = useRef(null)
   const [formError, setFormError] = useState(false)
   const [error, setError] = useState(null)
   const [updateError, setUpdateError] = useState(null)
@@ -29,9 +30,11 @@ export const ProfilePage = () => {
       setUpdateError(error)
     }
 
-    if (!updateError) {
-      setFormError(true)
-      setError('Can not update an updated profile!')
+    if (updateError === null) {
+      setError(null)
+      // eslint-disable-next-line no-undef
+      alert('Profile Updated Successfully')
+      formRef.current.reset()
     }
   }
 
@@ -55,7 +58,7 @@ export const ProfilePage = () => {
         >
           Profile Update
         </Typography>
-        <Box component='form' sx={{ mt: 1, width: '100%' }} onSubmit={handleSubmit}>
+        <Box component='form' sx={{ mt: 1, width: '100%' }} onSubmit={handleSubmit} ref={formRef}>
           <FormControl error={formError} sx={{ width: '100%' }}>
             <FormInput
               id='name'
@@ -63,7 +66,7 @@ export const ProfilePage = () => {
               name='name'
               autoComplete='name'
               autoFocus
-              error={formError}
+              error={formError || updateError}
               helperText={error}
             />
 
@@ -73,7 +76,7 @@ export const ProfilePage = () => {
               name='userName'
               autoComplete='user name'
               autoFocus
-              error={formError}
+              error={formError || updateError}
               helperText={error}
             />
 
