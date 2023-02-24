@@ -15,14 +15,12 @@ export const SignUpPage = () => {
   const theme = createTheme()
   const history = useNavigate()
 
-  // TODO: change form first name and last name to one field and update profile in DB
-
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const { email, password, firstName, lastName } = Object.fromEntries(new window.FormData(e.target))
+    const { email, password } = Object.fromEntries(new window.FormData(e.target))
 
-    if (!email && !password && !firstName && !lastName) {
+    if (!email && !password) {
       setError('Please fill all fields')
       setFormError(true)
     }
@@ -68,28 +66,8 @@ export const SignUpPage = () => {
           </Typography>
 
           <Box component='form' sx={{ mt: 1, width: '100%' }} onSubmit={handleSubmit}>
-            <FormControl>
-              <Box
-                display='flex'
-                flexDirection='row'
-              >
-                <FormInput
-                  id='firstName'
-                  label='First Name'
-                  name='firstName'
-                  error={formError}
-                  helperText={error}
-                  style={{ marginRight: '1rem' }}
-                />
-                <FormInput
-                  id='lastName'
-                  label='last Name'
-                  name='lastName'
-                  error={formError}
-                  helperText={error}
-                />
+            <FormControl style={{ width: '100%' }}>
 
-              </Box>
               <FormInput
                 id='email'
                 label='Email Address'
