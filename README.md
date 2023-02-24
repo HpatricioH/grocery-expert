@@ -1,1 +1,3 @@
-#GROCERY EXPERT
+# GROCERY EXPERT
+
+## Project Overview
