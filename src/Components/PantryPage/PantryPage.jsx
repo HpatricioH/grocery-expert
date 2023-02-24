@@ -1,13 +1,15 @@
+import loadable from '@loadable/component'
 import { Autocomplete, Container, Typography } from '@mui/material'
 import { useAddGroceries } from '../../hooks/useAddGroceries'
 import { useAuth } from '../../hooks/useAuth'
 import { useGetIngredients } from '../../hooks/useGetIngredients'
 import headingFont from '../../styles/fontTheme'
 import FormInput from '../../utilities/FormInput'
-import { PantryItemList } from '../PantryItemList/PantryItemList'
 import { SearchGroceries } from '../SearchGroceries/SearchGroceries'
 
-export const PantryPage = () => {
+const PantryItemList = loadable(() => import('../PantryItemList/PantryItemList'))
+
+const PantryPage = () => {
   const { user } = useAuth()
   const { pantryItems } = useGetIngredients()
   const { value, newItem, setValue, addGroceries } = useAddGroceries(user)
@@ -50,3 +52,5 @@ export const PantryPage = () => {
 
   )
 }
+
+export default PantryPage

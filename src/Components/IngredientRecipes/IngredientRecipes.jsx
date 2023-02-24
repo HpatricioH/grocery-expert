@@ -9,7 +9,7 @@ import { modal } from '../../utilities/modal'
 import { addFavorites } from '../../services/addFavorites'
 
 // TODO: change name of this component to only recipes instead of IngredientRecipes
-export const IngredientRecipes = () => {
+const IngredientRecipes = () => {
   const { id } = useParams()
   const { recipes, loading } = useGetRecipes(id)
   const { handleOpen, handleClose, open, idRecipe } = modal()
@@ -64,3 +64,5 @@ export const IngredientRecipes = () => {
       </Container>
       )
 }
+
+export default IngredientRecipes

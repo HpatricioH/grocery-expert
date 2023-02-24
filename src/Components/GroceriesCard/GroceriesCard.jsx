@@ -6,7 +6,7 @@ import { Count } from '../../utilities/Count'
 import { useGroceries } from '../../hooks/useGroceries'
 import { updateGroceries } from '../../services/updateGroceries'
 
-export const GroceriesCard = memo(({ name, quantity, image, id, getPantry }) => {
+const GroceriesCard = memo(({ name, quantity, image, id, getPantry }) => {
   const { count, handleIncrease, handleDecrease } = useCount({ quantity })
   const { getGroceriesCount } = useGroceries()
 
@@ -44,6 +44,7 @@ export const GroceriesCard = memo(({ name, quantity, image, id, getPantry }) => 
         alt={name}
         className='ingredient__img'
         loading='lazy'
+        style={{ width: '5rem', height: '5rem' }}
       />
       <EditIcon
         color='primary'
@@ -53,3 +54,5 @@ export const GroceriesCard = memo(({ name, quantity, image, id, getPantry }) => 
     </>
   )
 })
+
+export default GroceriesCard

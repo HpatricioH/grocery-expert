@@ -1,9 +1,11 @@
+import loadable from '@loadable/component'
 import { Box } from '@mui/material'
-import { GroceriesCard } from '../GroceriesCard/GroceriesCard'
 import { usePantry } from '../../hooks/usePantry.jsx'
 import { LoadingSpinner } from '../../utilities/LoadingSpinner'
 
-export const PantryItemList = ({ newItem, value }) => {
+const GroceriesCard = loadable(() => import('../GroceriesCard/GroceriesCard'))
+
+const PantryItemList = ({ newItem, value }) => {
   const { groceries, loading, getPantry } = usePantry(newItem, value)
 
   return loading
@@ -31,3 +33,5 @@ export const PantryItemList = ({ newItem, value }) => {
         })
       )
 }
+
+export default PantryItemList

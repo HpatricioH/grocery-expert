@@ -1,11 +1,13 @@
 import { Box, Container, Typography } from '@mui/material'
 import headingFont from '../../styles/fontTheme'
 import { LoadingSpinner } from '../../utilities/LoadingSpinner'
-import { GroceriesCard } from '../GroceriesCard/GroceriesCard'
 import { NoGroceries } from '../NoGroceries/NoGroceries'
 import { usePantry } from '../../hooks/usePantry'
+import loadable from '@loadable/component'
 
-export const GroceriesList = () => {
+const GroceriesCard = loadable(() => import('../GroceriesCard/GroceriesCard'))
+
+const GroceriesList = () => {
   const { groceryList, loading, getPantry } = usePantry()
 
   return (
@@ -52,3 +54,5 @@ export const GroceriesList = () => {
     </>
   )
 }
+
+export default GroceriesList
