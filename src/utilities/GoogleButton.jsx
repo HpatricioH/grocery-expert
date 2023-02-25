@@ -19,10 +19,6 @@ const GoogleButton = ({ name, ...otherProps }) => {
   const signInWithGoogle = async () => {
     await supabase.auth.signInWithOAuth({
       provider: 'google'
-    }, {
-
-      redirectTo: 'https://grocery-expert.vercel.app/'
-
     })
   }
 

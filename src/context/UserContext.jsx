@@ -6,7 +6,6 @@ const UserContext = createContext()
 export const UserProvider = ({ children }) => {
   const [logoutError, setLogoutError] = useState('')
   const [user, setUser] = useState()
-  // const [loading, setLoading] = useState(true)
 
   // logout request and navigate user to login page
   const handleLogOut = async (navigate) => {
