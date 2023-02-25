@@ -20,7 +20,7 @@ const GoogleButton = ({ name, ...otherProps }) => {
     await supabase.auth.signInWithOAuth({
       provider: 'google'
     }, {
-      redirectTo: 'http://127.0.0.1:8080/pantry'
+      redirectTo: 'https://grocery-expert.vercel.app/'
     })
   }
 
