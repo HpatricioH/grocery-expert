@@ -7,6 +7,7 @@ import React from 'react'
 import { FavoritesPage } from './Components/FavoritesPage/FavoritesPage'
 import { ProfilePage } from './Components/ProfilePage/ProfilePage'
 import loadable from '@loadable/component'
+import PublicRoutes from './routes/PublicRoutes'
 const Login = loadable(() => import('./Pages/Login/Login'))
 const SignUp = loadable(() => import('./Pages/SignUp/SignUp'))
 const PantryPage = loadable(() => import('./Components/PantryPage/PantryPage'))
@@ -22,8 +23,10 @@ function App () {
       <BrowserRouter>
         <UserProvider>
           <Routes>
-            <Route path='/' element={<Login />} />
-            <Route path='/signUp' element={<SignUp />} />
+            <Route element={<PublicRoutes />}>
+              <Route path='/' element={<Login />} />
+              <Route path='/signUp' element={<SignUp />} />
+            </Route>
             <Route element={<PrivateRoutes />}>
               <Route path='/home' element={<Home />} />
               <Route path='/pantry' element={<PantryPage />} />

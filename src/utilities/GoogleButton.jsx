@@ -2,7 +2,7 @@ import { Button } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { supabase } from './supabaseClient'
 
-// Button costume style
+// Button custom style
 const LoginGoogle = styled(Button)({
   backgroundColor: 'white',
   margin: '1rem 0 0',
