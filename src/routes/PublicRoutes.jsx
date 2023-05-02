@@ -10,8 +10,8 @@ const PublicRoutes = () => {
       try {
         const { data } = await supabase.auth.getSession()
 
-        if (data.session) return navigate('/home')
-        if (data.session === null) return navigate('/')
+        if (data.session) return navigate('/')
+        if (data.session === null) return navigate('/login')
       } catch (error) {
         console.log(error)
       }
