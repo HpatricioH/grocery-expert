@@ -24,11 +24,11 @@ function App () {
         <UserProvider>
           <Routes>
             <Route element={<PublicRoutes />}>
-              <Route path='/' element={<Login />} />
+              <Route path='/login' element={<Login />} />
               <Route path='/signUp' element={<SignUp />} />
             </Route>
             <Route element={<PrivateRoutes />}>
-              <Route path='/home' element={<Home />} />
+              <Route path='/' element={<Home />} />
               <Route path='/pantry' element={<PantryPage />} />
               <Route path='/recipes' element={<RecipesPage />} />
               <Route path='/groceries' element={<GroceriesList />} />

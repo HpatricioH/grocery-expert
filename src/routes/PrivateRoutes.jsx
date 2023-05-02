@@ -15,7 +15,7 @@ const PrivateRoutes = () => {
     const getSession = async () => {
       try {
         const { data } = await supabase.auth.getSession()
-        if (!data.session) return navigate('/')
+        if (!data.session) return navigate('/login')
         if (data) return setLoading(false)
       } catch (error) {
         console.log(error)

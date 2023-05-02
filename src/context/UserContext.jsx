@@ -13,7 +13,7 @@ export const UserProvider = ({ children }) => {
     if (error) {
       setLogoutError(error)
     }
-    navigate('/')
+    navigate('/login')
   }
 
   useEffect(() => {

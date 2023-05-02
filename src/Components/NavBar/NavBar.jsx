@@ -24,7 +24,7 @@ const NavBar = () => {
                   : 'navBar__element-active'}
               >
                 <Link
-                  to={`/${page.toLowerCase()}`}
+                  to={`/${page.toLowerCase() === 'home' ? '' : page.toLowerCase()}`}
                   className='navbar__link'
                 >
                   {`${page}`}
