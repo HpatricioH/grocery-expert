@@ -31,7 +31,7 @@ export const LoginForm = () => {
     } else {
       setError(null)
       setFormError(false)
-      navigate('/home')
+      navigate('/')
     }
   }
 
