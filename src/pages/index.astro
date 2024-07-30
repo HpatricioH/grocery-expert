@@ -5,7 +5,6 @@ import Card from '../components/Card.astro';
 
 <Layout title="Welcome to Grocery Expert">
   <main>
-    <p>NAVBAR</p>
     <div class="scroller">
       <div class="mask">
         <svg
@@ -31,14 +30,10 @@ import Card from '../components/Card.astro';
       </div>
       <div class="title">
         <h1>
-          Welcome to <span
-            class="bg-gradient-to-r from-fuchsia-600 to-purple-600 inline-block text-transparent bg-clip-text"
-            >Grocery Expert</span
-          >
+          Welcome to <span class="inline-block">Grocery Expert</span>
         </h1>
       </div>
     </div>
-    <p>Content</p>
   </main>
 </Layout>
 
@@ -58,6 +53,8 @@ import Card from '../components/Card.astro';
     line-height: 1;
     text-align: center;
     margin-top: 1em;
+    color: white;
+    text-shadow: 5px 5px 5px #001e03;
   }
 
   .title {
@@ -76,7 +73,6 @@ import Card from '../components/Card.astro';
     gap: 2rem;
     padding: 0;
   }
-
   .scroller {
     display: grid;
 
@@ -101,6 +97,6 @@ import Card from '../components/Card.astro';
     object-fit: cover;
   }
   .image {
-    opacity: 0.9;
+    opacity: 0.94;
   }
 </style>
