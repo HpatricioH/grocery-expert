@@ -17,6 +17,9 @@ importers:
       astro:
         specifier: ^4.12.2
         version: 4.12.2(@types/node@20.14.12)(typescript@5.5.4)
+      rippleui:
+        specifier: ^1.12.1
+        version: 1.12.1
       tailwindcss:
         specifier: ^3.4.7
         version: 3.4.7
@@ -609,6 +612,9 @@ packages:
 
   '@types/node@20.14.12':
     resolution: {integrity: sha512-r7wNXakLeSsGT0H1AU863vS2wa5wBOK4bWMjZz2wj+8nBx+m5PeIn0k8AloSLpRuiwdRQZwarZqHE4FNArPuJQ==}
+
+  '@types/postcss-js@4.0.4':
+    resolution: {integrity: sha512-j5+GMZVIPCJpRTwI/mO64mCzv7X+zAEq3JP0EV2lo/BrLWHAohEubUJimIAY23rH27+wKce0fXUYjAdBoqlaYw==}
 
   '@types/unist@3.0.2':
     resolution: {integrity: sha512-dqId9J8K/vGi5Zr7oo212BGii5m3q5Hxlkwy3WpYuKPklmBEvsbMYYyLxAQpSffdLl/gdW0XUpKWFvYmyoWCoQ==}
@@ -1666,6 +1672,9 @@ packages:
     resolution: {integrity: sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==}
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
 
+  rippleui@1.12.1:
+    resolution: {integrity: sha512-2LLqGQy0Gb+V/XHC+Ucx7rKcgisTr1HBevVc+NiwTiJn4y38Ya1cad8I/ZZHfWbrvKG/bPKYh+XJCM8M4cUs0A==}
+
   rollup@4.19.0:
     resolution: {integrity: sha512-5r7EYSQIowHsK4eTZ0Y81qpZuJz+MUuYeqmmYmRMl1nwhdmbiYqt5jwzf6u7wyOzJgYqtCRMtVRKOtHANBz7rA==}
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
@@ -2612,6 +2621,10 @@ snapshots:
   '@types/node@20.14.12':
     dependencies:
       undici-types: 5.26.5
+
+  '@types/postcss-js@4.0.4':
+    dependencies:
+      postcss: 8.4.40
 
   '@types/unist@3.0.2': {}
 
@@ -3963,6 +3976,15 @@ snapshots:
       unified: 11.0.5
 
   reusify@1.0.4: {}
+
+  rippleui@1.12.1:
+    dependencies:
+      '@types/postcss-js': 4.0.4
+      postcss: 8.4.40
+      postcss-js: 4.0.1(postcss@8.4.40)
+      tailwindcss: 3.4.7
+    transitivePeerDependencies:
+      - ts-node
 
   rollup@4.19.0:
     dependencies:
