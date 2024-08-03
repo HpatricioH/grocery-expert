@@ -2,7 +2,24 @@
 export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
-		extend: {},
+		extend: {
+			colors: {
+        'primary-color': '#eff9f0',
+      },
+			fontFamily: {
+        montserrat: ["montserrat", "sans-serif"],
+      },
+		},
 	},
-	plugins: [require("rippleui")],
+	plugins: [require("rippleui")({
+		themes: [
+			{
+				themeName: "light",
+				colorScheme: "light",
+				colors: {
+					primary: "#eff9f0"
+				}
+			}
+		]
+	}) ],
 }
