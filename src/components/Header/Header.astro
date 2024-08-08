@@ -1,7 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
-
-let logged = false;
+import Navigation from '../Navigation/Navigation.astro';
 ---
 
 <nav class="navbar navbar-sticky bg-primary-color/50 navbar-glass text-black">
@@ -28,45 +27,7 @@ let logged = false;
           <div
             class="dropdown-menu dropdown-menu-bottom-left bg-white *:font-semibold"
           >
-            <div
-              class="flex justify-center items-center hover:bg-primary-color hover:rounded-md"
-            >
-              <Icon name="pantry" class="size-6" />
-              <a
-                tabindex="-1"
-                class="dropdown-item text-sm hover:bg-primary-color">Pantry</a
-              >
-            </div>
-            <div
-              class="flex justify-center items-center hover:bg-primary-color hover:rounded-md"
-            >
-              <Icon name="recipies" class="size-6" />
-              <a
-                tabindex="-1"
-                class="dropdown-item text-sm hover:bg-primary-color">Recipies</a
-              >
-            </div>
-            {
-              logged ? (
-                <div class="flex justify-center items-center hover:bg-primary-color hover:rounded-md">
-                  <Icon name="profile" class="size-6" />
-                  <a class="dropdown-item text-sm hover:bg-primary-color">Profile</a>
-                </div>
-                <div class="flex justify-center items-center hover:bg-primary-color hover:rounded-md">
-                  <Icon name="logout" class="size-6" />
-                  <a class="dropdown-item text-sm hover:bg-primary-color">
-                    Logout
-                  </a>
-                </div>
-              ) : (
-                <div class="flex justify-center items-center hover:bg-primary-color hover:rounded-md">
-                  <Icon name="login" class="size-6" />
-                  <a class="dropdown-item text-sm hover:bg-primary-color">
-                    Login
-                  </a>
-                </div>
-              )
-            }
+            <Navigation />
           </div>
         </div>
       </div>

@@ -1,0 +1,58 @@
+---
+import { Icon } from 'astro-icon/components';
+
+let logged = false;
+
+---
+  {
+    logged ? (
+      <div class="flex justify-center items-center hover:bg-primary-color hover:rounded-md">
+        <Icon 
+          name="pantry" 
+          class="size-6" />
+        <a
+          tabindex="-1"
+          class="dropdown-item text-sm hover:bg-primary-color"
+          href="/patry/">Pantry</a>
+      </div>
+
+      <div class="flex justify-center items-center hover:bg-primary-color hover:rounded-md">
+        <Icon 
+          name="recipies" 
+          class="size-6" />
+        <a
+          tabindex="-1"
+          class="dropdown-item text-sm hover:bg-primary-color"
+          href="/recipies/">Recipies</a>
+      </div>
+
+      <div class="flex justify-center items-center hover:bg-primary-color hover:rounded-md">
+        <Icon 
+          name="profile" 
+          class="size-6" />
+        <a 
+          class="dropdown-item text-sm hover:bg-primary-color"
+          href="/profile/">Profile</a>
+      </div>
+      
+      <div class="flex justify-center items-center hover:bg-primary-color hover:rounded-md">
+        <Icon 
+          name="logout" 
+          class="size-6" />
+        <a 
+          class="dropdown-item text-sm hover:bg-primary-color">
+          Logout
+        </a>
+      </div>
+    ) : (
+      <div class="flex justify-center items-center hover:bg-primary-color hover:rounded-md">
+        <Icon 
+          name="login" 
+          class="size-6" />
+        <a 
+          class="dropdown-item text-sm hover:bg-primary-color">
+          Login
+        </a>
+      </div>
+    )
+  }
