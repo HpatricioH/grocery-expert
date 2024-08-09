@@ -1,83 +1,98 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+import { Icon } from 'astro-icon/components';
 ---
 
 <Layout title="Welcome to Grocery Expert">
-  <main>
-    <div class="flex-grow flex items-center justify-center bg-gray-200">
-      <div
-        class="absolute inset-0 -z-10 h-full w-full bg-[#eff9f0] bg-[linear-gradient(to_right,#ebebeb,transparent_1px),linear-gradient(to_bottom,#ebebeb,transparent_1px)] bg-[size:6rem_4rem]"
+  <main
+    class="overflow-hidden h-screen w-screen flex flex-col justify-center items-center relative"
+  >
+    <div
+      class="h-[90%] w-[150%] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#92e552c9] via-[#eff9f045] to-[#eff9f045] absolute rounded-full left-[95%] top-[95%] transform -translate-x-1/2 -translate-y-1/2"
+    >
+    </div>
+    <div
+      class="absolute inset-0 -z-10 h-full w-full bg-[#eff9f0] bg-[linear-gradient(to_right,#ebebeb,transparent_1px),linear-gradient(to_bottom,#ebebeb,transparent_1px)] bg-[size:6rem_4rem]"
+    >
+    </div>
+    <div
+      class="h-[90%] w-[150%] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#92e552c9] via-[#eff9f045] to-[#eff9f045] absolute rounded-full left-[10%] top-[5%] transform -translate-x-1/2 -translate-y-1/2"
+    >
+    </div>
+    <div class="w-[23rem] flex flex-col gap-6 relative">
+      <h1>
+        Welcome to <span class="text-secondary-color">Grocery</span>
+        Expert
+      </h1>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        direction="ltr"
+        width="217.02169478311703"
+        height="88.60393165402962"
+        viewBox="782.6354137780829 205.10508774943378 217.02169478311703 88.60393165402962"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        style="background-color: transparent;"
+        class="absolute inset-0 w-[55%] h-full left-[11.5rem] top-[-0.7rem]"
+        ><defs></defs><g
+          transform="matrix(0.9816, 0.1908, -0.1908, 0.9816, 814.6354, 255.4233)"
+          opacity="1"
+          ><g transform="scale(1)"
+            ><path
+              d="M-1.7294,-2.2608 T1.1424,-4.2757 8.6079,-9.2089 19.5371,-15.3624 33.9281,-21.9818 50.987,-28.351 69.345,-33.6124 87.8894,-37.6119 104.5451,-40.4303 118.014,-42.4421 128.263,-44.0195 135.3373,-45.0415 140.204,-45.6399 144.6483,-46.099 147.0537,-46.321 A1.7997,1.7997 0 0 1 147.4063,-42.739 T145.0037,-42.4878 140.6097,-42.0771 135.8399,-41.5498 128.8127,-40.5025 118.555,-38.8796 105.1575,-36.8191 88.6884,-33.9536 70.4241,-29.9107 52.4187,-24.6046 35.7432,-18.1703 21.8366,-11.4885 11.4525,-5.2285 4.4254,0.0167 1.7294,2.2608 A2.8464,2.8464 0 0 1 -1.7294,-2.2608 Z"
+              stroke-linecap="round"
+              fill="#4da10a"></path></g
+          ></g
+        ><g
+          transform="matrix(0.9816, 0.1908, -0.1908, 0.9816, 824.3884, 261.709)"
+          opacity="1"
+          ><g transform="scale(1)"
+            ><path
+              d="M-1.3123,-2.4053 T0.5309,-3.3108 4.4861,-5.4322 9.303,-8.1516 15.3231,-11.2953 22.4196,-14.6376 30.7207,-18.2411 40.5251,-22.0049 52.1267,-25.8569 65.1647,-29.747 77.9892,-33.3325 90.0846,-36.2715 101.4543,-38.5306 111.2444,-40.2481 119.2342,-41.3508 127.0265,-42.2015 131.2413,-42.6616 A1.7319,1.7319 0 0 1 131.6187,-39.2184 T127.4043,-38.7546 119.7018,-37.9071 111.8455,-36.8119 102.1383,-35.0927 90.9196,-32.8448 78.9528,-29.9047 66.2044,-26.2959 53.2983,-22.3844 41.8945,-18.5173 32.2935,-14.7137 24.1853,-11.0286 17.3713,-7.5946 11.6682,-4.3008 6.9721,-1.2047 3.0715,1.3454 1.3123,2.4053 A2.74,2.74 0 0 1 -1.3123,-2.4053 Z"
+              stroke-linecap="round"
+              fill="#4da10a"></path></g
+          ></g
+        ></svg
       >
-      </div>
+      <p class="text-center text-slate-600 text-base">
+        Your go-to tool for tracking pantry items and finding recipes with what
+        you have. Simplify meal planning and enjoy cooking with ease!
+      </p>
+      <button class="btn bg-secondary-color hover:bg-[#578c2e] text-white"
+        >Get Started</button
+      >
     </div>
-
-    <div class="image">
-      <img src="/pictures/groceries.webp" alt="Groceries image" />
-    </div>
-
-    <p>sdfgdfgsdfgdf</p>
   </main>
 </Layout>
 
 <style>
   main {
     margin: auto;
-    /* padding: 1rem; */
     color: black;
     font-size: 20px;
     line-height: 1.6;
   }
   h1 {
-    font-size: 4rem;
-    font-weight: 700;
+    font-size: 2.5rem;
+    font-weight: 900;
     line-height: 1;
     text-align: center;
     margin-top: 1em;
-    color: white;
-    text-shadow: 5px 5px 5px #001e03;
+    z-index: 50;
+    animation: fadeUp 1s;
+  }
+  svg {
+    animation: fadeUp 1s;
   }
 
-  .title {
-    z-index: 2;
-  }
-  .text-gradient {
-    background-image: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 400%;
-    background-position: 0%;
-  }
-  .link-card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-    gap: 2rem;
-    padding: 0;
-  }
-  .scroller {
-    display: grid;
-
-    & > * {
-      grid-area: 1/1;
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(1rem);
     }
-    .mask {
-      z-index: 2;
-      /* height: 20rem; */
-      mix-blend-mode: lighten;
-      background: #eff9f0;
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
-  }
-  path {
-    stroke-width: 50;
-    stroke: black;
-  }
-
-  img {
-    width: 100%;
-    object-fit: cover;
-    mask-image: linear-gradient(black 80%, transparent);
-  }
-  .image {
-    opacity: 1;
   }
 </style>
