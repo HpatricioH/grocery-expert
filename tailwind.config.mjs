@@ -1,20 +1,22 @@
 /** @type {import('tailwindcss').Config} */
+import rippleui from "rippleui"
 
 export default {
-	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+	content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
 	theme: {
 		extend: {
 			colors: {
-        'primary-color': '#eff9f0',
-				'secondary-color': '#4da10a',
-				'accent-color': '#6fa541',
+        "primary-color": "#eff9f0",
+				"secondary-color": "#4da10a",
+				"accent-color": "#6fa541",
       },
 			fontFamily: {
         montserrat: ["Montserrat", "sans-serif"],
       },
 		},
 	},
-	plugins: [require("rippleui")({
+
+	plugins: [rippleui({
 		themes: [
 			{
 				themeName: "light",
@@ -24,5 +26,5 @@ export default {
 				}
 			}
 		]
-	}) ],
+	})],
 }

@@ -19,7 +19,17 @@
     "typescript": "^5.5.4"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "0.43.1",
     "@playwright/test": "^1.45.3",
-    "@types/node": "^20.14.12"
+    "@types/node": "^20.14.12",
+    "@typescript-eslint/parser": "7.15.0",
+    "eslint": "8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-astro": "^1.2.3",
+    "eslint-plugin-jsx-a11y": "6.9.0",
+    "prettier": "^3.3.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-organize-imports": "^4.0.0",
+    "prettier-plugin-tailwindcss": "^0.6.6"
   }
 }
