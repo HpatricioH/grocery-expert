@@ -1,0 +1,16 @@
+---
+import { getSession } from "auth-astro/server"
+import Layout from "../../layouts/Layout.astro"
+
+const session = await getSession(Astro.request)
+
+if (!session) {
+  return Astro.redirect("/")
+}
+---
+
+<Layout title="Grocery Expert Pantry">
+  <main class="h-screen w-screen flex flex-col justify-center items-center relative text-black">
+    <h1>Pantry</h1>
+  </main>
+</Layout>

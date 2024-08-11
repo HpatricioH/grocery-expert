@@ -1,6 +1,5 @@
 ---
-import { Icon } from 'astro-icon/components';
-import Navigation from '../Navigation/Navigation.astro';
+import Navigation from "../Navigation/Navigation.astro"
 ---
 
 <nav class="navbar navbar-sticky bg-primary-color/50 navbar-glass text-black">
@@ -17,18 +16,7 @@ import Navigation from '../Navigation/Navigation.astro';
     <div class="avatar avatar-ring avatar-md">
       <div class="dropdown-container">
         <div class="dropdown">
-          <label class="btn btn-ghost flex cursor-pointer px-0" tabindex="0">
-            <!-- <img
-              src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
-              alt="avatar"
-            /> -->
-            <Icon name="avatar" class="size-6" />
-          </label>
-          <div
-            class="dropdown-menu dropdown-menu-bottom-left bg-white *:font-semibold"
-          >
-            <Navigation />
-          </div>
+          <Navigation />
         </div>
       </div>
     </div>

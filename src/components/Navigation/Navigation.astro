@@ -1,24 +1,29 @@
 ---
 import { Icon } from "astro-icon/components"
+import { getSession } from "auth-astro/server"
 
-const logged = false
+const session = await getSession(Astro.request)
 
 const loggedMenu = [{
   name: "Pantry",
   icon: "pantry",
-  link: "/pantry/"
+  link: "/pantry/",
+  id: "pantry"
 }, {
   name: "Recipies",
   icon: "recipies",
-  link: "/recipies/"
+  link: "/recipies/",
+  id: "recipies"
 }, {
   name: "Profile",
   icon: "profile",
-  link: "/profile/"
+  link: "/profile/",
+  id: "profile"
 }, {
   name: "Logout",
   icon: "logout",
-  link: "/logout/"
+  link: "/",
+  id: "logout"
 }]
 
 const notLoggedMenu = [{
@@ -28,8 +33,19 @@ const notLoggedMenu = [{
 }]
 
 ---
+
+<label class="btn btn-ghost flex cursor-pointer px-0" tabindex="0">
+  {session ? <img
+    src={session.user?.image}
+    alt="avatar"
+  /> :
+  <Icon name="avatar" class="size-6" />}
+</label>
+<div
+  class="dropdown-menu dropdown-menu-bottom-left bg-white *:font-semibold"
+>
 {
-  logged ? (
+  session ? (
     loggedMenu.map((menuItem) => {
       return (
         <div class="flex justify-center items-center hover:bg-primary-color hover:rounded-md">
@@ -37,6 +53,7 @@ const notLoggedMenu = [{
             name={menuItem.icon}
             class="size-6" />
           <a
+            id={menuItem.id}
             tabindex="-1"
             class="dropdown-item text-sm hover:bg-primary-color"
             href={menuItem.link}>{menuItem.name}</a>
@@ -60,3 +77,14 @@ const notLoggedMenu = [{
       })
     )
 }
+</div>
+
+<script>
+  const { signOut } = await import("auth-astro/client")
+
+  const logout = document.querySelector("#logout") as HTMLButtonElement
+
+  if (logout) {
+    logout.onclick = () => signOut({ callbackUrl: "/" })
+  }
+</script>
