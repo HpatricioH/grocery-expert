@@ -1,3 +1,9 @@
+---
+import { getSession } from "auth-astro/server"
+
+const session = await getSession(Astro.request)
+---
+
 <div class="w-[23rem] flex flex-col gap-6 relative">
   <h1>
     Welcome to <span class="text-secondary-color">Grocery</span>
@@ -38,9 +44,9 @@
     you have. Simplify meal planning and enjoy cooking with ease!
   </p>
   <button
+    id="getStarted"
     class="btn bg-secondary-color hover:bg-[#578c2e] text-white"
-    onclick="window.location.href='/login'">Get Started</button
-  >
+    >Get Started</button>
 </div>
 
 <style>
@@ -54,3 +60,8 @@
     animation: fadeUp 1s;
   }
 </style>
+
+<script define:vars={{ session }}>
+  const url = session ? "/pantry" : "/login"
+  document.querySelector("#getStarted").onclick = () => window.location.href = url
+</script>
