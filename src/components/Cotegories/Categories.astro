@@ -1,0 +1,37 @@
+---
+import CldImage from "../../utils/CldImage.astro"
+import categories from "../../lib/data/categories.json"
+
+---
+
+<section>
+  <h2 class="text-lg font-extrabold tracking-wide mb-4">
+    Search by Categories
+  </h2>
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
+  {
+    categories.map((category) => {
+      return (
+        <div class="flex flex-col justify-center items-center">
+          <div class="card-container bg-tertiary-color rounded-md p-1 text-center mb-3">
+            <div class="w-32">
+              <CldImage src={category.image} alt={category.name} width="148" height="145"/>
+            </div>
+          </div>
+          <h3 class="font-semibold text-sm tracking-wide text-black/55">
+            {category.name}
+          </h3>
+        </div>
+      )
+    })
+  }
+  </div>
+</section>
+
+<style>
+  .card-container {
+    box-shadow: 4px 8px 23px -12px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 4px 8px 23px -12px rgba(0,0,0,0.75);
+    -moz-box-shadow: 4px 8px 23px -12px rgba(0,0,0,0.75);
+  }
+</style>
