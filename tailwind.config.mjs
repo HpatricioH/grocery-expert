@@ -8,6 +8,7 @@ export default {
 			colors: {
         "primary-color": "#eff9f0",
 				"secondary-color": "#4da10a",
+				"tertiary-color": "#f8f8f8",
 				"accent-color": "#6fa541",
       },
 			fontFamily: {
