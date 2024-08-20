@@ -10,6 +10,7 @@ export default {
 				"secondary-color": "#4da10a",
 				"tertiary-color": "#f8f8f8",
 				"accent-color": "#6fa541",
+				"main-color": "#5ac169",
       },
 			fontFamily: {
         montserrat: ["Montserrat", "sans-serif"],
