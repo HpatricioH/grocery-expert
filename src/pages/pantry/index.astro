@@ -2,6 +2,7 @@
 import { getSession } from "auth-astro/server"
 import Layout from "../../layouts/Layout.astro"
 import Categories from "../../components/Cotegories/Categories.astro"
+import Search from "../../components/Search/Search.astro"
 
 const session = await getSession(Astro.request)
 
@@ -11,7 +12,8 @@ if (!session) {
 ---
 
 <Layout title="Grocery Expert Pantry">
-  <main class="min-h-screen flex flex-col text-black m-5 pt-[4rem]">
+  <main class="min-h-screen flex flex-col text-black m-5 pt-[4rem] bg-white">
+    <Search />
     <Categories />
   </main>
 </Layout>

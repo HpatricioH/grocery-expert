@@ -6,19 +6,19 @@ import categories from "../../lib/data/categories.json"
 
 <section>
   <h2 class="text-lg font-extrabold tracking-wide mb-4">
-    Search by Categories
+    Shop By Categories
   </h2>
-  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
+  <div class="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
   {
     categories.map((category) => {
       return (
         <div class="flex flex-col justify-center items-center">
-          <div class="card-container bg-tertiary-color rounded-md p-1 text-center mb-3">
-            <div class="w-32">
-              <CldImage src={category.image} alt={category.name} width="148" height="145"/>
+          <div class="bg-tertiary-color rounded-xl p-1 text-center mb-3">
+            <div class="w-24 h-24 p-2">
+              <CldImage src={category.image} alt={category.name} width="148" height="145" class="w-20 h-20"/>
             </div>
           </div>
-          <h3 class="font-semibold text-sm tracking-wide text-black/55">
+          <h3 class="font-semibold text-sm tracking-wide text-black/55 text-center">
             {category.name}
           </h3>
         </div>
