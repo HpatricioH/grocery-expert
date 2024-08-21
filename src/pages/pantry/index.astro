@@ -3,6 +3,8 @@ import { getSession } from "auth-astro/server"
 import Layout from "../../layouts/Layout.astro"
 import Categories from "../../components/Cotegories/Categories.astro"
 import Search from "../../components/Search/Search.astro"
+import RecipeCard from "../../components/Recipe Card/RecipeCard.astro"
+import BuyItemsContainer from "../../sections/BuyItemsContainer.astro"
 
 const session = await getSession(Astro.request)
 
@@ -15,5 +17,7 @@ if (!session) {
   <main class="min-h-screen flex flex-col text-black m-5 pt-[4rem] bg-white">
     <Search />
     <Categories />
+    <RecipeCard />
+    <BuyItemsContainer />
   </main>
 </Layout>
