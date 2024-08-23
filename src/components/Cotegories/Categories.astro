@@ -6,7 +6,7 @@ import categories from "../../lib/data/categories.json"
 
 <section>
   <h2 class="text-lg font-extrabold tracking-wide mb-4">
-    Shop By Categories
+    Groceries By Categories
   </h2>
   <div class="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
   {
@@ -14,7 +14,7 @@ import categories from "../../lib/data/categories.json"
       return (
         <div class="flex flex-col justify-center items-center">
           <div class="bg-tertiary-color rounded-xl p-1 text-center mb-3">
-            <div class="w-24 h-24 p-2">
+            <div class="w-24 h-24 p-2 hover:scale-105 ease-in-out duration-300">
               <CldImage src={category.image} alt={category.name} width="148" height="145" class="w-20 h-20"/>
             </div>
           </div>
