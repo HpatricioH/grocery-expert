@@ -1,29 +1,22 @@
 ---
 import { Icon } from "astro-icon/components"
-import CldImage from "../../utils/CldImage.astro"
-import buyItems from "../../lib/data/buyItems.json"
-import Button from "../../utils/Button.astro"
+import ProductCard from "../Product Card/ProductCard.astro"
+import groceries from "../../lib/data/groceries.json"
+
+const filteredBuyItems = groceries.filter(item => item.quantity === 0)
 ---
 <div class="relative flex justify-center items-center">
   <Icon name="chevronLeft" class="size-8 cursor-pointer opacity-50 hover:opacity-100" id="arrowLeft"/>
   <div class="w-full h-full flex gap-4 items-center overflow-x-scroll scroll scroll-smooth scrollbar-hide" id="slider">
     {
-      buyItems.map((item) => {
+      filteredBuyItems.map((item) => {
         return (
-          <div class="card-body bg-tertiary-color rounded-xl p-1 text-center mb-3 w-[8.5rem]">
-            <div class="w-32 h-28 p-2">
-              <CldImage src={item.image} alt={item.name} width="1048" height="1045"/>
-            </div>
-            <div class="h-[2rem] w-full mt-4 text-xs">
-              <p class="font-semibold tracking-wide text-black/65 text-left">
-                {item.description}
-            <p class="text-xs text-left text-black/45">{item.weight}</p>
-              </p>
-            </div>
-            <div class="flex gap-4 my-2 justify-end items-baseline">
-              <Button className="bg-main-color hover:bg-main-color/90 btn-sm" type="button">Add</Button>
-            </div>
-          </div>
+          <ProductCard
+            image={item.image}
+            name={item.name}
+            description={item.description}
+            weight={item.weight}
+            quantity={item.quantity}/>
         )
       })
     }
@@ -49,5 +42,5 @@ import Button from "../../utils/Button.astro"
 <style>
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
-}
+  }
 </style>

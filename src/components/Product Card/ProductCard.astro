@@ -1,0 +1,32 @@
+---
+import Button from "../../utils/Button.astro"
+import CldImage from "../../utils/CldImage.astro"
+
+interface Props {
+  image: string
+  name: string
+  description: string
+  weight: string
+  quantity: number
+}
+
+const { image, name, description, weight, quantity } = Astro.props
+---
+
+<div class="card-body bg-tertiary-color rounded-xl p-1 text-center mb-3 w-[8.5rem]">
+  <div class="w-32 h-28 p-2">
+    <CldImage src={image} alt={name} width="1048" height="1045"/>
+  </div>
+  <div class="h-[2rem] w-full text-xs px-1">
+    <p class="font-semibold tracking-wide text-black/65 text-left">
+      {description}
+    </p>
+    <div class="flex justify-between mt-2">
+      <p class="text-xs text-left text-black/45">{weight}</p>
+      <p class="text-xs text-left">Quantity: {quantity}</p>
+    </div>
+  </div>
+  <div class="flex gap-4 my-4 justify-end items-baseline">
+    <Button className="bg-main-color hover:bg-main-color/90 btn-sm" type="button">Add</Button>
+  </div>
+</div>
