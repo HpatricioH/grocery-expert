@@ -2,6 +2,7 @@
 import { getSession } from "auth-astro/server"
 
 const session = await getSession(Astro.request)
+const url = session ? "/pantry" : "/login"
 ---
 
 <div class="w-[23rem] flex flex-col gap-6 relative">
@@ -43,10 +44,11 @@ const session = await getSession(Astro.request)
     Your go-to tool for tracking pantry items and finding recipes with what
     you have. Simplify meal planning and enjoy cooking with ease!
   </p>
-  <button
+  <a
     id="getStarted"
+    href={url}
     class="btn bg-secondary-color hover:bg-[#578c2e] text-white"
-    >Get Started</button>
+    >Get Started</a>
 </div>
 
 <style>
@@ -60,8 +62,3 @@ const session = await getSession(Astro.request)
     animation: fadeUp 1s;
   }
 </style>
-
-<script define:vars={{ session }}>
-  const url = session ? "/pantry" : "/login"
-  document.querySelector("#getStarted").onclick = () => window.location.href = url
-</script>
