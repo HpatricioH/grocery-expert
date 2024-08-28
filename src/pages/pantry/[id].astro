@@ -1,0 +1,31 @@
+---
+import ProductCard from "../../components/Product Card/ProductCard.astro"
+import Search from "../../components/Search/Search.astro"
+import Layout from "../../layouts/Layout.astro"
+import groceries from "../../lib/data/groceries.json"
+
+const { id } = Astro.params
+
+const filteredGroceries = groceries.filter(item => item.category === id)
+---
+
+<Layout title={id ?? ""}>
+  <main class="min-h-screen flex flex-col text-black m-5 pt-[4rem] bg-white overflow-x-hidden">
+    <Search />
+    <h2 class="text-lg font-extrabold tracking-wide mb-4 text-center">{id}</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
+      {
+        filteredGroceries.map(item => {
+          return (
+            <ProductCard
+              image={item.image}
+              name={item.name}
+              description={item.description}
+              weight={item.weight}
+              quantity={item.quantity}/>
+          )
+        })
+      }
+    </div>
+  </main>
+</Layout>
