@@ -1,0 +1,16 @@
+---
+import { getSession } from "auth-astro/server"
+import Layout from "../../layouts/Layout.astro"
+
+const session = await getSession(Astro.request)
+
+if (!session) {
+  return Astro.redirect("/")
+}
+---
+
+<Layout title="Grocery Expert Recipes">
+  <main class="min-h-screen flex flex-col text-black m-5 pt-[4rem] bg-white overflow-x-hidden">
+    <h2>Recipes Page</h2>
+  </main>
+</Layout>
