@@ -2,6 +2,7 @@
 interface Props {
   type: "submit" | "button" | "reset"
   className: string
+  id?: string
 }
 
 const { className, ...props } = Astro.props
