@@ -3,7 +3,7 @@ import { getSession } from "auth-astro/server"
 import Layout from "../../layouts/Layout.astro"
 import Categories from "../../components/Cotegories/Categories.astro"
 import Search from "../../components/Search/Search.astro"
-import RecipeCard from "../../components/Recipe Card/RecipeCard.astro"
+import RecipeFeatureCard from "../../components/Recipe Feature Card/RecipeFeatureCard.astro"
 import BuyItemsContainer from "../../sections/BuyItemsContainer.astro"
 
 const session = await getSession(Astro.request)
@@ -17,7 +17,7 @@ if (!session) {
   <main class="min-h-screen flex flex-col text-black m-5 pt-[4rem] bg-white overflow-x-hidden">
     <Search />
     <Categories />
-    <RecipeCard />
+    <RecipeFeatureCard />
     <BuyItemsContainer />
   </main>
 </Layout>
