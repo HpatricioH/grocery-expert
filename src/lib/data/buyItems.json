@@ -19,5 +19,19 @@
     "description": "Beef Striploin Grilling Steak",
     "weight": "0.959 kg",
     "category": "Meat"
+  },
+  {
+    "image": "beef",
+    "name": "beef",
+    "description": "Beef Striploin Grilling Steak",
+    "weight": "0.959 kg",
+    "category": "Meat"
+  },
+  {
+    "image": "beef",
+    "name": "beef",
+    "description": "Beef Striploin Grilling Steak",
+    "weight": "0.959 kg",
+    "category": "Meat"
   }
 ]

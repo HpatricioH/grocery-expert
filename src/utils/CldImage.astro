@@ -20,7 +20,7 @@ const cld = new Cloudinary({
 const cldSrc = cld.image(src)
              .format("auto")
              .quality("auto")
-             .resize(`c_crop,w_${props.width},h_${props.height},g_face`)
+             .resize(`c_crop,w_${props.width},h_${props.height},g_face` as any)
 
 if (src.startsWith("https://")) {
   cldSrc.setDeliveryType("fetch")
