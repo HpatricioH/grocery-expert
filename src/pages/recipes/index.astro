@@ -4,6 +4,7 @@ import Layout from "../../layouts/Layout.astro"
 import Search from "../../components/Search/Search.astro"
 import RecipeInstructions from "../../components/Recipe Instructions/recipeInstructions.astro"
 import RecipesNav from "../../components/Recipes Nav/RecipesNav.astro"
+import RecipeContainer from "../../sections/RecipeContainer.astro"
 
 const session = await getSession(Astro.request)
 
@@ -18,5 +19,6 @@ if (!session) {
     <RecipesNav />
     <div class="border border-secondary-color w-full mb-4"></div>
     <RecipeInstructions />
+    <RecipeContainer />
   </main>
 </Layout>
