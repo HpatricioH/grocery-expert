@@ -1,0 +1,257 @@
+{
+  "recipes": [
+    {
+      "title": "Spaghetti Carbonara",
+      "ingredients": [
+        "200g spaghetti",
+        "100g pancetta",
+        "2 large eggs",
+        "50g pecorino cheese",
+        "50g parmesan cheese",
+        "2 cloves garlic",
+        "Salt and pepper"
+      ],
+      "instructions": [
+        "Cook the spaghetti in salted boiling water until al dente.",
+        "In a separate pan, fry the pancetta with the garlic.",
+        "Beat the eggs in a bowl and mix in the cheese.",
+        "Drain the pasta and mix it with the pancetta, then remove from heat.",
+        "Quickly add the egg mixture and stir until creamy.",
+        "Season with salt and pepper, and serve."
+      ],
+      "category": "Main Course",
+      "prepTime": "15 minutes",
+      "cookTime": "15 minutes",
+      "servings": 2,
+      "image": "spaghettiCarbonara",
+      "liked": false
+    },
+    {
+      "title": "Chicken Caesar Salad",
+      "ingredients": [
+        "2 chicken breasts",
+        "1 romaine lettuce",
+        "50g parmesan cheese",
+        "Croutons",
+        "Caesar dressing"
+      ],
+      "instructions": [
+        "Grill the chicken breasts until fully cooked.",
+        "Chop the lettuce and place in a large bowl.",
+        "Slice the chicken and add it to the lettuce.",
+        "Top with parmesan, croutons, and Caesar dressing.",
+        "Toss the salad and serve."
+      ],
+      "category": "Salad",
+      "prepTime": "10 minutes",
+      "cookTime": "15 minutes",
+      "servings": 2,
+      "image": "ceviche",
+      "liked": true
+    },
+    {
+      "title": "Vegetable Stir-Fry",
+      "ingredients": [
+        "1 bell pepper",
+        "1 carrot",
+        "1 zucchini",
+        "1 onion",
+        "100g broccoli",
+        "2 tbsp soy sauce",
+        "1 tbsp olive oil",
+        "1 tsp sesame oil"
+      ],
+      "instructions": [
+        "Chop all vegetables into bite-sized pieces.",
+        "Heat olive oil in a large pan or wok.",
+        "Add onions and stir-fry until translucent.",
+        "Add remaining vegetables and stir-fry until tender.",
+        "Stir in soy sauce and sesame oil.",
+        "Serve with rice or noodles."
+      ],
+      "category": "Main Course",
+      "prepTime": "10 minutes",
+      "cookTime": "10 minutes",
+      "servings": 2,
+      "image": "sirloin",
+      "liked": false
+    },
+    {
+      "title": "Banana Pancakes",
+      "ingredients": [
+        "2 ripe bananas",
+        "2 eggs",
+        "1/2 cup oats",
+        "1 tsp cinnamon",
+        "Maple syrup"
+      ],
+      "instructions": [
+        "Mash bananas in a bowl.",
+        "Whisk in eggs and add oats and cinnamon.",
+        "Heat a pan and add a small amount of oil.",
+        "Pour the batter into the pan, forming small pancakes.",
+        "Cook until golden brown on both sides.",
+        "Serve with maple syrup."
+      ],
+      "category": "Breakfast",
+      "prepTime": "5 minutes",
+      "cookTime": "10 minutes",
+      "servings": 2,
+      "image": "bolognese",
+      "liked": true
+    },
+    {
+      "title": "Tomato Basil Soup",
+      "ingredients": [
+        "1 tbsp olive oil",
+        "1 onion",
+        "2 cloves garlic",
+        "5 ripe tomatoes",
+        "2 cups vegetable broth",
+        "1/4 cup fresh basil",
+        "Salt and pepper"
+      ],
+      "instructions": [
+        "Heat olive oil in a pot and sauté onions and garlic.",
+        "Add chopped tomatoes and cook until soft.",
+        "Add vegetable broth and bring to a simmer.",
+        "Blend the soup until smooth.",
+        "Stir in fresh basil and season with salt and pepper.",
+        "Serve hot."
+      ],
+      "category": "Soup",
+      "prepTime": "10 minutes",
+      "cookTime": "20 minutes",
+      "servings": 4,
+      "image": "tomato_basil_soup.jpg",
+      "liked": false
+    },
+    {
+      "title": "Beef Tacos",
+      "ingredients": [
+        "250g ground beef",
+        "1 onion",
+        "1 bell pepper",
+        "2 tsp taco seasoning",
+        "Taco shells",
+        "Cheese",
+        "Lettuce",
+        "Tomato"
+      ],
+      "instructions": [
+        "Cook the ground beef in a pan until browned.",
+        "Add chopped onion and bell pepper, and cook until soft.",
+        "Stir in taco seasoning and cook for another 2 minutes.",
+        "Serve the beef mixture in taco shells with cheese, lettuce, and tomato."
+      ],
+      "category": "Main Course",
+      "prepTime": "10 minutes",
+      "cookTime": "15 minutes",
+      "servings": 4,
+      "image": "beef_tacos.jpg",
+      "liked": true
+    },
+    {
+      "title": "Chocolate Chip Cookies",
+      "ingredients": [
+        "1 cup butter",
+        "1 cup sugar",
+        "1 cup brown sugar",
+        "2 eggs",
+        "1 tsp vanilla extract",
+        "3 cups flour",
+        "1 tsp baking soda",
+        "2 cups chocolate chips"
+      ],
+      "instructions": [
+        "Preheat oven to 350°F (175°C).",
+        "Cream together butter and sugars.",
+        "Beat in eggs and vanilla.",
+        "Beat in eggs and vanilla.",
+        "Mix in flour and baking soda.",
+        "Stir in chocolate chips.",
+        "Drop spoonfuls of dough onto a baking sheet.",
+        "Bake for 10-12 minutes or until golden brown."
+      ],
+      "category": "Dessert",
+      "prepTime": "10 minutes",
+      "cookTime": "12 minutes",
+      "servings": 24,
+      "image": "chocolate_chip_cookies.jpg",
+      "liked": false
+    },
+    {
+      "title": "Grilled Cheese Sandwich",
+      "ingredients": [
+        "4 slices of bread",
+        "Butter",
+        "4 slices of cheese"
+      ],
+      "instructions": [
+        "Butter one side of each bread slice.",
+        "Place cheese between two slices of bread, buttered sides out.",
+        "Heat a pan and grill the sandwich until golden brown on both sides.",
+        "Serve hot."
+      ],
+      "category": "Snack",
+      "prepTime": "5 minutes",
+      "cookTime": "5 minutes",
+      "servings": 2,
+      "image": "grilled_cheese_sandwich.jpg",
+      "liked": true
+    },
+    {
+      "title": "Apple Pie",
+      "ingredients": [
+        "2 cups flour",
+        "1/2 cup butter",
+        "1/4 cup cold water",
+        "5 apples",
+        "1/2 cup sugar",
+        "1 tsp cinnamon",
+        "1/4 tsp nutmeg"
+      ],
+      "instructions": [
+        "Preheat oven to 375°F (190°C).",
+        "Mix flour and butter until crumbly.",
+        "Add cold water to form a dough.",
+        "Roll out the dough and place it in a pie dish.",
+        "Peel and slice the apples.",
+        "Mix apples with sugar, cinnamon, and nutmeg.",
+        "Place the apple mixture in the dough and cover with another layer of dough.",
+        "Bake for 45-50 minutes or until golden brown."
+      ],
+      "category": "Dessert",
+      "prepTime": "20 minutes",
+      "cookTime": "50 minutes",
+      "servings": 8,
+      "image": "apple_pie.jpg",
+      "liked": false
+    },
+    {
+      "title": "Lemon Garlic Shrimp",
+      "ingredients": [
+        "500g shrimp",
+        "3 cloves garlic",
+        "1 lemon",
+        "2 tbsp olive oil",
+        "Parsley",
+        "Salt and pepper"
+      ],
+      "instructions": [
+        "Heat olive oil in a pan.",
+        "Add minced garlic and cook until fragrant.",
+        "Add shrimp and cook until pink.",
+        "Squeeze lemon juice over the shrimp.",
+        "Season with salt, pepper, and parsley.",
+        "Serve hot."
+      ],
+      "category": "Main Course",
+      "prepTime": "10 minutes",
+      "cookTime": "5 minutes",
+      "servings": 4,
+      "image": "lemon_garlic_shrimp.jpg",
+      "liked": true
+    }
+  ]
+}

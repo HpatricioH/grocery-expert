@@ -1,24 +1,25 @@
 ---
-import Button from "../../utils/Button.astro"
+import { Icon } from "astro-icon/components"
 import CldImage from "../../utils/CldImage.astro"
+import recipesData from "../../lib/data/recipes.json"
+
+const { recipes } = recipesData
 ---
-
-<section class="card bg-tertiary-color mt-8 overflow-hidden h-60">
-  <div class="card-body relative p-0">
-    <div class="flex flex-col gap-16 p-4">
-      <h2 class="card-header">Healthy, Quick, Easy Recipes for Balanced Eating</h2>
-      <div class="card-footer">
-        <Button className="bg-main-color hover:bg-main-color/90 text-white font-semibold" type="button" id="recipesButton">
-          View Now
-        </Button>
-      </div>
-    </div>
-    <CldImage src="cooked-chicken" alt="cooked chicken" width="1600" height="2900" class="w-60 h-52 absolute top-12 right-0"/>
-  </div>
-</section>
-
-<script>
-  const url = "/recipes"
-  const recipesButton = document.querySelector("#recipesButton") as HTMLButtonElement
-  recipesButton.onclick = () => window.location.href = url
-</script>
+{
+  recipes.map(recipe => {
+    return (
+      <a href="/" class="text-black relative w-44 flex flex-col gap-4 object-cover transition-all duration-500 group overflow-hidden">
+        <div class="rounded-lg overflow-hidden h-40">
+          <CldImage src={recipe.image} alt="ceviche Dish" width="16000" height="14000" class="w-full h-full rounded-xl group-hover:scale-105 transition-all duration-500 object-cover"/>
+          <div class="backdrop-blur-sm bg-white/10 absolute top-3 right-3 rounded-lg p-1 group-hover:scale-105 transition-all duration-500 object-cover">
+            <Icon name="like" class="size-6 text-white"/>
+          </div>
+        </div>
+        <div class="text-[#3E5481] [&>h2]:font-extrabold [&>h2]:text-lg [&>h2]:mb-2 [&>p]:text-sm">
+          <h2>{recipe.title}</h2>
+          <p>{recipe.category} {" • >"} {recipe.cookTime}</p>
+        </div>
+      </a>
+    )
+  })
+}

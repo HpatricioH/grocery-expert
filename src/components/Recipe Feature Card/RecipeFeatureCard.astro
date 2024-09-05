@@ -1,5 +1,4 @@
 ---
-import Button from "../../utils/Button.astro"
 import CldImage from "../../utils/CldImage.astro"
 ---
 
@@ -8,17 +7,11 @@ import CldImage from "../../utils/CldImage.astro"
     <div class="flex flex-col gap-16 p-4">
       <h2 class="card-header">Healthy, Quick, Easy Recipes for Balanced Eating</h2>
       <div class="card-footer">
-        <Button className="bg-main-color hover:bg-main-color/90 text-white font-semibold" type="button" id="recipesButton">
+        <a class="bg-main-color hover:bg-main-color/90 text-white font-semibold btn" href="/recipes/">
           View Now
-        </Button>
+        </a>
       </div>
     </div>
     <CldImage src="cooked-chicken" alt="cooked chicken" width="1600" height="2900" class="w-60 h-52 absolute top-12 right-0"/>
   </div>
 </section>
-
-<script>
-  const url = "/recipes"
-  const recipesButton = document.querySelector("#recipesButton") as HTMLButtonElement
-  recipesButton.onclick = () => window.location.href = url
-</script>

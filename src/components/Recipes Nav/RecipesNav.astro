@@ -3,6 +3,6 @@ const { pathname } = Astro.url
 ---
 
 <nav class="flex gap-4 font-bold">
-  <a href="/recipes" class:list=`${pathname === "/recipes" ? "text-secondary-color" : ""} hover:text-black/70`>Recipes</a>
+  <a href="/recipes/" class:list=`${pathname === "/recipes/" ? "text-secondary-color" : ""} hover:text-black/70`>Recipes</a>
   <a href="/recipes/liked" class:list=`${pathname === "/recipes/liked" ? "text-secondary-color" : ""} hover:text-black/70`>Liked</a>
 </nav>
