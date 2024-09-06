@@ -3,16 +3,20 @@ import { Icon } from "astro-icon/components"
 import CldImage from "../../utils/CldImage.astro"
 import recipesData from "../../lib/data/recipes.json"
 
+const { pathname } = Astro.url
 const { recipes } = recipesData
+const likedRecipes = recipes.filter(recipe => recipe.liked === true)
+
+const recipeData = pathname === "/recipes/" ? recipes : likedRecipes
 ---
-{
-  recipes.map(recipe => {
+{recipeData.length > 0 ? (
+  recipeData.map(recipe => {
     return (
       <a href="/" class="text-black relative w-44 flex flex-col gap-4 object-cover transition-all duration-500 group overflow-hidden">
         <div class="rounded-lg overflow-hidden h-40">
           <CldImage src={recipe.image} alt="ceviche Dish" width="16000" height="14000" class="w-full h-full rounded-xl group-hover:scale-105 transition-all duration-500 object-cover"/>
           <div class="backdrop-blur-sm bg-white/10 absolute top-3 right-3 rounded-lg p-1 group-hover:scale-105 transition-all duration-500 object-cover">
-            <Icon name="like" class="size-6 text-white"/>
+            <Icon name="like" class="size-6 text-white hover:text-red-700"/>
           </div>
         </div>
         <div class="text-[#3E5481] [&>h2]:font-extrabold [&>h2]:text-lg [&>h2]:mb-2 [&>p]:text-sm">
@@ -22,4 +26,10 @@ const { recipes } = recipesData
       </a>
     )
   })
+) : (
+  <div class="flex flex-col justify-center items-center font-bold gap-3 absolute left-0 right-0 m-auto">
+    <Icon name="kitchenOff" class="size-10 text-black"/>
+    <p>No Recipes available</p>
+  </div>
+)
 }
