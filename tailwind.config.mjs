@@ -8,6 +8,8 @@ export default {
 			colors: {
         "primary-color": "#eff9f0",
 				"secondary-color": "#4da10a",
+				"error-primary": "#ad1a1a",
+				"error-secondary": "#ad1a1adb",
 				"tertiary-color": "#f8f8f8",
 				"accent-color": "#6fa541",
 				"main-color": "#5ac169",
