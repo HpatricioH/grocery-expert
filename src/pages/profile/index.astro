@@ -1,6 +1,7 @@
 ---
 import { getSession } from "auth-astro/server"
 import Layout from "../../layouts/Layout.astro"
+import ProfileContainer from "../../sections/ProfileContainer.astro"
 
 const session = await getSession(Astro.request)
 
@@ -11,7 +12,8 @@ if (!session) {
 
 <Layout title="Grocery Expert Recipes">
   <main class="min-h-screen flex flex-col text-black m-5 pt-[4rem] bg-white overflow-x-hidden">
-    <h2>Profile</h2>
+    <h2 class="text-lg font-extrabold tracking-wide">Profile</h2>
     <div class="border border-secondary-color w-full mb-4"></div>
+    <ProfileContainer />
   </main>
 </Layout>
