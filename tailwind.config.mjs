@@ -13,6 +13,7 @@ export default {
 				"tertiary-color": "#f8f8f8",
 				"accent-color": "#6fa541",
 				"main-color": "#5ac169",
+				"text-primary": "#333"
       },
 			fontFamily: {
         montserrat: ["Montserrat", "sans-serif"],
