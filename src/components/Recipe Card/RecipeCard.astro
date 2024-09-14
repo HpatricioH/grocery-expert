@@ -12,14 +12,14 @@ const recipeData = pathname === "/recipes/" ? recipes : likedRecipes
 {recipeData.length > 0 ? (
   recipeData.map(recipe => {
     return (
-      <a href="/" class="text-black relative w-44 flex flex-col gap-4 object-cover transition-all duration-500 group overflow-hidden">
+      <a href={`/recipes/item/${recipe.id}`} class="text-black relative w-44 flex flex-col gap-4 object-cover transition-all duration-500 group overflow-hidden">
         <div class="rounded-lg overflow-hidden h-40">
-          <CldImage src={recipe.image} alt="ceviche Dish" width="16000" height="14000" class="w-full h-full rounded-xl group-hover:scale-105 transition-all duration-500 object-cover"/>
+          <CldImage src={recipe.image} alt={recipe.image} width="16000" height="14000" class="w-full h-full rounded-xl group-hover:scale-105 transition-all duration-500 object-cover"/>
           <div class="backdrop-blur-sm bg-white/10 absolute top-3 right-3 rounded-lg p-1 group-hover:scale-105 transition-all duration-500 object-cover">
             <Icon name="like" class="size-6 text-white hover:text-red-700"/>
           </div>
         </div>
-        <div class="text-[#3E5481] [&>h2]:font-extrabold [&>h2]:text-lg [&>h2]:mb-2 [&>p]:text-sm">
+        <div class="text-text-primary [&>h2]:font-extrabold [&>h2]:text-lg [&>h2]:mb-2 [&>p]:text-sm">
           <h2>{recipe.title}</h2>
           <p>{recipe.category} {" • >"} {recipe.cookTime}</p>
         </div>
