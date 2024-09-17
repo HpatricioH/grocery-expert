@@ -24,7 +24,9 @@ if (!session) {
 
 <Layout title="Grocery Expert Recipes">
   <main class="relative min-h-screen flex flex-col text-black pt-[4rem] bg-white overflow-x-hidden">
-    <CldImage src={image} alt={image} width="16000" height="16000" class="w-full h-full group-hover:scale-105 transition-all duration-500 object-cover"/>
+    <div class="w-full h-64">
+      <CldImage src={image} alt={image} width="16000" height="16000" class="transition-all duration-500 object-cover"/>
+    </div>
     <div class="rounded-t-3xl bg-white p-4 absolute top-[17rem] [&>h2]:text-text-primary [&>h2]:font-bold [&>h2]:pb-1 [&>h2]:text-lg">
       {filteredRecipe.map((recipe) => {
         return (
