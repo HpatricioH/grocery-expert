@@ -1,0 +1,38 @@
+[
+  {
+    "image": "Fruits_and_Vegetables",
+    "name": "Vegetables & Fruits"
+  },
+  {
+    "image": "Dairy_and_Eggs",
+    "name": "Dairy & Breakfast"
+  },
+  {
+    "image": "Drinks",
+    "name": "Cold Drinks & Juices"
+  },
+  {
+    "image": "Meat",
+    "name": "Meat"
+  },
+  {
+    "image": "Bakery",
+    "name": "Bakery"
+  },
+  {
+    "image": "Pantry_grocery",
+    "name": "Pantry"
+  },
+  {
+    "image": "Deli",
+    "name": "Dali"
+  },
+  {
+    "image": "Frozen",
+    "name": "Frozen"
+  },
+  {
+    "image": "Fish_Seafood",
+    "name": "Seafood"
+  }
+]

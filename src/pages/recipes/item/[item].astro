@@ -1,0 +1,75 @@
+---
+import { getSession } from "auth-astro/server"
+import { Icon } from "astro-icon/components"
+import Layout from "@/layouts/Layout.astro"
+import CldImage from "@/utils/CldImage.astro"
+import recipesData from "@/lib/data/recipes.json"
+
+const session = await getSession(Astro.request)
+const { item } = Astro.params
+const { recipes } = recipesData
+
+const filteredRecipe = recipes.filter(recipe => recipe.id === item)
+
+const [image] = filteredRecipe.map(recipe => recipe.image)
+const [ingredients] = filteredRecipe.map(recipe => recipe.ingredients)
+const [instructions] = filteredRecipe.map(recipe => recipe.instructions)
+let countInstructions = 1
+
+if (!session) {
+  return Astro.redirect("/")
+}
+
+---
+
+<Layout title="Grocery Expert Recipes">
+  <main class="relative min-h-screen flex flex-col text-black pt-[4rem] bg-white overflow-x-hidden">
+    <div class="w-full h-64">
+      <CldImage src={image} alt={image} width="16000" height="16000" class="transition-all duration-500 object-cover"/>
+    </div>
+    <div class="rounded-t-3xl bg-white p-4 absolute top-[17rem] [&>h2]:text-text-primary [&>h2]:font-bold [&>h2]:pb-1 [&>h2]:text-lg">
+      {filteredRecipe.map((recipe) => {
+        return (
+        <h2>{recipe.title}</h2>
+        <p class="[&>p]:text-sm text-text-primary/70">{recipe.category} {" • "} {recipe.cookTime}</p>
+        <div class="border border-secondary-color/30 w-full my-2"></div>
+
+        <h2>Description</h2>
+        <p class="[&>p]:text-sm text-text-primary/70">
+          {recipe.description}
+        </p>
+        )
+      })}
+      <div class="border border-secondary-color/30 w-full my-2"></div>
+
+      <h2>Ingredients</h2>
+      <div class="flex flex-col gap-4 steps my-3">
+        {ingredients.map((ingredient) => {
+          return (
+          <p class="flex items-center gap-2 ">
+            <span class="bg-gray-400/30 step-circle border-0 text-black text-sm">
+              <Icon name="check" class="size-5 text-secondary-color"/>
+            </span>
+            {ingredient}
+          </p>
+          )
+        })}
+      </div>
+      <div class="border border-secondary-color/30 w-full my-2"></div>
+
+      <h2>Steps</h2>
+      <div class="flex flex-col gap-4 steps [&>p]:flex [&>p]:items-center [&>p]:gap-2">
+        {instructions.map((instructions) => {
+          return (
+            <p>
+              <span class="bg-black step-circle border-0 text-white text-sm">
+                {countInstructions < instructions.length ? countInstructions++ : "-"}
+              </span>
+              {instructions}
+            </p>
+          )
+        })}
+      </div>
+    </div>
+  </main>
+</Layout>

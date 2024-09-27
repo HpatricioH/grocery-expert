@@ -1,0 +1,37 @@
+[
+  {
+    "image": "tomato",
+    "name": "tomato",
+    "description": "Tomato Beefsteak Red",
+    "weight": "0.268 kg",
+    "category": "Fruits and Vegetables"
+  },
+  {
+    "image": "bananas",
+    "name": "bananas",
+    "description": "Bananas, Bunch",
+    "weight": "1kg",
+    "category": "Fruits and Vegetables"
+  },
+  {
+    "image": "beef",
+    "name": "beef",
+    "description": "Beef Striploin Grilling Steak",
+    "weight": "0.959 kg",
+    "category": "Meat"
+  },
+  {
+    "image": "beef",
+    "name": "beef",
+    "description": "Beef Striploin Grilling Steak",
+    "weight": "0.959 kg",
+    "category": "Meat"
+  },
+  {
+    "image": "beef",
+    "name": "beef",
+    "description": "Beef Striploin Grilling Steak",
+    "weight": "0.959 kg",
+    "category": "Meat"
+  }
+]

@@ -1,0 +1,56 @@
+---
+import Layout from "../layouts/Layout.astro"
+import Hero from "../sections/Hero.astro"
+---
+
+<Layout title="Welcome to Grocery Expert">
+  <main
+    class="overflow-hidden h-screen w-screen flex flex-col justify-center items-center relative"
+  >
+    <div
+      class="h-[90%] w-[150%] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#92e552c9] via-[#eff9f045] to-[#eff9f045] absolute rounded-full left-[95%] top-[95%] transform -translate-x-1/2 -translate-y-1/2"
+    >
+    </div>
+    <div
+      class="absolute inset-0 -z-10 h-full w-full bg-[#eff9f0] bg-[linear-gradient(to_right,#ebebeb,transparent_1px),linear-gradient(to_bottom,#ebebeb,transparent_1px)] bg-[size:6rem_4rem]"
+    >
+    </div>
+    <div
+      class="h-[90%] w-[150%] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#92e552c9] via-[#eff9f045] to-[#eff9f045] absolute rounded-full left-[10%] top-[5%] transform -translate-x-1/2 -translate-y-1/2"
+    >
+    </div>
+    <Hero />
+  </main>
+</Layout>
+
+<style>
+  main {
+    margin: auto;
+    color: black;
+    font-size: 20px;
+    line-height: 1.6;
+  }
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    line-height: 1;
+    text-align: center;
+    margin-top: 1em;
+    z-index: 50;
+    animation: fadeUp 1s;
+  }
+  svg {
+    animation: fadeUp 1s;
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

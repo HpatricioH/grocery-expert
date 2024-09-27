@@ -1,0 +1,24 @@
+---
+import { Icon } from "astro-icon/components"
+import Button from "../../utils/Button.astro"
+
+---
+
+<div class="flex w-full flex-col border border-neutral-200 dark:border-neutral-800 p-4 rounded-md">
+  <h2 class="text-2xl font-semibold tracking-tight lg:text-3xl my-0">General</h2>
+  <p class="text-sm opacity-75 mb-3">Update your personal information: </p>
+  <form class="[&>label]:text-[#1c1c1c] [&>input]:bg-[#fcfcfc] [&>input]:border-[#e2e2e2] flex flex-col">
+    <label class="form-label mb-1" for="authName">Your Name: </label>
+    <input placeholder="Type here" class="input max-w-full mb-3" id="authName"/>
+    <label class="form-label mb-1" for="authEmail">Your Email: </label>
+    <input type="email" class="input max-w-full cursor-not-allowed mb-3" id="authEmail" disabled/>
+    <p class="flex items-center gap-2 pl-1 text-[0.8rem] text-neutral-500 ">
+      <Icon name="warning" class="size-4"/>
+      <span>Email Addres not editable as is managed by Auth provider.</span>
+    </p>
+    <Button type="button" className="bg-main-color hover:bg-main-color/90 text-white font-semibold space-x-2 mb-3 btn-sm mt-4 place-self-end">
+      <Icon name="save" class="size-4"/>
+      <span>Save</span>
+    </Button>
+  </form>
+</div>

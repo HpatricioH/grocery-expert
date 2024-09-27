@@ -1,0 +1,37 @@
+---
+import LoginButtons from "../components/LoginButtons/LoginButtons.astro"
+---
+
+<section
+  class="bg-primary-color text-black overflow-hidden h-screen w-screen flex flex-col justify-center items-center"
+>
+  <div
+    class="absolute inset-0 -z-10 h-full w-full bg-[#eff9f0] bg-[linear-gradient(to_right,#ebebeb,transparent_1px),linear-gradient(to_bottom,#ebebeb,transparent_1px)] bg-[size:6rem_4rem]"
+  >
+  </div>
+  <div class="w-[23rem] flex flex-col gap-3 relative">
+    <a href="/"><img src="/pictures/logo.png" alt="grocery expert logo" /></a>
+    <div>
+      <h1 class="font-extrabold text-3xl text-center mb-4 tracking-wide">
+        Welcome Back
+      </h1>
+      <p class="font-bold text-black/60">Sign up with:</p>
+    </div>
+    <LoginButtons />
+  </div>
+</section>
+
+<script>
+  const { signIn } = await import("auth-astro/client")
+
+  const loginGoogle = document.querySelector("#loginGoogle") as HTMLButtonElement
+  const loginGithub = document.querySelector("#loginGithub") as HTMLButtonElement
+
+  if (loginGoogle) {
+    loginGoogle.onclick = () => signIn("google", { callbackUrl: "/pantry" })
+  }
+
+  if (loginGithub) {
+    loginGithub.onclick = () => signIn("github", { callbackUrl: "/pantry" })
+  }
+</script>

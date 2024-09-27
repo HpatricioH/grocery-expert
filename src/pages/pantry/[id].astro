@@ -1,0 +1,48 @@
+---
+import { Icon } from "astro-icon/components"
+import ProductCard from "../../components/Product Card/ProductCard.astro"
+import Search from "../../components/Search/Search.astro"
+import Layout from "../../layouts/Layout.astro"
+import groceries from "../../lib/data/groceries.json"
+import NoItems from "../../components/No Items/NoItems.astro"
+
+const { id } = Astro.params
+
+const filteredGroceries = groceries.filter(item => item.category === id)
+---
+
+<Layout title={id ?? ""}>
+  <main class="min-h-screen flex flex-col text-black m-5 pt-[4rem] bg-white overflow-x-hidden">
+    <Search />
+    <div class="flex justify-baseline mb-4">
+      <button id="backNavigation">
+        <Icon name="chevronLeft" class="size-6" />
+      </button>
+      <h2 class="text-lg font-extrabold tracking-wide text-center flex-1">{id}</h2>
+    </div>
+    {
+    filteredGroceries.length > 0 ?
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 w-full p-4">
+        {
+          filteredGroceries.map(item => {
+            return (
+            <ProductCard
+                image={item.image}
+                name={item.name}
+                description={item.description}
+                weight={item.weight}
+                quantity={item.quantity}/>
+            )
+          })
+        }
+      </div> :
+      <NoItems />
+     }
+  </main>
+</Layout>
+
+<script>
+  const url = "/pantry"
+  const recipesButton = document.querySelector("#backNavigation") as HTMLButtonElement
+  recipesButton.onclick = () => window.location.href = url
+</script>

@@ -1,0 +1,26 @@
+---
+import Navigation from "../Navigation/Navigation.astro"
+
+---
+
+<nav class="navbar navbar-sticky bg-primary-color/50 navbar-glass text-black">
+  <div class="navbar-start">
+    <a href="/">
+      <img
+        src="/pictures/logo.png"
+        alt="groceries expert logo"
+        class="h-8 navbar-item"
+        loading="lazy"
+      />
+    </a>
+  </div>
+  <div class="navbar-end">
+    <div class="avatar avatar-ring avatar-md">
+      <div class="dropdown-container">
+        <div class="dropdown">
+          <Navigation />
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
