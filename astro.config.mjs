@@ -12,9 +12,9 @@ export default defineConfig({
     dsn: "https://33329a8e9ef071173d630ec4a290effe@o4504914110251008.ingest.us.sentry.io/4508010968121344",
     sourceMapsUploadOptions: {
       project: "groceryexpert",
-      authToken: import.meta.env.SENTRY_AUTH_TOKEN,
+      authToken: process.env.SENTRY_AUTH_TOKEN,
     },
-  }),],
+  })],
   output: "server",
   adapter: vercel({
     webAnalytics: {
