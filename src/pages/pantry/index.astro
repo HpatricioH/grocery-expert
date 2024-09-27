@@ -5,6 +5,12 @@ import Categories from "../../components/Cotegories/Categories.astro"
 import Search from "../../components/Search/Search.astro"
 import RecipeFeatureCard from "../../components/Recipe Feature Card/RecipeFeatureCard.astro"
 import BuyItemsContainer from "../../sections/BuyItemsContainer.astro"
+import { user } from "@/../db/schema"
+import { db } from "@/turso"
+
+const result = await db.select().from(user).all()
+
+console.log(result)
 
 const session = await getSession(Astro.request)
 
