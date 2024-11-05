@@ -13,6 +13,11 @@ test("get started link", async ({ page }) => {
   await page.getByTestId("getStarted").click()
 
   await page.waitForURL("**/pantry")
+})
 
-  console.log("current URL", page.url())
+test("Navigate to recipies", async ({ page }) => {
+  await page.getByTestId("navigation").click()
+  await page.getByRole("link", { name: "Recipes" }).click()
+
+  await expect(page).toHaveURL("http://localhost:4321/recipes/")
 })
