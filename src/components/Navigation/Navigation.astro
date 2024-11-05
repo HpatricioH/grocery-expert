@@ -33,7 +33,10 @@ const notLoggedMenu = [{
 }]
 ---
 
-<label class="btn btn-ghost flex cursor-pointer px-0" tabindex="0">
+<label
+  class="btn btn-ghost flex cursor-pointer px-0"
+  tabindex="0"
+  data-testid="navigation">
   {session ? <img
     src={session.user?.image}
     alt="avatar"
