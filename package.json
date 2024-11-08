@@ -23,6 +23,7 @@
     "astro": "^4.16.7",
     "astro-icon": "^1.1.0",
     "auth-astro": "^4.1.2",
+    "dompurify": "^3.1.7",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.33.0",
     "rippleui": "^1.12.1",
@@ -32,6 +33,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "0.43.1",
     "@playwright/test": "^1.45.3",
+    "@types/dompurify": "^3.0.5",
     "@types/node": "^20.14.12",
     "@typescript-eslint/parser": "7.15.0",
     "drizzle-kit": "^0.24.2",
