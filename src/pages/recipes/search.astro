@@ -1,0 +1,63 @@
+---
+import { getSession } from "auth-astro/server"
+import Layout from "../../layouts/Layout.astro"
+import SearchBar from "../../components/Search/SearchBar.astro"
+import RecipeInstructions from "../../components/Recipe Instructions/recipeInstructions.astro"
+import RecipesNav from "../../components/Recipes Nav/RecipesNav.astro"
+
+const session = await getSession(Astro.request)
+
+if (!session) {
+  return Astro.redirect("/")
+}
+---
+
+<Layout title="Search Recepies">
+  <main class="min-h-screen flex flex-col text-black m-5 pt-[4rem] bg-white overflow-x-hidden">
+    <SearchBar />
+    <RecipesNav />
+    <div class="border border-secondary-color w-full mb-4"></div>
+    <RecipeInstructions />
+    <section aria-label="Search Results">
+      <p id="searchReadout"></p>
+    </section>
+  </main>
+</Layout>
+
+<script>
+  import DOMPurify from "dompurify"
+
+  const search = document.querySelector("#search")
+  const searchReadout = document.querySelector("#searchReadout")
+
+  // functions
+  function updateDocumentTitle(search: string) {
+    document.title = search ? `Search results for "${search}"` : "Search Recipes"
+  }
+
+  function updateSearchReadout(search: string) {
+    if (searchReadout instanceof HTMLElement) {
+      searchReadout.innerText = search ? `Search results for "${search}"` : ""
+    }
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const queryParam = new URLSearchParams(window.location.search).get("q")
+    const urlParams = DOMPurify.sanitize(queryParam || "")
+    if (search instanceof HTMLInputElement) {
+      updateDocumentTitle(urlParams)
+      updateSearchReadout(urlParams)
+      search.value = urlParams || ""
+      search.focus()
+    }
+  })
+
+  search?.addEventListener("input", () => {
+    const queryParam = (search as HTMLInputElement).value
+    const searchTerm = DOMPurify.sanitize(queryParam)
+    if (search instanceof HTMLInputElement) {
+      updateDocumentTitle(searchTerm)
+      updateSearchReadout(searchTerm)
+    }
+  })
+</script>
