@@ -1,6 +1,6 @@
 import { recipes } from "../lib/data/recipes.json"
 
-interface Recipe {
+export interface Recipe {
   title: string
   category: string
   cookTime: string

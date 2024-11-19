@@ -20,15 +20,31 @@ if (!session) {
     <RecipeInstructions />
     <section aria-label="Search Results">
       <p id="searchReadout"></p>
+      <div id="searchResults"></div>
     </section>
   </main>
 </Layout>
 
 <script>
   import DOMPurify from "dompurify"
+  import type { Recipe } from "../search.json"
+
+  let SEARCH_DATA: Recipe | undefined
+
+  const SPINNER = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="spinner"><path d="M304 48c0 26.5-21.5 48-48 48s-48-21.5-48-48 21.5-48 48-48 48 21.5 48 48zm-48 368c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48zm208-208c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48zM96 256c0-26.5-21.5-48-48-48S0 229.5 0 256s21.5 48 48 48 48-21.5 48-48zm12.9 99.1c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48c0-26.5-21.5-48-48-48zm294.2 0c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48c0-26.5-21.5-48-48-48zM108.9 60.9c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48z"/><style>
+    #spinner {
+      animation: spin 1s linear infinite
+      }
+    @keyframes spin {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    </style></svg>`
 
   const search = document.querySelector("#search")
   const searchReadout = document.querySelector("#searchReadout")
+  const searchResults = document.querySelector("#searchResults")
 
   // functions
   function updateDocumentTitle(search: string) {
@@ -41,10 +57,30 @@ if (!session) {
     }
   }
 
+  async function fetchSearchResults(search: string) {
+    if (search.length === 0) return
+    if (searchResults instanceof HTMLElement) searchResults.innerHTML = SPINNER
+
+    if (!SEARCH_DATA) {
+        try {
+        const res = await fetch("/search.json")
+        if (!res.ok && searchReadout instanceof HTMLElement) {
+          searchReadout.innerText = "Something went wrong with the data source. Try again."
+          throw new Error("Something went wrong with the data source. Try again.")
+        }
+        const data = await res.json()
+        SEARCH_DATA = data
+      } catch (error) {
+        throw new Error("Error in the searched data.")
+      }
+    }
+  }
+
   window.addEventListener("DOMContentLoaded", () => {
     const queryParam = new URLSearchParams(window.location.search).get("q")
     const urlParams = DOMPurify.sanitize(queryParam || "")
     if (search instanceof HTMLInputElement) {
+      fetchSearchResults(urlParams)
       updateDocumentTitle(urlParams)
       updateSearchReadout(urlParams)
       search.value = urlParams || ""
@@ -58,6 +94,7 @@ if (!session) {
     if (search instanceof HTMLInputElement) {
       updateDocumentTitle(searchTerm)
       updateSearchReadout(searchTerm)
+      fetchSearchResults(searchTerm)
     }
   })
 </script>
