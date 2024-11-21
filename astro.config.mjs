@@ -6,6 +6,8 @@ import sentry from "@sentry/astro"
 
 import vercel from "@astrojs/vercel/serverless"
 
+import preact from "@astrojs/preact";
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), icon(), auth(), sentry({
@@ -14,7 +16,7 @@ export default defineConfig({
       project: "groceryexpert",
       authToken: process.env.SENTRY_AUTH_TOKEN,
     },
-  })],
+  }), preact()],
   output: "server",
   adapter: vercel({
     webAnalytics: {
